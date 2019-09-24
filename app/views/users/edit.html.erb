@@ -12,11 +12,19 @@
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
 
+      <section>
+        <%= f.label :'change_password', onclick: 'myFunction()' %>
+      </section>
+
+      <div id="new">
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
+      </div>
 
+      <div id="confirm">
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
 
       <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
@@ -27,3 +35,28 @@
     </div>
   </div>
 </div>
+
+<script>
+  var y = document.getElementById("new");
+  var z = document.getElementById("confirm");
+  y.style.display = "none";
+  z.style.display = "none";
+
+  function myFunction() {
+    if (y.style.display === "none") {
+      y.style.display = "block";
+      document.getElementById("user_password").setAttribute("required","required");
+    } else {
+      y.style.display = "none";
+      document.getElementById("user_password").removeAttribute("required");
+    }
+
+    if (z.style.display === "none") {
+      z.style.display = "block";
+      document.getElementById("user_password_confirmation").setAttribute("required","required");
+    } else {
+      z.style.display = "none";
+      document.getElementById("user_password_confirmation").removeAttribute("required");
+    }
+  }
+</script>

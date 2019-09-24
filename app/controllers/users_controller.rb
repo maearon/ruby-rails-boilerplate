@@ -1,15 +1,17 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
                                         :following, :followers]
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
+  before_action :correct_user,   only: [:edit, :update,
+                                        :following, :followers]
+  before_action :admin_user,     only: [:destroy, :index]
+
+  before_action :set_user,     except: [:index, :new, :create]
 
   def index
     @users = User.paginate(page: params[:page])
   end
 
   def show
-    @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
   end
 
@@ -29,21 +31,19 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "Profile updated"
-      redirect_to @user
+      redirect_to my_account_path
     else
       render 'edit'
     end
   end
 
   def destroy
-    @user = User.find(params[:id]).destroy
+    @user.destroy
     respond_to do |format|
       format.html {
         flash[:success] = 'User successfully deleted!'
@@ -68,6 +68,10 @@ class UsersController < ApplicationController
   end
 
   private
+    def set_user
+      params[:id] ||= session[:user_id]
+      @user = User.find(params[:id])
+    end
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
@@ -78,6 +82,7 @@ class UsersController < ApplicationController
 
     # Confirms the correct user.
     def correct_user
+      params[:id] ||= session[:user_id]
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end

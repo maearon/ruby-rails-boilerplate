@@ -90,7 +90,7 @@ GEM
     bootstrap-will_paginate (1.0.0)
       will_paginate
     builder (3.2.3)
-    byebug (11.0.1)
+    coderay (1.1.2)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
@@ -133,6 +133,9 @@ GEM
     pg (1.1.4)
     polyamorous (2.3.0)
       activerecord (>= 5.0)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     puma (3.12.1)
     rack (2.0.7)
     rack-proxy (0.6.5)
@@ -241,13 +244,13 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   bootstrap-sass (= 3.4.1)
   bootstrap-will_paginate (= 1.0.0)
-  byebug
   faker (= 2.1.2)
   image_processing (= 1.9.3)
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)
   mini_magick (= 4.9.5)
   pg (>= 0.18, < 2.0)
+  pry
   puma (~> 3.11)
   rails (~> 6.0.0)
   ransack (~> 2.3)
