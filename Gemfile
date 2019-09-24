@@ -54,3 +54,7 @@ gem 'faker',                      '2.1.2'
 gem 'will_paginate',              '3.1.8'
 gem 'bootstrap-will_paginate',    '1.0.0'
 gem 'bootstrap-sass',             '3.4.1'
+
+gem "ransack", "~> 2.3"
+
+gem "react-rails", "~> 2.6"
