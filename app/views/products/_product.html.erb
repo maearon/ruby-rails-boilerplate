@@ -1,0 +1,4 @@
+<li>
+  <%= image_tag product.variants.first.images.first, size: "50x50" %>
+  <%= link_to product.name, "/products/#{product.id}?variant=#{product.variants.first&.id}" %>
+</li>

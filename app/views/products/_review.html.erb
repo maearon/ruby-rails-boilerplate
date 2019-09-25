@@ -1,0 +1,7 @@
+<% if  @review_items.any? %>
+  <ol class="reviews">
+    <%= render @review_items %>
+  </ol>
+  <%= will_paginate @review_items,
+                    params: { controller: :products, action: :show } %>
+<% end %>

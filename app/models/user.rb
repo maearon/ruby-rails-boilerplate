@@ -18,6 +18,8 @@ class User < ApplicationRecord
                     uniqueness: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  has_one :cart
+  has_one :wish
 
   default_scope { order(id: :asc) }
 

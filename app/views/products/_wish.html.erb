@@ -1,0 +1,5 @@
+<%= form_for(set_wish.wish_items.build, remote: true) do |f| %>
+  <div><%= hidden_field_tag :product_id, session[:product_id] %></div>
+  <div><%= hidden_field_tag :variant_id, session[:variant_id] %></div>
+  <%= f.submit "Add to Wishlist", class: "btn btn-primary" %>
+<% end %>

@@ -60,3 +60,7 @@ gem "ransack", "~> 2.3"
 gem "react-rails", "~> 2.6"
 
 gem "cocoon", "~> 1.2"
+
+gem 'uglifier', '3.2.0'
+gem 'coffee-rails', '4.2.2'
+gem 'activerecord_reset_pk_sequence'

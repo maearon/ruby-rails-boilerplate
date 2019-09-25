@@ -1,0 +1,10 @@
+<%= form_with(model: [ @product, @product.reviews.build ], local: true) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "Reviewer..." %>
+  </div>
+  <div class="field">
+    <%= f.text_area :body, placeholder: "Compose new review..." %>
+  </div>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>

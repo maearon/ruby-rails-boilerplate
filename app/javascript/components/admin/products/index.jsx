@@ -32,8 +32,8 @@ class index extends Component {
     let autoCompleteList = this.state.autoCompleteResults.map((response) => {
       return <ul class="products">
         <li>
-          <img alt={response.name} class='gravatar' src={response.image_url} />
-          <a href={response.url}>{response.name}</a>
+          <img alt={response.name} class='gravatar' src={response.image_url} height="50" width="50" />
+          <a href={response.url_edit}>{response.name}</a>
             | <a data-confirm="You sure?" rel="nofollow" data-method="delete" href={response.url} data-remote="true" class={"product-" + response.id}>delete</a>
         </li>
       </ul>

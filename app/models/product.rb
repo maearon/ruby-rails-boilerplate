@@ -13,8 +13,8 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :variants,
                                 allow_destroy: true
   has_many :reviews, dependent: :destroy
-  has_many :cart_items
-  has_many :wish__items
+  has_many :cart_items, dependent: :destroy
+  has_many :wish_items, dependent: :destroy
   has_many :order_items, dependent: :destroy
 
   validates :name, presence: true

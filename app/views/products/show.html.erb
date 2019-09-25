@@ -1,0 +1,52 @@
+<% provide(:title, @product.name) %>
+<div class="row">
+  <aside class="col-md-1">
+    <section class="product_thumbnails">
+      <ul style="list-style-type: none;padding: 0">
+        <% @variant.images.each.with_index(1) do | image, index | %>
+          <li><%= link_to "javascript:void(0);" do %>
+            <%= image_tag image, size: "60x60" %>
+          <% end %></li>
+        <% end %>
+      </ul>
+    </section>
+  </aside>
+  <aside class="col-md-6">
+    <section>
+      <h1>
+        <%= image_tag @variant.images.first, alt: @product.name, size: "500x500" %>
+      </h1>
+    </section>
+  </aside>
+  <div class="col-md-4" style="padding-top: 100px">
+    <section class="product_info">
+      <h3><%= pluralize(@product.reviews.count, "reviews") %></h3>
+
+      <h1><%= @product.name %></h1>
+
+      <ul style="list-style-type: none;">
+        <% @product.variants.each.with_index(1) do | variant, index | %>
+          <li style="display: inline;"><%= link_to product_path(@product, variant: variant.id) do %>
+            <%= image_tag variant.images.first, size: "60x60" %>
+          <% end %></li>
+        <% end %>
+      </ul>
+
+      <%= render 'cart_form' %>
+
+      <%= render 'wish_form' %>
+    </section>
+  </div>
+</div>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section class="review_form">
+      <%= render 'reviews/form' %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <h3>RATINGS & REVIEWS</h3>
+    <%= render 'review' %>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<%= form_for(set_wish.wish_items.find_by(product_id: @product.id, variant_id: @variant.id),
+             html: { method: :delete },
+             remote: true) do |f| %>
+  <%= f.submit "Remove from Wishlist", class: "btn" %>
+<% end %>

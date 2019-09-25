@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
   include SessionsHelper
+  include CartsHelper
+  include WishesHelper
+  include ProductsHelper
+  include VariantsHelper
+  before_action :set_cart, :set_wish
 
   private
 

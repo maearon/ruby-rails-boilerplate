@@ -11,7 +11,8 @@ json.products do
     json.description_p product.description_p
     json.specifications product.specifications
     json.care product.care
-    json.image_url url_for(product.variant.first.images.first)
-    json.url url_for(product)
+    json.image_url url_for(product.variants.first.images.first)
+    json.url url_for(admin_product_path(product))
+    json.url_edit url_for(edit_admin_product_path(product))
   end
 end

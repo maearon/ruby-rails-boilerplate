@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
   end
   resources :products, only: [:index, :show] do
-    resources :comments
+    resources :reviews
   end
   resources :cart_items
   get 'cart', to: 'cart#index'

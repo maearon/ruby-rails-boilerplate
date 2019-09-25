@@ -1,23 +1,20 @@
 class Wish < ApplicationRecord
-  has_many :wish_items, dependent: :destroy
   belongs_to :user, optional: true
-  # has_and_belongs_to_many :products
-  # has_and_belongs_to_many :variants
-  # has_many :products, :through => :wish_items
+  has_many :wish_items, dependent: :destroy
 
-
-  def add_product(product_params)
-
-    current_item = wish_items.find_by(variant_id: product_params[:product][:variant_id])
-
-    if current_item
-      current_item.destroy
-    else
-      new_item = wish_items.create(product_id: product_params[:product][:product_id],variant_id: product_params[:product][:variant_id], wish_id: self.id)
-    end
-
-    new_item
+  # Wishes a product.
+  def wish(product, variant)
+    wish_items.create(product: product,variant: variant, wish: self)
   end
 
+  # Unwishes a product.
+  def unwish(current_item)
+    wish_items.delete(current_item)
+  end
 
+  # Returns true if the current user is following the other user.
+  def wishing?(product, variant)
+    current_item = wish_items.find_by(variant: variant)
+    wish_items.include?(current_item)
+  end
 end
