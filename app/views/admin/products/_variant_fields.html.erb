@@ -1,0 +1,157 @@
+<div class="nested-fields">
+
+  <div class="form-group">
+    <%= f.label 'price' %>
+    <%= f.number_field :price, min: 1, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'originalprice' %>
+    <%= f.number_field :originalprice, min: 1, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'sku' %>
+    <%= f.number_field :sku, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'stock' %>
+    <%= f.number_field :stock, min: 1, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'color' %>
+    <div class="<%= "field_with_errors" if f.object.errors[:supplier].any? %>">
+      <%= f.select :color, Variant::COLOR, {prompt: "Select Color"}, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'avatar' %>
+    <% if @product&.variants&.first&.avatar&.attached? %>
+        <%= image_tag @product&.variants&.first&.avatar, size: "50x50" %>
+    <% end %>
+    <%= f.file_field :avatar, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'hover' %>
+    <% if @product&.variants&.first&.hover&.attached? %>
+        <%= image_tag @product&.variants&.first&.hover, size: "50x50" %>
+    <% end %>
+    <%= f.file_field :hover, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'images' %>
+    <% if @product&.variants&.first&.images&.attached? %>
+        <% @product&.variants&.each do |variant| %>
+          <% variant&.images&.each do |image| %>
+            <%= image_tag image, size: "50x50" %>
+          <% end %>
+        <% end %>
+    <% end %>
+    <%= f.file_field :images, multiple: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group delete">
+    <%= link_to_remove_association 'Remove variant', f, class: "btn btn-sm btn-rounded btn-outline-primary" %>
+  </div>
+</div>
+
+<!--# TODO: put into assets after 14-2 implemented-->
+<script>
+    $(document).ready(function(){
+        $('.supplier_select').select2({
+            ajax: {
+                url: "/supplier_search",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return { supplier: params.term };
+                },
+                processResults: function (data) {
+                    console.log(data);
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; },
+            placeholder: '選択してください',
+        });
+        $('.item_name').keyup(function(){
+            $('.currentEditName').removeClass('currentEditName');
+            $(this).addClass('currentEditName');
+            var target =$(this);
+            $.ajax({
+                url:'/order_item/search_by_name',
+                method:'get',
+                data:{name:target.val()},
+                success:function(data){
+
+                    var result='';
+                    for(var i=0;i<data.length;i++){
+                        var item =data[i];
+                        result+='<li item-id="'+item['id']+'" item-name="'+item['name']+'" item-code="'+item['jan_code']+'">'+item['name']+'</li>';
+                    }
+                    $('#item_name_list').html(result).show()
+                        .css({
+                            left: target.offset().left,
+                            top: target.offset().top+target.height(),
+                        });
+                    $('#item_code_list').hide();
+                }
+            })
+        }).blur(function(){
+            $('#item_name_list').hide();
+        });
+        $('#item_name_list').mouseenter(function(){
+            $('.currentEditName').unbind('blur');
+        }).blur(function(){
+            $(this).hide();
+        });
+        $(document).on('click','#item_name_list li',function(){
+            $('.currentEditName').val($(this).attr('item-name')).siblings('.item_code').val($(this).attr('item-code'))
+                .siblings('.item_name_hidden').val($(this).attr('item-id'));
+            $('#item_name_list').hide();
+        });
+        $('.item_code').keyup(function(){
+            $('.currentEditCode').removeClass('currentEditCode');
+            $(this).addClass('currentEditCode');
+            var target =$(this);
+            $.ajax({
+                url:'/order_item/search_by_code',
+                method:'get',
+                data:{jan_code: target.val()},
+                success:function(data){
+                    var result='';
+                    for(var i=0;i<data.length;i++){
+                        var item =data[i];
+                        result+='<li item-id="'+item['id']+'" item-name="'+item['name']+'" item-code="'+item['jan_code']+'">'+item['jan_code']+'</li>';
+                    }
+                    $('#item_code_list').html(result).show()
+                        .css({
+                            left: target.offset().left,
+                            top: target.offset().top+target.height(),
+                        });
+                    $('#item_name_list').hide();
+                }
+            })
+        }).blur(function(){
+            $('#item_code_list').hide();
+        });
+        $('#item_code_list').mouseenter(function(){
+            $('.currentEditCode').unbind('blur');
+        }).blur(function(){
+            $(this).hide();
+        });
+        $(document).on('click','#item_code_list li',function(){
+            $('.currentEditCode').val($(this).attr('item-code')).siblings('.item_name').val($(this).attr('item-name'))
+                .siblings('.item_name_hidden').val($(this).attr('item-id'));
+            $('#item_code_list').hide();
+        });
+    })
+</script>

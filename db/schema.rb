@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_18_005112) do
+ActiveRecord::Schema.define(version: 2019_09_25_123744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,25 @@ ActiveRecord::Schema.define(version: 2019_09_18_005112) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "cart_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "cart_id", null: false
+    t.bigint "product_id", null: false
+    t.bigint "variant_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cart_id"], name: "index_cart_items_on_cart_id"
+    t.index ["product_id"], name: "index_cart_items_on_product_id"
+    t.index ["variant_id"], name: "index_cart_items_on_variant_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
   create_table "microposts", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -43,6 +62,42 @@ ActiveRecord::Schema.define(version: 2019_09_18_005112) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "order_id", null: false
+    t.bigint "product_id", null: false
+    t.bigint "variant_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+    t.index ["variant_id"], name: "index_order_items_on_variant_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "method"
+    t.string "status"
+    t.string "details"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "jan_code"
+    t.string "gender"
+    t.string "franchise"
+    t.string "producttype"
+    t.string "category"
+    t.string "sport"
+    t.text "description_h5"
+    t.text "description_p"
+    t.text "specifications"
+    t.text "care"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -53,6 +108,15 @@ ActiveRecord::Schema.define(version: 2019_09_18_005112) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "commenter"
+    t.text "body"
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,6 +135,49 @@ ActiveRecord::Schema.define(version: 2019_09_18_005112) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "variants", force: :cascade do |t|
+    t.string "color"
+    t.float "price"
+    t.float "originalprice"
+    t.text "sku"
+    t.integer "stock"
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_variants_on_product_id"
+  end
+
+  create_table "wish_items", force: :cascade do |t|
+    t.bigint "wish_id", null: false
+    t.bigint "product_id", null: false
+    t.bigint "variant_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_wish_items_on_product_id"
+    t.index ["variant_id"], name: "index_wish_items_on_variant_id"
+    t.index ["wish_id"], name: "index_wish_items_on_wish_id"
+  end
+
+  create_table "wishes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_wishes_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cart_items", "carts"
+  add_foreign_key "cart_items", "products"
+  add_foreign_key "cart_items", "variants"
+  add_foreign_key "carts", "users"
   add_foreign_key "microposts", "users"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "order_items", "variants"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "variants", "products"
+  add_foreign_key "wish_items", "products"
+  add_foreign_key "wish_items", "variants"
+  add_foreign_key "wish_items", "wishes"
+  add_foreign_key "wishes", "users"
 end

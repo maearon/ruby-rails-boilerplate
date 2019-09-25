@@ -1,0 +1,7 @@
+<div id="follow_form">
+  <% if @wish.wish_items.find_by(variant_id: j) %>
+      <%= render 'unwish' %>
+  <% else %>
+      <%= render 'wish' %>
+  <% end %>
+</div>

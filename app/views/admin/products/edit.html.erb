@@ -1,0 +1,9 @@
+<% provide :title, "商品データ管理" %>
+
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to '商品データ管理', products_path %></li>
+  <li class="breadcrumb-item active" aria-current="page">編集</li>
+</ol>
+
+<%= render 'form', product: @product, is_update: true %>

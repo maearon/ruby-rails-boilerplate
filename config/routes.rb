@@ -24,6 +24,26 @@ Rails.application.routes.draw do
   namespace :api, format: "json" do
     namespace :v1 do
       get "users", to: "users#index"
+      get "products", to: "products#index"
     end
+  end
+  resources :products, only: [:index, :show] do
+    resources :comments
+  end
+  resources :cart_items
+  get 'cart', to: 'cart#index'
+  resources :wish_items
+  get 'wish', to: 'wish#index'
+
+  namespace :admin do
+    root 'static_pages#home'
+    resources :users
+    resources :products do
+      collection do
+        get :import
+        post :csv_import
+      end
+    end
+    resources :orders
   end
 end

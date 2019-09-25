@@ -1,0 +1,257 @@
+<% provide(:title, "adidas " + @product.name.titleize + " - " + @product.variants.first.color.name.to_s.capitalize + "") %>
+<% idsp = @product.id %>
+
+<% giaban = @variant.price %>
+<% giagoc = @variant.originalprice %>
+<% ptgg = (100 - giaban.fdiv(giagoc) * 100).to_i %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <% if @variant.images.attached? %>
+        <% @variant.images.each.with_index(1) do | image, index | %>
+          <%= image_tag image, id: "thumbnail_#{index.to_s}", onclick: "myFunction(this);", size: "52x52" %>
+        <% end %>
+      <% end %>
+
+
+
+      <% if @variant.images.attached? %>
+        <%= image_tag @variant.images.first, onclick: "changecursor()", id: "expandedImg", class: "performance-item", alt: "#{@product.name} #{@variant.color.name.to_s.titleize} #{@variant.sku}", size: "152x152" %>
+      <% end %>
+      <%= ptgg %>
+
+      <div id="myresult" class="img-zoom-result" style="display:none"></div>
+    </div>
+    <div class="col">
+
+      <%= "Đọc tất cả #{@product.comments.count} đánh giá" %>
+      <%= "#{@product.gender.name}'s #{@product.brand_id ? @product.brand.name : @product.sport.name}" %>
+      <%= @product.name %>
+
+      <div class="gl-price-container">
+        <span class="gl-price" style="<%= @product.variants.first.originalprice ? 'color:red' : '' %>">
+          <%= "#{number_to_currency(giaban * 23000, precision: 0, separator: ',', delimiter: '.', unit: '₫', format: "%n %u")}" %>
+        </span>
+        <strike>
+          <% if @product.variants.first.originalprice %>
+            <%= "#{number_to_currency(giagoc * 23000, precision: 0, separator: ',', delimiter: '.', unit: '₫', format: "%n %u")}" %>
+          <% end %>
+        </strike>
+      </div>
+
+      <div data-auto-id="color-chooser" class="gl-vspacing-l wrapper___2M6MI">
+        <h5 class="color_variation_title___2Zf7T">MÀU SẮC CÓ SẴN</h5>
+        <div class="gl-label gl-label--large gl-vspacing-s color_text___mgoYV">
+          <%= Color.find(@variant.color_id).name %>
+        </div>
+        <div class="wrapper-full-width___1NpMw" data-abtest-atp-1231="control">
+          <div class="wrapper-inner___I9yBh">
+            <% @product.variants.order(:id).each do |variant| %>
+              <% if variant.avatar.attached? %>
+                <div class="color_variation___3RVtF active___14GDh">
+                  <a href="/products/<%= @product.id %>?variant=<%= variant.id %>">
+                    <div class="image_holder___1vNhb" style="background-image: url(&quot;<%= url_for(variant.avatar) %>&quot;);margin:1px;<% variant.id.to_s == @variant.id.to_s ? 'border-bottom: 2px solid #000;' : nil %>">
+                    </div>
+                  </a>
+                </div>
+
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%= form_for @product, :url => cart_items_path, :html => {:method => :post} do |f| %>
+        <%= f.hidden_field :variant_id, value: @variant.id %>
+        <%= f.hidden_field :product_id, value: @product.id %>
+        <%= f.number_field :quantity, value: 1, class: "number-tag", min: 1, max: 15 %>
+        <%= f.button 'THÊM VÀO TÚI', class: "btn" %>
+      <% end %>
+
+      <%= form_for @product, :url => wish_items_path, remote: true, :html => {:action => "create", :method => :post}, :authenticity_token => true do |f| %>
+        <%= f.hidden_field :variant_id, value: @variant.id %>
+        <%= f.hidden_field :product_id, value: @product.id %>
+        <%= f.button 'THÊM VÀO TÚI', class: "btn" %>
+      <% end %>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= @product.name %>
+      <%= @product.description_h5 %>
+      <%= @product.description_p %>
+    </div>
+    <div class="col">
+      <%= @product.specifications %>
+    </div>
+    <div class="col">
+      <%= @product.care %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="col-s-12 offset-l-1 col-l-22 col-xl-20 offset-xl-2 offset-hg-3 col-hg-18" style="margin-bottom:150px;text-align: center;">
+        <h3>XẾP HẠNG VÀ ĐÁNH GIÁ</h3><br><br>
+        <%= render @product.comments %>
+        <h2>Thêm một bình luận:</h2>
+        <%= render 'comments/form' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ------------------------------------------------------------------------------------------ changecursor  --
+function changecursor() {
+    document.getElementById("expandedImg").style.cursor = 'url(/assets/glass/assets/img/icon-adidas-cursor-zoomed.png) 24 24,auto';
+    document.getElementById("expandedImg").setAttribute("onclick", "restorecursor()");
+}
+function restorecursor() {
+    document.getElementById("expandedImg").style.cursor = 'url(/assets/glass/assets/img/icon-adidas-cursor-zoom.png) 24 24,auto';
+    document.getElementById("expandedImg").setAttribute("onclick", "changecursor()");
+}
+// ------------------------------------------------------------------------------------------  zoom --
+
+function zoom() {
+    var x = document.getElementById("myresult");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+// Initiate zoom effect:
+imageZoom("expandedImg", "myresult");
+}
+// ------------------------------------------------------------------------------------------ change thumbnail --
+document.getElementById("thumbnail_1").parentNode.setAttribute("style", "border-bottom: 2px solid #000;");
+function myFunction(imgs) {
+    expandImg = document.getElementById("expandedImg");
+    expandImg.src = imgs.src;
+    var images = document.querySelectorAll('*[id^="thumbnail_"]');
+    var i = images.length;
+    for (j = 1; j < i; j++) {
+        document.getElementById("thumbnail_"+j).parentNode.setAttribute("style", "");
+    }
+    imgs.parentNode.setAttribute("style", "border-bottom: 2px solid #000");
+// Initiate zoom effect:
+imageZoom("expandedImg", "myresult");
+}
+// ------------------------------------------------------------------------------------------ scroll to comments  --
+function scrollWin() {
+    window.scrollTo(0,1350);
+}
+// ---------------------------------------------------------------- toggle model free deliver  --
+// Get the modal
+// var modal = document.getElementsByClassName("ui-corner-all popup-scale-in")[0];
+// var overlay = document.getElementsByClassName("ui-widget-overlay")[0];
+
+// // Get the button that opens the modal
+// var btn = document.getElementsByClassName("callout-bar-copy")[0];
+// var btn2 = document.getElementsByClassName("gl-label gl-label--large")[2];
+
+// // Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("ui-icon-closethick")[0];
+
+// // When the user clicks the button, open the modal
+// btn.onclick = function() {
+//   modal.style.display = "block";
+//   overlay.style.display = "block";
+// }
+// btn2.onclick = function() {
+//     modal.style.display = "block";
+//     overlay.style.display = "block";
+// }
+
+//   // When the user clicks on <span> (x), close the modal
+//   span.onclick = function() {
+//     modal.style.display = "none";
+//     overlay.style.display = "none";
+// }
+
+//   // When the user clicks anywhere outside of the modal, close it
+//   window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//         overlay.style.display = "none";
+//     }
+// }
+// --------------------------------------------------------Show active choose item product detailt  --
+
+
+
+
+
+
+
+
+// --------------------------------------------------------Add active class to the current button (highlight it)  --
+// var header = document.getElementById("myDIV");
+// var btns = header.getElementsByClassName("btn");
+// for (var i = 0; i < btns.length; i++) {
+//   btns[i].addEventListener("click", function() {
+//     var current = document.getElementsByClassName("active");
+//     current[0].className = current[0].className.replace(" active", "");
+//     this.className += " active";
+//   });
+// }
+// --------------------------------------------------------zoom  --
+
+function imageZoom(imgID, resultID) {
+    var img, lens, result, cx, cy;
+    img = document.getElementById(imgID);
+    result = document.getElementById(resultID);
+    /*tạo lens:*/
+    lens = document.createElement("DIV");
+    lens.setAttribute("class", "img-zoom-lens");
+    /*chèn lens:*/
+    img.parentElement.insertBefore(lens, img);
+    /*tính tỷ lệ giữa result DIV và lens:*/
+    cx = result.offsetWidth / lens.offsetWidth;
+    cy = result.offsetHeight / lens.offsetHeight;
+    /*đặt thuộc tính nền cho result DIV:*/
+    result.style.backgroundImage = "url('" + img.src + "')";
+    result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+    /*thực thi chức năng khi ai đó di chuyển con trỏ qua image, hoặc the lens:*/
+    lens.addEventListener("mousemove", moveLens);
+    img.addEventListener("mousemove", moveLens);
+    /*và cũng cho màn hình cảm ứng:*/
+    lens.addEventListener("touchmove", moveLens);
+    img.addEventListener("touchmove", moveLens);
+    function moveLens(e) {
+      var pos, x, y;
+      /*ngăn chặn bất kỳ hành động nào khác có thể xảy ra khi di chuyển qua image:*/
+      e.preventDefault();
+      /*lấy vị trí x và y của con trỏ:*/
+      pos = getCursorPos(e);
+      /*tính toán vị trí của lens:*/
+      x = pos.x - (lens.offsetWidth / 2);
+      y = pos.y - (lens.offsetHeight / 2);
+      /*ngăn không cho lens được đặt bên ngoài image:*/
+      if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
+      if (x < 0) {x = 0;}
+      if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
+      if (y < 0) {y = 0;}
+      /*đặt vị trí của lens:*/
+      lens.style.left = x + "px";
+      lens.style.top = y + "px";
+      /*hiển thị những gì lens "nhìn thấy":*/
+      result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+    }
+    function getCursorPos(e) {
+      var a, x = 0, y = 0;
+      e = e || window.event;
+      /*lấy vị trí x và y của image:*/
+      a = img.getBoundingClientRect();
+      /*tính toán tọa độ x và y của con trỏ, liên quan đến image:*/
+      x = e.pageX - a.left;
+      y = e.pageY - a.top;
+      /*xem xét việc cuộn trang bất kỳ:*/
+      x = x - window.pageXOffset;
+      y = y - window.pageYOffset;
+      return {x : x, y : y};
+    }
+  }
+</script>
+

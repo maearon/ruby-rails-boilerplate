@@ -58,3 +58,5 @@ gem 'bootstrap-sass',             '3.4.1'
 gem "ransack", "~> 2.3"
 
 gem "react-rails", "~> 2.6"
+
+gem "cocoon", "~> 1.2"

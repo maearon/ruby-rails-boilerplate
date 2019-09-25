@@ -90,6 +90,7 @@ GEM
     bootstrap-will_paginate (1.0.0)
       will_paginate
     builder (3.2.3)
+    cocoon (1.2.14)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
@@ -244,6 +245,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   bootstrap-sass (= 3.4.1)
   bootstrap-will_paginate (= 1.0.0)
+  cocoon (~> 1.2)
   faker (= 2.1.2)
   image_processing (= 1.9.3)
   jbuilder (~> 2.7)
