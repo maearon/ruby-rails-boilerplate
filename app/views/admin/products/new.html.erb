@@ -1,9 +1,4 @@
 <% provide :title, "Product" %>
-
-<!-- Breadcrumb -->
-<ol class="breadcrumb">
-  <li class="breadcrumb-item"><%= link_to 'Product', admin_products_path %></li>
-  <li class="breadcrumb-item active" aria-current="page">New</li>
-</ol>
+<h1>New product</h1>
 
 <%= render 'form', product: @product, is_update: false %>

@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.string :gender
       t.string :franchise
       t.string :producttype
+      t.string :brand
       t.string :category
       t.string :sport
       t.text :description_h5

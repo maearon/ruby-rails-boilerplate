@@ -55,6 +55,39 @@ ActiveRecord::Schema.define(version: 2019_09_25_123744) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
+  create_table "guest_cart_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "guest_cart_id", null: false
+    t.bigint "product_id", null: false
+    t.bigint "variant_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guest_cart_id"], name: "index_guest_cart_items_on_guest_cart_id"
+    t.index ["product_id"], name: "index_guest_cart_items_on_product_id"
+    t.index ["variant_id"], name: "index_guest_cart_items_on_variant_id"
+  end
+
+  create_table "guest_carts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "guest_wish_items", force: :cascade do |t|
+    t.bigint "guest_wish_id", null: false
+    t.bigint "product_id", null: false
+    t.bigint "variant_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guest_wish_id"], name: "index_guest_wish_items_on_guest_wish_id"
+    t.index ["product_id"], name: "index_guest_wish_items_on_product_id"
+    t.index ["variant_id"], name: "index_guest_wish_items_on_variant_id"
+  end
+
+  create_table "guest_wishes", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "microposts", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -90,6 +123,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_123744) do
     t.string "gender"
     t.string "franchise"
     t.string "producttype"
+    t.string "brand"
     t.string "category"
     t.string "sport"
     t.text "description_h5"
@@ -170,6 +204,12 @@ ActiveRecord::Schema.define(version: 2019_09_25_123744) do
   add_foreign_key "cart_items", "products"
   add_foreign_key "cart_items", "variants"
   add_foreign_key "carts", "users"
+  add_foreign_key "guest_cart_items", "guest_carts"
+  add_foreign_key "guest_cart_items", "products"
+  add_foreign_key "guest_cart_items", "variants"
+  add_foreign_key "guest_wish_items", "guest_wishes"
+  add_foreign_key "guest_wish_items", "products"
+  add_foreign_key "guest_wish_items", "variants"
   add_foreign_key "microposts", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"

@@ -14,7 +14,8 @@ class ProductsController < ApplicationController
 
   private
     def set_product
-      @product = Product.find(params[:id])
-      @variant = @product.variants.find(params[:variant])
+      @product = Product.find_by(id: params[:id])
+      @product ? nil : @product = Product.new
+      params[:variant] ? @variant = @product.variants.find(params[:variant]) : @variant = @product.variants.first
     end
 end

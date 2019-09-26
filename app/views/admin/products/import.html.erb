@@ -1,9 +1,0 @@
-<% provide :title, "商品データ管理" %>
-
-<!-- Breadcrumb -->
-<ol class="breadcrumb">
-  <li class="breadcrumb-item"><%= link_to "商品データ管理", products_path %></li>
-  <li class="breadcrumb-item active" aria-current="page">一括インポート</li>
-</ol>
-
-<%= render "shared/import_create_update", store_id: nil, path: products_path %>

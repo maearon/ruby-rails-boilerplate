@@ -1,5 +1,5 @@
 <div id="wish_form">
-<% if set_wish.wishing?(@product, @variant) %>
+<% if current_wish.wishing?(@product, @variant) %>
   <%= render 'unwish' %>
 <% else %>
   <%= render 'wish' %>

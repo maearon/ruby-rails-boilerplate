@@ -25,14 +25,18 @@ Rails.application.routes.draw do
     namespace :v1 do
       get "users", to: "users#index"
       get "products", to: "products#index"
+      get "wish", to: "wish#index"
+      get "cart", to: "cart#index"
     end
   end
   resources :products, only: [:index, :show] do
     resources :reviews
   end
-  resources :cart_items
+  resources :cart_items, only: [:create]
+  resources :guest_cart_items, only: [:create]
   get 'cart', to: 'cart#index'
-  resources :wish_items
+  resources :wish_items, only: [:create, :destroy]
+  resources :guest_wish_items, only: [:create, :destroy]
   get 'wish', to: 'wish#index'
 
   namespace :admin do

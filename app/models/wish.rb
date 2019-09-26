@@ -17,4 +17,8 @@ class Wish < ApplicationRecord
     current_item = wish_items.find_by(variant: variant)
     wish_items.include?(current_item)
   end
+
+  def total_item
+    wish_items.inject(0) { |sum, l| sum + 1 }
+  end
 end

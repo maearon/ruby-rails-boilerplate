@@ -1,9 +1,22 @@
-<% provide :title, "商品データ管理" %>
+<% provide :title, "Admin Edit Product" %>
+<% if @product&.variants&.first&.images&.attached? %>
+  <table>
+    <% @product&.variants&.each do |variant| %>
+    <tr>
+      <% if variant&.avatar&.attached? %>
+      <td><%= image_tag variant&.avatar, size: "30x30" %></td>
+      <% end %>
 
-<!-- Breadcrumb -->
-<ol class="breadcrumb">
-  <li class="breadcrumb-item"><%= link_to '商品データ管理', products_path %></li>
-  <li class="breadcrumb-item active" aria-current="page">編集</li>
-</ol>
+      <% if variant&.hover&.attached? %>
+      <td><%= image_tag variant&.hover, size: "30x30" %></td>
+      <% end %>
+
+      <% variant&.images&.each do |image| %>
+      <td><%= image_tag image, size: "20x20" %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
 
 <%= render 'form', product: @product, is_update: true %>

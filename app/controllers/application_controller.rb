@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include WishesHelper
   include ProductsHelper
   include VariantsHelper
-  before_action :set_cart, :set_wish
+  before_action :current_cart, :current_wish
 
   private
 

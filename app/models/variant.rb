@@ -2,7 +2,8 @@ class Variant < ApplicationRecord
   COLOR = %w{ Black Grey White Red Pink Orange Yellow Green Blue Purple Beige Brown Gold Silver Multicolor }
 
   has_many :cart_items
-  has_many :wish__items
+  has_many :wish_items
+  has_many :order_items
   belongs_to :product
 
   has_one_attached :avatar

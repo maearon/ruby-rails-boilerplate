@@ -9,9 +9,8 @@ class Product < ApplicationRecord
   CATEGORY = %w{ Shoes Compression Accessories Apparel }
   SPORT = %w{ Running Soccer Football }
 
-  has_many :variants, dependent: :destroy
-  accepts_nested_attributes_for :variants,
-                                allow_destroy: true
+  has_many :variants, inverse_of: :product, dependent: :destroy
+  accepts_nested_attributes_for :variants, reject_if: :all_blank, allow_destroy: true
   has_many :reviews, dependent: :destroy
   has_many :cart_items, dependent: :destroy
   has_many :wish_items, dependent: :destroy
@@ -22,4 +21,6 @@ class Product < ApplicationRecord
     length: {maximum: 13}
   validates :name, presence: true,
   length: { minimum: 1 }
+
+  default_scope { order(id: :asc) }
 end

@@ -1,3 +1,5 @@
+<div class="row">
+<aside class="col-md-2">
 <%= form_with model: [:admin, @product], local: true, class: "horizontal-form" do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
@@ -40,6 +42,7 @@
     <%= f.label :sport %>
     <%= f.select :sport, Product::SPORT, {prompt: "Select Sport"}, class: "form-control" %>
   </div>
+</aside>
 
   <h2>Variants</h2>
   <div>
@@ -48,14 +51,15 @@
     <% end %>
     <div class="add-variant">
       <%= link_to_add_association 'Add Variant', f, :variants, render_options: {locals: { is_update: is_update }},
-                                  class: "btn btn-sm btn-rounded btn-primary" %>
+                                  class: "btn btn-sm btn-rounded btn-success" %>
     </div>
     <ul id="item_name_list" class="item_list"></ul>
     <ul id="item_code_list" class="item_list"></ul>
   </div>
 
   <div class="actions">
-    <%= link_to 'Back', admin_products_path %>
-    <%= f.submit %>
+    <%= f.submit nil, class: "btn btn-primary" %>
   </div>
 <% end %>
+
+

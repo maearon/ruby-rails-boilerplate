@@ -30,13 +30,15 @@ class index extends Component {
 
   render(){
     let autoCompleteList = this.state.autoCompleteResults.map((response) => {
-      return <ul class="products">
-        <li>
-          <img alt={response.name} class='gravatar' src={response.image_url} height="50" width="50" />
-          <a href={response.url_edit}>{response.name}</a>
-            | <a data-confirm="You sure?" rel="nofollow" data-method="delete" href={response.url} data-remote="true" class={"product-" + response.id}>delete</a>
+      return <ol class="products">
+        <li id={'product'+response.id}>
+          <a href={response.url_edit}><img alt={response.name} class="gravatar" src={response.image_url} height="50" width="50" /></a>
+          <span class="user"><a href={response.url_edit}>{response.name}</a></span>
+          <span class="content">
+            | <a data-confirm="You sure?" rel="nofollow" data-method="delete" href={response.url} data-remote="true">delete</a>
+          </span>
         </li>
-      </ul>
+      </ol>
     });
 
     return (
