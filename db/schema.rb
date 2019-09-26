@@ -111,8 +111,8 @@ ActiveRecord::Schema.define(version: 2019_09_25_123744) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string "commenter"
-    t.text "body"
+    t.string "reviewer"
+    t.text "content"
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
