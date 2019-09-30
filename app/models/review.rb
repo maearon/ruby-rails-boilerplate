@@ -1,7 +1,7 @@
 class Review < ApplicationRecord
-  validates :commenter, presence: true,
+  validates :reviewer, presence: true,
   length: { minimum: 1 }
-  validates :body, presence: true,
+  validates :content, presence: true,
   length: { minimum: 3 }
   belongs_to :product
 end

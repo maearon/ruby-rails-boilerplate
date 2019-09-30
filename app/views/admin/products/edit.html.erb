@@ -1,4 +1,5 @@
-<% provide :title, "Admin Edit Product" %>
+<h1>Editing Product</h1>
+
 <% if @product&.variants&.first&.images&.attached? %>
   <table>
     <% @product&.variants&.each do |variant| %>
@@ -19,4 +20,6 @@
   </table>
 <% end %>
 
-<%= render 'form', product: @product, is_update: true %>
+<%= render 'form', project: @project %>
+
+<%= link_to 'Back', admin_products_path %>

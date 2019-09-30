@@ -1,4 +1,6 @@
 class GuestCartItemsController < ApplicationController
+  before_action :set_guest_cart_item, only:[:destroy]
+
   def create
     @product = Product.find(params[:product_id])
     @variant = Variant.find(params[:variant_id])
@@ -8,4 +10,14 @@ class GuestCartItemsController < ApplicationController
       format.js
     end
   end
+
+  def destroy
+    @guest_cart_item.destroy
+    redirect_to request.referrer
+  end
+
+  private
+    def set_guest_cart_item
+      @guest_cart_item = GuestCartItem.find(params[:id])
+    end
 end

@@ -1,0 +1,18 @@
+.nested-fields
+  .field
+    = f.label :description
+    br
+    = f.text_field :description
+  .field
+    = f.check_box :done
+    = f.label :done
+  .field
+    = f.label :avatar
+    = f.file_field :avatar
+  .field
+    = f.label :hover
+    = f.file_field :hover
+  .field
+    = f.label 'images'
+    = f.file_field :images, multiple: true
+  = link_to_remove_association "remove task", f

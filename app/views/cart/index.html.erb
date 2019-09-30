@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-8">
+    <h3>YOUR BAG</h3>
+    <% if @cart_items.any? %>
+      <ol class="microposts">
+        <%= render @cart_items %>
+      </ol>
+      <%= will_paginate @cart_items,
+                        params: { controller: :cart, action: :index } %>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+                <div class="cart-totals">
+                  <h2>ORDER SUMMARY</h2>
+                  <div class="table-cart table-responsive">
+                    <table>
+                      <tbody class="cart-totals-list">
+                        <% unless current_cart.sale.zero? %>
+                        <tr>
+                          <th>original price</th>
+                          <td><%= number_to_currency current_cart.total_originalvalue, unit: '$', delimiter: ".", precision: 0 %></td>
+                        </tr>
+                        <tr>
+                          <th>sale</th>
+                          <td><%= number_to_currency current_cart.sale, unit: '$', delimiter: ".", precision: 0 %></td>
+                        </tr>
+                        <% end %>
+                        <tr>
+                          <th><%= "#{current_cart.total_item} items" %></th>
+                          <td><%= number_to_currency current_cart.total_value, unit: '$', delimiter: ".", precision: 0 %></td>
+                        </tr>
+                        <tr>
+                          <th>Delivery</th>
+                          <td><span>Free</span></td>
+                        </tr>
+                        <tr>
+                          <th>SALES TAX</th>
+                          <td><span>-</span></td>
+                        </tr>
+                        <tr class="cart-total">
+                          <th>Total</th>
+                          <td><%= number_to_currency current_cart.total_value, unit: '$', delimiter: ".", precision: 0 %></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="we-proceed-to-checkout">
+                      <a href="#" onclick="event.preventDefault();">checkout</a>
+                    </div>
+                    <div class="we-proceed-to-checkout">
+                      <a href="#" onclick="event.preventDefault();">paypal</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="coupon">
+                      <input type="submit" value="apply" />
+                      <span>enter your promo code</span>
+                      <input type="text" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+</div>

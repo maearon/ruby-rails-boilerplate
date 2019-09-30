@@ -1,0 +1,12 @@
+<li id="wish_item-<%= wish_item.id %>">
+  <%= image_tag wish_item.variant.images.first, size: 50, size: "50x50" %>
+  <span class="user"><%= link_to wish_item.product.name, wish_item.product %></span>
+  <span class="content">
+    <%= wish_item.variant.color %>
+  </span>
+  <span class="timestamp">
+    Added <%= time_ago_in_words(wish_item.created_at) %> ago.
+    <%= link_to "delete", wish_item_url(wish_item), method: :delete,
+                                     data: { confirm: "You sure?" } %>
+  </span>
+</li>

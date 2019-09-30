@@ -12,6 +12,10 @@ class Cart < ApplicationRecord
     end
   end
 
+  def list
+    cart_items
+  end
+
   def total_item
     cart_items.inject(0) { |sum, l| sum + l.quantity }
   end

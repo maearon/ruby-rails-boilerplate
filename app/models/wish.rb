@@ -2,6 +2,10 @@ class Wish < ApplicationRecord
   belongs_to :user, optional: true
   has_many :wish_items, dependent: :destroy
 
+  def list
+    wish_items
+  end
+
   # Wishes a product.
   def wish(product, variant)
     wish_items.create(product: product,variant: variant, wish: self)

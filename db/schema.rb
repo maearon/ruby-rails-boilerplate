@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_123744) do
+ActiveRecord::Schema.define(version: 2019_09_30_020813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,13 @@ ActiveRecord::Schema.define(version: 2019_09_25_123744) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -151,6 +158,15 @@ ActiveRecord::Schema.define(version: 2019_09_25_123744) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_reviews_on_product_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "description"
+    t.boolean "done"
+    t.bigint "project_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -215,6 +231,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_123744) do
   add_foreign_key "order_items", "products"
   add_foreign_key "order_items", "variants"
   add_foreign_key "reviews", "products"
+  add_foreign_key "tasks", "projects"
   add_foreign_key "variants", "products"
   add_foreign_key "wish_items", "products"
   add_foreign_key "wish_items", "variants"

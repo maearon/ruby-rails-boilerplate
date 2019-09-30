@@ -59,10 +59,12 @@ gem "ransack", "~> 2.3"
 
 gem "react-rails", "~> 2.6"
 
-gem "cocoon", "~> 1.2"
+gem 'cocoon', '~> 1.2', '>= 1.2.14'
 
 gem 'uglifier', '3.2.0'
 gem 'coffee-rails', '4.2.2'
 gem 'activerecord_reset_pk_sequence'
 
 gem "font-awesome-sass", "~> 5.11"
+
+gem "slim", "~> 4.0"

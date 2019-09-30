@@ -1,6 +1,10 @@
 class GuestWish < ApplicationRecord
   has_many :guest_wish_items, dependent: :destroy
 
+  def list
+    guest_wish_items
+  end
+
   # Wishes a product.
   def wish(product, variant)
     guest_wish_items.create(product: product,variant: variant, guest_wish: self)

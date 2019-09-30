@@ -5,7 +5,7 @@
       <ul style="list-style-type: none;padding: 0">
         <% @variant.images.each.with_index(1) do | image, index | %>
           <li><%= link_to "javascript:void(0);" do %>
-            <%= image_tag image, size: "60x60" %>
+            <%= image_tag image, size: "60x60", onclick: "myFunction(this);", id: "thumbnail_"<<index.to_s %>
           <% end %></li>
         <% end %>
       </ul>
@@ -14,7 +14,7 @@
   <aside class="col-md-7">
     <section>
       <h1>
-        <%= image_tag @variant.images.first, alt: @product.name, size: "650x650" %>
+        <%= image_tag @variant.images.first, alt: @product.name, size: "650x650", onclick: "changecursor()", id: "expandedImg" %>
       </h1>
     </section>
   </aside>
@@ -50,3 +50,7 @@
     <%= render 'review' %>
   </div>
 </div>
+
+<script>
+document.getElementById("thumbnail_1").setAttribute("style", "border: 2px solid #000;");
+</script>

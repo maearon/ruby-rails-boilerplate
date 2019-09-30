@@ -13,7 +13,7 @@ class Variant < ApplicationRecord
   validates_numericality_of :stock, :price, greater_than_or_equal_to: 0
   validates :avatar,   content_type: { in: %w[image/jpeg image/gif image/png],
                                       message: "must be a valid image format" },
-                      size: { less_than: 5.megabytes,
+                      size: { less_than: 100.megabytes,
                             message: "should be less than 5MB" }
   validates_uniqueness_of :id, scope: :product_id
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :projects
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'password_resets/new'
   get 'password_resets/edit'
@@ -32,8 +33,8 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show] do
     resources :reviews
   end
-  resources :cart_items, only: [:create]
-  resources :guest_cart_items, only: [:create]
+  resources :cart_items, only: [:create, :destroy]
+  resources :guest_cart_items, only: [:create, :destroy]
   get 'cart', to: 'cart#index'
   resources :wish_items, only: [:create, :destroy]
   resources :guest_wish_items, only: [:create, :destroy]
@@ -42,12 +43,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'static_pages#home'
     resources :users
-    resources :products do
-      collection do
-        get :import
-        post :csv_import
-      end
-    end
+    resources :products
     resources :orders
   end
 end

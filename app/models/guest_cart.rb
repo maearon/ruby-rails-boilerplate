@@ -11,6 +11,10 @@ class GuestCart < ApplicationRecord
     end
   end
 
+  def list
+    guest_cart_items
+  end
+
   def total_item
     guest_cart_items.inject(0) { |sum, l| sum + l.quantity }
   end

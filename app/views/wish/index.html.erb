@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-12">
+    <h3>WISHLIST</h3>
+    <% if @wish_items.any? %>
+      <ol class="microposts">
+        <%= render @wish_items %>
+      </ol>
+      <%= will_paginate @wish_items,
+                        params: { controller: :wish, action: :index } %>
+    <% end %>
+  </div>
+</div>

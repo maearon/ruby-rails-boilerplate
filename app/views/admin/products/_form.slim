@@ -1,0 +1,36 @@
+= form_with model: [:admin, @product], local: true, class: "form-inline admin-product-form" do |f|
+  = render 'shared/error_messages', object: f.object
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control"
+  .form-group
+    = f.label :jan_code
+    = f.text_field :jan_code, class: "form-control"
+  .form-group
+    = f.label :gender
+    = f.select :gender, Product::GENDER, {prompt: "Select Gender"}, class: "form-control"
+  .form-group
+    = f.label :franchise
+    = f.select :franchise, Product::FRANCHISE, {prompt: "Select Franchise"}, class: "form-control"
+  .form-group
+    = f.label :producttype
+    = f.select :producttype, Product::PRODUCTTYPE, {prompt: "Select Producttype"}, class: "form-control"
+  .form-group
+    = f.label :brand
+    = f.select :brand, Product::BRAND, {prompt: "Select Brand"}, class: "form-control"
+  .form-group
+    = f.label :category
+    = f.select :category, Product::CATEGORY, {prompt: "Select Category"}, class: "form-control"
+  .form-group
+    = f.label :sport
+    = f.select :sport, Product::SPORT, {prompt: "Select Sport"}, class: "form-control"
+  h3 Variants
+  #variants
+    = f.fields_for :variants do |variant|
+      = render 'variant_fields', f: variant
+    .links
+      .add-variant
+        = link_to_add_association 'add variant', f, :variants, class: "btn btn-sm btn-rounded btn-success"
+  = f.submit nil, class: "btn btn-primary"
+
+

@@ -1,0 +1,31 @@
+.nested-fields
+  .form-group
+    = f.label :price
+    br
+    = f.number_field :price, min: 1, class: "form-control"
+  .form-group
+    = f.label :originalprice
+    br
+    = f.number_field :originalprice, min: 1, class: "form-control"
+  .form-group
+    = f.label :sku
+    br
+    = f.number_field :sku, class: "form-control"
+  .form-group
+    = f.label :stock
+    br
+    = f.number_field :stock, min: 1, class: "form-control"
+  .form-group
+    = f.label :color
+    br
+    = f.select :color, Variant::COLOR, {prompt: "Select Color"}, class: "form-control"
+  .form-group
+    = f.label :avatar
+    = f.file_field :avatar, class: "form-control"
+  .form-group
+    = f.label :hover
+    = f.file_field :hover, class: "form-control"
+  .form-group
+    = f.label 'images'
+    = f.file_field :images, multiple: true, class: "form-control"
+  = link_to_remove_association "remove variant", f, class: "btn btn-sm btn-rounded btn-danger"

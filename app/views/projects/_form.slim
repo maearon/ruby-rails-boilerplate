@@ -1,0 +1,16 @@
+= form_for @project do |f|
+  .field
+    = f.label :name
+    br
+    = f.text_field :name
+  .field
+    = f.label :description
+    br
+    = f.text_field :description
+  h3 Tasks
+  #tasks
+    = f.fields_for :tasks do |task|
+      = render 'task_fields', f: task
+    .links
+      = link_to_add_association 'add task', f, :tasks
+  = f.submit
