@@ -16,7 +16,11 @@ class GuestCart < ApplicationRecord
   end
 
   def total_item
-    guest_cart_items.inject(0) { |sum, l| sum + l.quantity }
+    total_item = 0
+    self.guest_cart_items.each do |guest_cart_item|
+      total_item += guest_cart_item.quantity.to_i
+    end
+    total_item
   end
 
   def total_originalvalue

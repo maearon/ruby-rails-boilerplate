@@ -1,15 +1,6 @@
-<% if current_cart.class == Cart %>
-  <%= form_for(current_cart.cart_items.build, remote: true) do |f| %>
-    <div><%= hidden_field_tag :product_id, session[:product_id] %></div>
-    <div><%= hidden_field_tag :variant_id, session[:variant_id] %></div>
-    <div><%= f.number_field :quantity, value: 1, min: 1, max: 15, class: "form-control" %></div>
-    <%= f.submit "Add to Cart", class: "btn btn-primary" %>
-  <% end %>
-<% else %>
-  <%= form_for(current_cart.guest_cart_items.build, remote: true) do |f| %>
-    <div><%= hidden_field_tag :product_id, session[:product_id] %></div>
-    <div><%= hidden_field_tag :variant_id, session[:variant_id] %></div>
-    <div><%= f.number_field :quantity, value: 1, min: 1, max: 15, class: "form-control" %></div>
-    <%= f.submit "Add to Cart", class: "btn btn-primary" %>
-  <% end %>
+<%= form_for(current_cart.list.build, remote: true) do |f| %>
+  <div><%= hidden_field_tag :product_id, @product.id %></div>
+  <div><%= hidden_field_tag :variant_id, @variant.id %></div>
+  <div><%= f.number_field :quantity, value: 1, min: 1, max: 15, class: "form-control" %></div>
+  <%= f.submit "Add to Cart", class: "btn btn-primary" %>
 <% end %>

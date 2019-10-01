@@ -3,8 +3,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include CartsHelper
   include WishesHelper
-  include ProductsHelper
-  include VariantsHelper
   before_action :current_cart, :current_wish
 
   private

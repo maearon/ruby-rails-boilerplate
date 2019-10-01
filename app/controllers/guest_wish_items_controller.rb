@@ -11,6 +11,8 @@ class GuestWishItemsController < ApplicationController
 
   def destroy
     @current_item = GuestWishItem.find(params[:id])
+    @product = @current_item.product
+    @variant = @current_item.variant
     current_wish.unwish(@current_item)
     respond_to do |format|
       format.html { redirect_to request.referrer }

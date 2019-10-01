@@ -22,6 +22,6 @@ class GuestWish < ApplicationRecord
   end
 
   def total_item
-    guest_wish_items.inject(0) { |sum, l| sum + 1 }
+    guest_wish_items.count
   end
 end

@@ -17,7 +17,11 @@ class Cart < ApplicationRecord
   end
 
   def total_item
-    cart_items.inject(0) { |sum, l| sum + l.quantity }
+    total_item = 0
+    self.cart_items.each do |cart_item|
+      total_item += cart_item.quantity.to_i
+    end
+    total_item
   end
 
   def total_originalvalue

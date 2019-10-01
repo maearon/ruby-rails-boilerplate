@@ -23,6 +23,6 @@ class Wish < ApplicationRecord
   end
 
   def total_item
-    wish_items.inject(0) { |sum, l| sum + 1 }
+    wish_items.count
   end
 end
