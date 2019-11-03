@@ -1,0 +1,459 @@
+/*bộ chọn css
+https://www.w3schools.com/cssref/css_selectors.asp*/
+body,html{
+    height:100%
+}
+body{
+    margin:0;
+    padding:0;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility
+}
+[tabindex]:focus,button:focus,input:focus,select:focus,textarea:focus{
+    outline:none!important
+}
+[role=button],a,area,button,input:not([type=range]),label,select,summary,textarea{
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    border-radius:0;
+    box-shadow:none;
+    outline:none
+}
+input[type=email],input[type=password],input[type=tel],input[type=text],textarea{
+    -webkit-appearance:none
+}
+button{
+    border:none;
+    background:none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0)
+}
+button,input,optgroup,select,textarea{
+    margin:0
+}
+fieldset{
+    border:none
+}
+form{
+    width:100%
+}
+input:focus,textarea:focus{
+    outline:none
+}
+input:focus::-webkit-input-placeholder,textarea:focus::-webkit-input-placeholder{
+    opacity:0
+}
+input:focus:-ms-input-placeholder,input:focus::-ms-input-placeholder,textarea:focus:-ms-input-placeholder,textarea:focus::-ms-input-placeholder{
+    opacity:0
+}
+input:focus::placeholder,textarea:focus::placeholder{
+    opacity:0
+}
+input::-ms-clear{
+    width:0;
+    height:0
+}
+h1,h2,h3,h4,h5,h6{
+    font-weight:400
+}
+h1,h2,h3,h4,h5,h6,p{
+    margin:0;
+    padding:0
+}
+em,i{
+    font-style:normal
+}
+ol,ul{
+    margin:0;
+    padding:0;
+    list-style:none
+}
+a{
+    cursor:pointer;
+    text-decoration:none
+}
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(sansation_light.woff);
+}
+
+body,html{
+    font-family:Verdana,Arial,sans-serif;
+    font-weight:400;
+    font-style:normal;
+    font-size:14px
+}
+a{
+    color:inherit
+}
+p{
+    line-height:22px;
+    margin-bottom:16px
+}
+
+
+/* 
+https://www.w3schools.com/cssref/pr_font_font.asp
+https://www.w3schools.com/cssref/css3_pr_font-face_rule.asp
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(sansation_light.woff);
+}
+
+div {
+    font-family: myFirstFont;
+}
+
+
+
+là sự kết hợp của nhiều thuộc tính khác nhau nhằm tạo vùng không gian 
+tạm thay thế vùng không gian bị giải phóng khi thành phần sử dụng float.
+gốc tính padding và margin sẽ không còn bị ảnh hưởng bởi float*/
+.clearfix {
+    zoom: 1;
+}
+
+
+
+
+/**************************************************************************************************************************/
+/*Breadcrumb là tập hợp các đường link phân cấp giúp khách truy cập biết mình đang ở vị trí nào của website, 
+chuyên mục nào từ đó có thể di chuyển thuận lợi từ trang này trang khác trong 1 website. */
+.breadcrumb {
+    
+    padding: 10px 0;
+    width: 950px;
+    margin: 5px auto;
+    font-size: 13px;
+}
+.breadcrumb a {
+    color: #000;
+    text-decoration: none;
+    text-decoration-line: none;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+    text-transform: capitalize;
+}
+.divider {
+    margin: 0 5px 0 0;
+}
+.col-container {
+    display: table; /* Làm cho phần tử vùng chứa hoạt động như một bảng */
+    width: 100%; /* Đặt toàn bộ chiều rộng để mở rộng toàn bộ trang */
+    letter-spacing: .25px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+.col {
+    display: table-cell;/* Làm cho các phần tử bên trong container hoạt động giống như các ô bảng */
+    padding: 16px;/* đệm */
+}
+.col h2 {
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0;
+}
+
+h1, h3, h4, h5, .adineue-bd, .title-mega, .title-super, .contentasset .question, .contentasset .related-question-header, .contentasset .help-section-category, .title-48, .title-28, .title-22, .title-18, .title-16 {
+    text-transform: uppercase;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, button, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    
+    vertical-align: baseline;
+    background: transparent;
+    max-height: 999999px;
+}
+
+div {
+    display: block;
+}
+
+
+
+/**************************************************************************************************/
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 3002;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+
+}
+.sidenav legend {
+    white-space: normal;
+    width: 100%;
+}
+.gl-progress__label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.sidenav .QuestionText {
+    padding: 0px 15pt 0px 15pt;
+}
+.sidenav h1 {
+    font-size: 26px;
+    line-height: 24pt;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    font-family: AdineuePRO-Bold,Helvetica,Arial,sans-serif;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #000000;
+}
+.sidenav p {
+    font-family: adihausDIN,Arial,sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 18pt;
+    letter-spacing: 0pt;
+    color: #000000;
+}
+.sidenav strong, b {
+    font-weight: bold;
+}
+
+.sidenav p {
+    font-family: adihausDIN,Arial,sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 18pt;
+    letter-spacing: 0pt;
+    color: #000000;
+}
+.sidenav .QuestionBody {
+    padding: 0pt 15pt 0pt 15pt!important;
+    overflow: visible!important;
+    overflow-y: visible!important;
+    font-size: 16px;
+    position: relative;
+}
+.sidenav .NPS table .ColumnLabels .First {
+    text-align: left;
+}
+.sidenav .NPS table .ColumnLabels .Last {
+    text-align: right;
+}
+th {
+    font-style: normal;
+    font-weight: 100;
+    text-align: left;
+    font-size: 14px;
+}
+.sidenav .LabelWrapper {
+    width: 100%;
+}
+span.LabelWrapper {
+    position: relative;
+}
+.sidenav.QuestionBody {
+    padding: 0pt 15pt 0pt 15pt!important;
+    overflow: visible!important;
+    overflow-y: visible!important;
+}
+.sidenav.QuestionBody {
+    padding: 0 20px 10px!important;
+}
+@media (max-width: 768px){
+.sidenav.QuestionBody {
+    padding: 0 15px 15px 15px;
+}}
+.sidenav.QuestionBody {
+    color: #000;
+    font-size: 16px;
+    overflow-y: hidden;
+    padding: 0 20px 20px 20px;
+    position: relative;
+
+}
+.sidenav.QuestionBody {
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+}
+#ButtonBlack {
+    min-height: 50px;
+    min-width: 50%;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    line-height: 50px;
+    padding: 0pt 22pt 0pt 22pt;
+    font-family: AdihausDIN,Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    position: relative;
+    align-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    margin-top: 10px;
+}
+#cta-text {
+    padding-right: 21px;
+    font-family: AdihausDIN,Arial,sans-serif;
+    float: left;
+}
+#cta-arrow {
+    float: right;
+    padding-top: 18px;
+    padding-left: 20px;
+}
+.sidenav img {
+    max-width: 100%;
+    height: auto!important;
+}
+#ButtonBlack {
+    min-height: 50px;
+    min-width: 50%;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    line-height: 50px;
+    padding: 0pt 22pt 0pt 22pt;
+    font-family: AdihausDIN,Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    position: relative;
+    align-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    margin-top: 10px;
+}
+#cta-arrow {
+    float: right;
+    padding-top: 18px;
+    padding-left: 20px;
+}
+#feedback {
+    border: 1px solid #ebebeb;
+    padding: 9px 15px;
+    color: #616363;
+    font-size: 19px!important;
+    transform: rotate(-90deg);
+    font-size:30px;cursor:pointer;
+    top:53%;
+    position:fixed;
+    display:block;
+    background:#fff;
+    right:-49px; 
+    
+    transition: 0.5s;
+}
+/**********************
+.Skin, .sidenav#EndOfSurvey, .sidenav#ProgressBar, .sidenav.QuestionText, .sidenav.yui-skin-sam .yui-calcontainer, .sidenavbutton, .sidenavinput, .sidenavselect, .sidenavtextarea {
+    
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.sidenav.QuestionText {
+    padding: 0px 15pt 0px 15pt;
+}
+h1 {
+    font-size: 26px;
+    line-height: 24pt;
+    margin-bottom: 20px;
+    margin-top: 0px;
+
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #000000;
+}
+p {
+    
+    font-style: normal;
+    font-size: 16px;
+    line-height: 18pt;
+    letter-spacing: 0pt;
+    color: #000000;
+}
+#ButtonWhite {
+    min-height: 50px;
+    background-color: #fff;
+    color: #000000;
+    border: 1.5pt solid #000000;
+    font-size: 13px;
+    letter-spacing: 2px;
+    line-height: 50px;
+    padding: 0px 21px 0px 21px;
+    
+    font-weight: 700;
+    position: relative;
+    align-content: center;
+    margin: 40px 0pt 25px 0pt;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+}
+#cta-arrow-white {
+    height: 12px;
+    float: right;
+    width: 25px;
+    padding-top: 17px;
+}
+img {
+    max-width: 100%;
+    height: auto!important;
+}
+a {
+    color: #000000;
+    border-bottom: 1pt solid #000000;
+    font-size: 13px;
+    letter-spacing: 2px;
+    line-height: 20pt;
+    padding: 0pt 0pt 0pt 0pt;
+    font-family: AdihausDIN,Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    position: relative;
+    align-content: center;
+    margin: 50pt 0pt 25pt 0pt;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+}
+***********************/
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media (min-width: 960px){
+.stack {
+    margin-top: 60px;
+    padding-bottom: 60px;
+}}
+
+.stack {
+    margin-top: 30px;
+    padding-bottom: 30px;
+}

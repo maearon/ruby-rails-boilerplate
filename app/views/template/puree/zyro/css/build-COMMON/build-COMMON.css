@@ -1,0 +1,151 @@
+
+.rbk-content-wrapper {
+    padding: 10px 0;
+    width: 950px;
+    margin: 5px auto;
+}
+.pt_account #content {
+    clear: both;
+    width: 100%;
+    margin: 0;
+}
+.rbk-content-wrapper .accountcenter, .rbk_content_wrapper .accountcenter {
+    float: left;
+    width: 690px;
+}
+.accountcenter {
+    float: right;
+    width: 689px;
+    margin: 0;
+    position: relative;
+}
+.accountwelcome h1 {
+    margin-bottom: 8px;
+    font-size: 32px;
+    width: 460px;
+}
+.accountwelcome .not_user {
+    position: absolute;
+    right: 0;
+    font-size: 14px;
+    top: 0;
+    width: 230px;
+    text-align: right;
+    line-height: 28px;
+}
+.adi-main-blue, a {
+    color: #0286cd;
+}
+.accountlanding {
+    clear: both;
+    padding: 16px 0;
+    border-top: 3px solid #ebebeb;
+    border-bottom: 3px solid #ebebeb;
+    margin: 0 0 32px;
+}
+.accountlanding .account-landing-slot .contentstack-productcarousel .carousel-title {
+    text-align: left;
+    letter-spacing: .1px;
+    margin: 0 0 20px;
+    padding: 0;
+    font-size: 24px;
+}
+.contentstack-productcarousel .carousel-title {
+    letter-spacing: 6px;
+    
+}
+.account-landing-slot .carousel-title {
+    
+    letter-spacing: 6px;
+    font-size: 28px;
+    line-height: .85;
+}
+.accountlanding h3 {
+    padding: 0 0 0 20px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: normal;
+}
+.carousel-title {
+    font-size: 32px;
+    line-height: 90%;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+.quick_links {
+    padding: 10px 0 0;
+}
+.clear {
+    clear: both!important;
+}
+.clearfix {
+    zoom: 1;
+}
+.quick_links h4 {
+    color: #000;
+    display: block;
+    padding: 7px 0;
+    margin: 0;
+    position: relative;
+}
+.quick_links ul li a, .orderhistoryfacelift ul.order-summary-help li a {
+    display: block;
+    padding: 2px 0;
+    color: #0286cd;
+}
+a {
+    text-decoration: none;
+}
+.rbk-content-wrapper #leftcolumn, .rbk_content_wrapper #leftcolumn {
+    float: right;
+    clear: right;
+    margin: 45px 0 0 0;
+}
+#leftcolumn, .pt_productsearchresult #leftcolumn {
+    width: 220px;
+    margin: 0 20px 0 0;
+}
+#leftcolumn {
+    float: left;
+    clear: left;
+    width: 182px;
+}
+
+.styled_nav.account_overview_link .navgroup .nav-title.account_overview_link, .styled_nav.address_book_link .navgroup .nav-title.address_book_link, .styled_nav.order_history_link .navgroup .nav-title.order_history_link, .styled_nav.personal_information_link .navgroup .nav-title.personal_information_link, .styled_nav.your_preferences_link .navgroup .nav-title.your_preferences_link, .styled_nav.mi_adidas_link .navgroup .nav-title.mi_adidas_link, .styled_nav.saveddesigns_links .navgroup .nav-title.saveddesigns_links, .styled_nav.universe_link .navgroup .nav-title.universe_link, .styled_nav.universe_link .navgroup .nav-title.account_overview_link, .styled_nav.account_overview_link .navgroup .nav-title.universe_link, .styled_nav.wishlist_link .navgroup .nav-title.wishlist_link {
+    color: #000;
+    margin-left: -7px;
+    padding-left: 6px;
+    border-left: 2px solid black;
+}
+
+.styled_nav .navgroup .nav-title:hover, .styled_nav .navgroup .nav-title:focus {
+    color: #025f8e;
+}
+.styled_nav .navgroup .nav-title {
+    color: #0286cd;
+    
+    text-transform: none;
+    display: block;
+    padding: 4px 0 0 0;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+}
+
+.styled_nav .navgroup .nav-title {
+    color: #0286cd;
+    
+    text-transform: none;
+    display: block;
+    padding: 4px 0 0 0;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+}
+
+.adi-main-blue, a {
+    color: #0286cd;
+}

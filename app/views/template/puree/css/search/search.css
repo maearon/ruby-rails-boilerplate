@@ -1,0 +1,94 @@
+#page_info_top{
+    margin-left: 80px;
+}
+.breadcrumbs .back, .breadcrumb .back {
+    padding-right: 8px;
+    border-right: 1px solid #000;
+}
+.breadcrumbs li, .breadcrumb li {
+    height: 13px;
+    float: left;
+    margin: 0 7px 0 0;
+    line-height: 15px;
+    color: #9a9b9b;
+}
+.breadcrumbs .back a, .breadcrumb .back a {
+    position: relative;
+
+    padding-left: 19px;
+}
+.breadcrumbs a, .breadcrumb a {
+    color: #000;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+.breadcrumbs .back a:after, .breadcrumb .back a:after {
+    content: '\2770';
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: 'icomoonregular';
+    color: #000;
+    /*
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);*/
+}
+.breadcrumbs li, .breadcrumb li {
+    height: 13px;
+    float: left;
+    margin: 0 7px 0 0;
+    line-height: 15px;
+    color: #9a9b9b;
+}
+.breadcrumbs a, .breadcrumb a {
+    color: #000;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+.search_results_switch_bar h3 .search-title:before {
+    height: 26px;
+    line-height: 26px;
+    top: 50%;
+    margin: -13px 0 0;
+}
+.search-title:before {
+    content: "\1F50D";
+    position: absolute;
+    top: 13px;
+    left: 0;
+    display: block;
+    font-family: 'icomoonregular';
+    font-size: 21px;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.search_results_switch_bar h3 {
+    margin-bottom: 0;
+    padding: 10px 0 0;
+    font-size: 16px;
+   
+}
+
+
+
+.search-title {
+    position: relative;
+    padding-left: 26px;
+}
+ 
+.search-value {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+

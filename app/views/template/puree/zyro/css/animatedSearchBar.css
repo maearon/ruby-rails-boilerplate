@@ -1,0 +1,30 @@
+.search input[type=text] {
+    width: 130px;
+    height: 32px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 11px;
+    float: right;
+    margin: 10px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 8px 10px 8px 30px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.1s ease-in-out;/*giãn ra trong 0.1s*/
+}
+
+/* Khi trường nhập được lấy tiêu điểm, thay đổi chiều rộng của nó thành 100% */
+.search input[type=text]:focus {
+    width: 20%;
+}
+.search input[type=email]::placeholder,
+.search input[type=password]::placeholder,
+.search input[type=tel]::placeholder,
+.search input[type=text]::placeholder,
+textarea::placeholder{
+    text-transform: lowercase;
+    color: #757575;
+}
+

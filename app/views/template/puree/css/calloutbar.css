@@ -1,0 +1,57 @@
+.usp-bar-area {
+    background-color: #fff;
+    border-bottom: 1px solid #c8cbcc;
+    margin: 0;padding: 0;
+    z-index: 2005;
+    padding-top: 1px;
+}
+
+.callout-bars {
+    display: table;
+    vertical-align: middle;
+    width: 350px;
+    margin: 6px auto;
+    font-size: 13px;
+}
+
+.callout-bars .lazyload {
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    vertical-align: -16px;
+    float: left;
+    
+}
+
+#readmore {
+    padding-top: 7px;
+    color: #363738;
+    width: 335px;
+cursor: pointer;
+    display: block;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    font-size: 12px;
+    
+}
+
+#readmore:after{
+    content: "\2771";
+float: right;
+font-family: 'icomoonregular';
+speak: none;
+font-style: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+font-size: 10px;
+}
+
+.ui-widget-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+}

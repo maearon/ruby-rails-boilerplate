@@ -1,0 +1,417 @@
+#main {
+    position: relative;
+    clear: both;
+}
+.left h2, .right h2 {
+    font-family: Arial,Helvetica,Verdana,sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    line-height: 1;
+    font-size: 32px;
+    margin-bottom: 12px;
+    margin-top: 20px;
+    margin-top: 20px;
+    color: #000;
+    font-weight: bold;
+}
+
+/*left*/
+.left {
+    margin: 0;
+    border-right: 0;
+    padding-left: 200px;
+    width: 470px;
+    float: left!important;
+    zoom: 1;
+}
+.left fieldset {
+    margin: 0;
+    padding: 0
+}
+.forgot{
+    color: #226ebb;
+    
+}
+#eye{
+    position: absolute;
+    margin-left: -30px;
+}
+/*materialize*/
+.materialize-element-field {
+    padding-right: 45px;
+    line-height: normal;
+    width: 100%;
+    transition: all .3s;
+    
+    color: #363738;
+    padding-left: 14px;
+    outline: 0;
+    width: 100%;
+    padding: 0;
+    border: 1px solid #c8cbcc;
+    font-size: 16px;
+    line-height: normal;
+    background: transparent;
+
+    border-bottom-color: #92d39f;
+    width: 370px;
+    height: 48px;
+
+    position: relative;
+    
+}
+.materialize-btn {
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    width: 370px;
+    height: 48px;
+    font-size: 16px;
+    text-transform: uppercase;
+    line-height: normal;
+    color: #fff;
+    position: relative;
+    margin-bottom: 20px;
+    display: block;
+    border: 0;
+    margin: 18px 0;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-weight: 900;
+}
+.button-image {
+    width: 30px;
+    height: 30px;
+    vertical-align: -58%;
+  }
+.materialize-btn span:after {
+    content: '\00bb';
+    position: relative;
+    opacity: 1;
+    top: 0;
+    left: 10px;
+    transition: 0.1s;
+}
+.materialize-btn:hover span:after {
+    opacity: 1;
+    left: 20px;
+    display: inline-block;
+  vertical-align: middle;
+}
+.materialize-password .materialize-element-btn:before {
+    color: #000;
+    content: '\e957';
+    font: normal normal normal 20px/1 'icomoonregular';
+    speak: none;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.materialize-password .materialize-element-btn:before {
+    color: #000;
+    content: "\e957";
+    font: normal normal normal 20px/1 "icomoonregular";
+    speak: none;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+}
+.materialize-btn-blue {
+    background: rgba(2,134,205,1);
+}
+.google-btn {
+    background: #e74847;
+}
+
+.yahoo-btn {
+    background: #2d1451;
+}
+.facebook-btn {
+    background: #4267b2;
+}
+.materialize-btn-black {
+    background: rgba(0,0,0,1);
+}
+/*right*/
+.right{
+    position: absolute;
+    top: 160px;
+    right: 200px;
+    width: 270px;
+    margin: 0 0 0 10px;
+    float: right!important;
+}
+
+/*hidden*/
+.hidden {
+    display: none;
+}
+
+
+
+.materialize-textinput.valid .materialize-element-box:after {
+    content: "\e612";
+    font: normal normal normal 20px/1 "icomoonregular";
+    speak: none;
+    text-transform: none;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #009736;
+}
+
+.materialize-element-label {
+ 
+    position: absolute;
+    margin-top: -8px;
+    font-size: 11px;
+    color:#c8cbcc;
+    text-transform: uppercase;
+    margin-left: 12px;
+    padding: 0px 4px;
+    z-index: 2;
+    background-color: #fff
+}
+.materialize-element-label:after {
+    content: "\25AA";
+    color: #e74847;
+}
+.materialize-element-btn:before {
+    color: #000;
+    content: '\FFFD';
+    cursor: pointer;
+    position: absolute;
+    margin-top: -42px;
+    margin-left: 340px;
+    font-size: 24px;
+}
+
+
+.clear { clear: both }
+
+
+element.style {
+}
+.ssojs .materialize-element-field:-webkit-autofill, .ssojs .materialize-element-field:-webkit-autofill:hover .ssojs .materialize-element-field:-webkit-autofill:focus {
+    -webkit-box-shadow: inset 0 0 0 9999px white;
+}
+.login-form .materialize-textinput .materialize-element-field {
+    padding-right: 45px;
+}
+.materialize-textinput.valid .materialize-element-field, .materialize-textarea.valid .materialize-element-field, .materialize-password.valid .materialize-element-field {
+    border-bottom-color: #92d39f;
+    box-shadow: 0 1px 0 0 #009736;
+}
+.ssojs .login-form input {
+    line-height: normal;
+}
+.ssojs .login-form input, .ssojs .login-form button, .ssojs .registration input, .ssojs .registration button {
+    width: 100%;
+}
+.materialize-textinput .materialize-element-field, .materialize-textarea .materialize-element-field, .materialize-password .materialize-element-field {
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    height: 48px;
+    color: #363738;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+.formfield input {
+    width: 100%;
+}
+input[type="text"], input[type="email"], input[type="password"], textarea, select {
+    outline: 0;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset;
+    background-color: fff;
+}
+.materialize-element-field {
+    width: 100%;
+    padding: 0;
+    border: 1px solid #c8cbcc;
+    font-size: 16px;
+    line-height: normal;
+    background: transparent;
+}
+input {
+    padding-right: 35px;
+    height: 40px;
+}
+input, textarea {
+    padding: 12px 10px 8px 10px;
+    border: 1px solid #c8cbcc;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: 0;
+}
+user agent stylesheet
+input:not([type]), input[type="email" i], input[type="number" i], input[type="password" i], input[type="tel" i], input[type="url" i], input[type="text" i] {
+    padding: 1px 0px;
+}
+user agent stylesheet
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: rgb(250, 255, 189) !important;
+    background-image: none !important;
+    color: rgb(0, 0, 0) !important;
+}
+user agent stylesheet
+input {
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    padding: 1px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+}
+user agent stylesheet
+input, textarea, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+}
+user agent stylesheet
+input, textarea, select, button, meter, progress {
+    -webkit-writing-mode: horizontal-tb !important;
+}
+
+.ssojs .login-form .rememberme {
+    padding: 0;
+    margin-top: 3px;
+    margin-bottom: 24px;
+}
+
+.dialog-forgotpassword a {
+    color: #226ebb;
+    font-size: 13px;
+}
+
+.dialog-forgotpassword a:hover {
+    text-decoration: underline;
+}
+
+.materialize-password .materialize-element-btn:before {
+    color: #000;
+    content: '\e957';
+    font: normal normal normal 20px/1 'icomoonregular';
+    speak: none;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.materialize-password .materialize-element-btn:before {
+    color: #000;
+    content: "\26";
+    font: normal normal normal 20px/1 "icomoonregular";
+    speak: none;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+.materialize-element-field {
+
+    padding-left: 14px!important;
+    border-bottom-color: #92d39f;
+    width: 370px;
+    height: 48px;
+
+}
+
+/*****************************************************************************/
+
+.alert {
+    margin-bottom: 30px;
+}
+#login-warning-alert {
+    margin: 18px 0;
+}
+.alert.alert-warning {
+    border-color: #ffb600;
+    background: #fff9ca;
+}
+.alert {
+    width: 950px;
+    margin: 5px auto!important;
+    padding: 16px 24px 16px 52px;
+    border: 0;
+    border-left: 3px solid;
+    border-radius: 0;
+    color: #000;
+    position: relative;
+}
+
+.alert.alert-warning:after {
+    color: #ffb600;
+    content: "\26A0";
+}
+.alert:after {
+    z-index: 1;
+    top: 14px;
+    left: 16px;
+    font-size: 24px;
+    position: absolute;
+    display: block;
+    font-family: 'icomoonregular';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.alert.title-only .alert-title {
+    margin-top: 2px;
+    margin-bottom: 0;
+}
+.alert .alert-title {
+    
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/*****************************************************************************/
+
+.alert.alert-success {
+    border-color: #009736;
+    background: #d8efe1;
+}
+
+.alert.alert-success:after {
+    color: #009736;
+    content: "\2713";
+}
+.alert-success .alert-title {
+    font-family: "adiBlack";
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}

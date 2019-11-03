@@ -1,0 +1,189 @@
+.glass-header-top {
+  webkit-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: flex;
+  position: absolute;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  height: 32px;
+  max-width: 1270px;
+  margin: 0 auto;
+  width: 100%;
+}
+.glass-header-top a {
+    padding: 0 10px;
+    display: -webkit-flex;
+    display: flex;
+    font-size: 11px;
+    -webkit-align-items: center;
+    align-items: center;
+    height: 100%;
+    text-transform: uppercase;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    cursor: pointer;
+    color: #ebebeb;
+}
+
+.glass-header-top em a {
+    color: #fff;
+    display: inline-block;
+    display: -webkit-flex;/*cho chữ thẳng hàng*/
+}
+
+.glass-header-top em:hover a {
+    color: #000;
+    background-color: #ebedee;
+    height: 28px;
+}
+
+.menu ul {
+    list-style-type: none; /* dạng-kiểu-danhsách: không */ /* bỏ dấu chấm đầu thẻ ul */
+    margin: 0; /* lề:0 */
+    padding: 0; /* đệm: 0 */
+    overflow: hidden; /* phần tràn: ẩn */
+    background-color: black;/* màu-nền: #333 */
+    padding-left: 170px;
+    padding-right: 80px;
+}
+
+.menu li {
+    float: left; /* lơ lửng: trái */
+}
+
+.menu li a, .dropbtn { /* thẻ a trong thẻ li + lớp dropbtn( nút thả) */
+    display: inline-block; /* hiểnthị: trêndòng-khối */
+    color: white; /* màu (chữ) : trắng */ 
+    text-align: center; /* sắphàng-vănbản: giữa */
+    padding: 17px 3px 11px; /* top right bottom*/
+    /* padding:10px 5px 15px;
+top padding is 10px
+right and left padding are 5px
+bottom padding is 15px */
+    text-decoration: none; /* đặc tánh */ /* trangtrí-vănbản: không */
+    font-weight: 400;
+    font-size: 15px;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 17px 3px 11px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 15px;
+
+}
+
+.menu li a:hover, .dropdown:hover .dropbtn { /* a:ấpủ trong thẻ li + lớp thảxuống:ấpủ + lớp dropbtn( nút thả) */
+    background-color: white; /* màu-nền: trắng */
+    color: black; /* màu (chữ) : đen */
+}
+
+.menu li .dropbtn {
+    font-weight: 1000; /* độrộng-chữ: đậm(bold) */
+}
+
+.menu li.dropdown { /* lớp dropdown của thẻ li */
+    display: inline-block; /* hiểnthị: trêndòng-khối */
+}
+
+.menu .dropdown-content { /* lớp nộidung-thảxuống */
+    display: none; /* hiểnthị:không */
+    left: 0;
+    padding-left: 70px ;
+    position: absolute; /* vịtrí: tuyệtđối - tương đối: relative - cố định:fixed*/
+    background-color: white;
+    min-width: 100%; /* chiềurộng-tốithiểu:160px */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* thuộc tánh hộp-bóng: 
+    trên cùng phần tử xuống bóng  
+    trái phần tử sang bóng
+    trên(dưới) bóng lên(xuống) - độ rộng phần bị làm mờ và lan màu
+    trái(phải) bóng lan ra - độ rộng phần bị làm mờ và lan màu 
+    màu bóng */
+    z-index: 1;
+    /* Các thuộc tánh z-index quy định cụ thể trình tự ngăn xếp của một phần tử.
+    Một phần tử có thứ tự ngăn xếp lớn hơn luôn ở phía trước phần tử có thứ tự ngăn xếp thấp hơn.
+    Lưu ý: z-index chỉ hoạt động trên các phần tử được định vị (vị trí: tuyệt đối, vị trí: tương đối hoặc vị trí: cố định). 
+    sử dụng các giá trị có sẵn của thuộc tánh như auto(tự động) hay initial(ban đầu) sẽ khiến phần tử nhận ngăn xếp thấp nhất*/
+
+}
+
+.menu .dropdown-content a { /* thẻ a trong lớp nộidung-thảxuống */
+    color: black; /* màu(chữ): đen */
+    padding: 0px 0px; /* đệm trên và dưới là 2px - đệm phải và trái là 6px */
+    text-decoration: none; /* đặc tánh */ /* trangtrí-vănbản: không */
+    display: block; /* hiểnthị: khối */
+    text-align: left; text-align: left; /* sắphàng-vănbản: trái */
+}
+
+.menu .dropdown-content a:hover {text-decoration: underline;} /* a:ấpủ của thẻ a trong lớp nộidung-thảxuống */
+
+.menu .dropdown:hover .dropdown-content { /* lớp thảxuống:ấpủ lớp nộidung-thảxuống */ 
+    display: block; /* khi Mouse over me sẽ thả xuống cả 2 đều hiển thị dạng khối*/ 
+}
+
+.login-icon:after {
+    content: "\1F736";
+    speak: none;
+    font-variant: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: fonticons-adidas;
+    font-weight: 400;
+    font-style: normal;
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+.menu-spacer___3Gp4L {
+    height: 12px;
+    width: 1px;
+    position: relative;
+    top: -1px;
+    background-color: #616363;
+}
+
+.menu-spacer___1eBnZ {
+    display: inline-block;
+    vertical-align: top;
+    width: 1px;
+    height: 24px;
+    margin: 13px 3px 0px 3px;
+    background-color: hsla(0,0%,100%,.25);
+}
+
+/* Container holding the image and the text */
+.wish {
+    position: relative;
+    text-align: center;
+    font-size: 11px;
+    font-family:Verdana,Arial,sans-serif;
+}
+
+.centered {
+    position: absolute;
+    top: 19px;
+    right: 67px;
+    color: #000!important;
+}
+
+#topdiv {
+    width: 100%;
+    position: fixed;
+    z-index: 2002;
+    top:0;
+}
+
+#topdivv {
+    width: 100%;
+    height: 110px;
+    position: relative;
+}
+
+#topdivvv {
+    width: 100%;
+    height: 82px;
+    position: relative;
+}
+
+

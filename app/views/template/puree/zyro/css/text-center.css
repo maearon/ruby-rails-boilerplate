@@ -1,0 +1,66 @@
+.text-center {
+    margin-top: 0px;
+    position: relative;
+    margin-left: 122px; 
+    padding: 12px;
+    justify-content: center; /*Căn chỉnh các mục flex ở giữa hộp chứa: https://www.w3schools.com/cssref/css3_pr_justify-content.asp*/
+}
+
+.teaser_container img{
+    width: 545px;
+    height: 306px;
+}
+
+.thumbnail {
+    width: 545px;
+    height: 306px; 
+    overflow: hidden; 
+}
+
+.teaser_container img {
+    transition: all 2s ease-out;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+}
+     
+.teaser_container img:hover {
+    transform: scale(1.1,1.1);
+    -webkit-transform: scale(1.1,1.1);
+    -moz-transform: scale(1.1,1.1);
+    -o-transform: scale(1.1,1.1);
+    -ms-transform: scale(1.1,1.1);
+    overflow: hidden;
+}
+.teaser_container a {
+    margin-right: 11px;
+    position: relative;
+    float: left;
+    display: block;
+    border: 1px solid white; 
+    text-align: center; /* sắphàng-vănbản: giữa */
+}
+.text-center h6 {
+    color: #000;
+    margin-bottom: 0;
+    font-size: 26px;
+    line-height: 24px;
+}
+.tester_text {
+    margin-top: 25px; 
+    display: block;
+    margin-bottom: 25px; 
+}
+.teaser_container a:hover { 
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* thuộc tánh hộp-bóng: 
+    trên cùng phần tử xuống bóng  
+    trái phần tử sang bóng
+    trên(dưới) bóng lên(xuống) - độ rộng phần bị làm mờ và lan màu
+    trái(phải) bóng lan ra - độ rộng phần bị làm mờ và lan màu 
+    màu bóng */
+    text-decoration: none;
+}
+.tester_text span{
+    font-size: 14px;
+    text-decoration: underline;
+}

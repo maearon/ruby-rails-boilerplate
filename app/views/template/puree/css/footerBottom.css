@@ -1,0 +1,32 @@
+.footerBottom {
+    margin: 50px 50px 30px 200px; 
+    font-size: 14px;
+}
+.footerBottom h5{
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 15px;
+    color: black;
+    font-weight: 1000;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-top: 0;
+    margin: 0;
+    padding: 0;
+}
+.footerBottom dl a {
+    display: block;
+    line-height: 15px;
+}
+.footerBottom a { /* thẻ a trong lớp nộidung-thảxuống */
+    color: black; /* màu(chữ): đen */
+    padding: 2px 6px; /* đệm trên và dưới là 2px - đệm phải và trái là 6px */
+    text-decoration: none; /* đặc tánh */ /* trangtrí-vănbản: không */
+    display: block; /* hiểnthị: khối */
+    text-align: left; text-align: left; /* sắphàng-vănbản: trái */
+}
+.footerBottom a:hover {
+    text-decoration: underline;
+    color: #025f8e;
+ }
+

@@ -1,0 +1,118 @@
+
+.main___4eD3G {
+    padding: 30px;
+    position: relative;
+}
+.row {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.main___4eD3G>div {
+    width: 100%;
+}
+.content___3uku8 {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.buttonsContainer___24LfL {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin: 25px 0;
+    width: 100%;
+}
+
+@media (min-width: 960px)
+.buttonsContainer___24LfL {
+    max-width: 40%;
+    margin: 30px 0;
+}
+.buttonsContainer___24LfL {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin: 25px 0;
+    width: 100%;
+}
+
+@media (min-width: 960px)
+.title___3vuW1 {
+    margin-top: 20px;
+}
+.title___3vuW1 {
+    margin-bottom: 0;
+    margin-top: 10px;
+    text-align: center;
+}
+.gl-heading--m, h4 {
+    font-size: 26px;
+    line-height: 24px;
+}
+.gl-heading--xl, h2 {
+    font-size: 44px;
+    line-height: 38px;
+}
+.gl-heading, h1, h2, h3, h4, h5, h6 {
+    
+    font-weight: 600;
+    font-style: normal;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 1.5px;
+}
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+h2 {
+    display: block;
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+.socialButton___2gvu4 {
+    padding: 0px 10px;
+}
+/****************************************************************************************/
+
+.footer {
+    position: relative; /* vịtrí: tương đối - tuyệtđối:absolute- cố định:fixed*/
+    height: 50px;
+    width: 100%;
+    background-color: rgb(54, 55, 56);  
+    display: table;
+    margin: 0;
+    padding: 0;
+}
+
+.footer p{
+    display: table-cell;
+    color: rgb(200, 203, 204);
+    text-align: center;
+    vertical-align: middle;
+}
