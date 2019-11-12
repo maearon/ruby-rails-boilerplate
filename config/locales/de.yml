@@ -29,5 +29,8 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+de:
+  static_pages:
+    home:
+      title: 'Neue Telefone sind da'
+      summary: 'Mid-estate skirt therapy. But the largest developers salad alcohol. Live lion and the price of the throat. Performance relay layout of the care. In the valley. '

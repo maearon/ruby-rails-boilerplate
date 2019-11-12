@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   include CartsHelper
   include WishesHelper
   before_action :current_cart, :current_wish
+  around_action :switch_locale
+ 
+  def switch_locale(&action)
+    locale = params[:locale] || I18n.default_locale
+    I18n.with_locale(locale, &action)
+  end
 
   private
 

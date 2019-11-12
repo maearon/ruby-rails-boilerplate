@@ -68,3 +68,4 @@ gem 'activerecord_reset_pk_sequence'
 gem "font-awesome-sass", "~> 5.11"
 
 gem "slim", "~> 4.0"
+gem 'rails-i18n'
