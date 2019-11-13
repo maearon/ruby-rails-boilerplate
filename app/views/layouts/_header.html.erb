@@ -13,27 +13,28 @@
           <!-- Language Dropdown-->
           <div class="dropdown show">
             <a id="langsDropdown" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-              <img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/<%= flash_classs(params[:locale]) %>.svg" alt="english">
-                <%= flash_class(params[:locale]) %>
+              <img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/<%= flash_classs(locale.to_s) %>.svg" alt="english">
+                <%= flash_class(locale.to_s) %>
             </a>
             <div aria-labelledby="langsDropdown" class="dropdown-menu">
-              <%= link_to "/us", class: "dropdown-item" do %>
-                <img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/united-kingdom.svg" alt="english">
-                English
-              <% end %>
-              <%= link_to "/de", class: "dropdown-item" do %>
-                <img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/germany.svg" alt="german">
-                German
-              <% end %>
-              <%= link_to "/fr", class: "dropdown-item" do %>
-                <img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/france.svg" alt="french">
-                French
+              <% I18n.available_locales.each do |c| %>
+              <a href="/<%= c.to_s  %>" class="dropdown-item">
+                <img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/<%= flash_classs(c.to_s) %>.svg" alt="english">
+                <%= flash_class(c.to_s) %>
+              </a>
               <% end %>
             </div>
           </div>
           <!-- Currency Dropdown-->
-          <div class="dropdown show"><a id="currencyDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">USD</a>
-            <div aria-labelledby="currencyDropdown" class="dropdown-menu"><a href="#" class="dropdown-item">EUR</a><a href="#" class="dropdown-item"> GBP</a></div>
+          <div class="dropdown show"><a id="currencyDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><%= flash_classss(locale.to_s) %></a>
+            <div aria-labelledby="currencyDropdown" class="dropdown-menu">
+              <% I18n.available_locales.each do |c| %>
+              <a href="/<%= c.to_s  %>" class="dropdown-item"><%= flash_classss(c.to_s) %></a>
+              <% end %>
+              <!-- <a href="#" class="dropdown-item">EUR</a>
+              <a href="#" class="dropdown-item">EUR</a> -->
+              <!-- <a href="#" class="dropdown-item"> GBP</a> -->
+            </div>
           </div>
         </div>
       </div>

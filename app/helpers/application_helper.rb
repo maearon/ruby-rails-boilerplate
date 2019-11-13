@@ -24,4 +24,13 @@ module ApplicationHelper
       when "fr" then "French"
    end
   end
+
+  def flash_classss(message_type)
+    case message_type
+      when "us" then "USD"
+      when "de" then "EUR"
+      when "fr" then "EUR"
+      # when "en" then "GBP"
+   end
+  end
 end
