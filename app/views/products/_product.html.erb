@@ -1,4 +1,21 @@
-<li>
-  <%= image_tag product.variants.first.images.first, size: "50x50" %>
-  <%= link_to product.name, "/products/#{product.id}?variant=#{product.variants.first&.id}" %>
-</li>
+<div class="item col-xl-4 col-md-6">
+  <div class="product is-gray">
+    <div class="image d-flex align-items-center justify-content-center">
+      <div class="ribbon ribbon-primary text-uppercase">Sale</div>
+      <%= image_tag product.variants.first.images.first, alt: "product", class: "img-fluid" %>
+      <div class="hover-overlay d-flex align-items-center justify-content-center">
+        <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart">
+          <i class="fa fa-shopping-cart"></i></a>
+          <a href="<%= "/#{params[:locale]}/products/#{product.id}?variant=#{product.variants.first&.id}" %>" class="visit-product active">
+            <i class="icon-search"></i>View
+          </a>
+          <a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view">
+            <i class="fa fa-arrows-alt"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="title"><small class="text-muted">Men Wear</small><a href="detail.html">
+        <h3 class="h6 text-uppercase no-margin-bottom"><%= product.name %></h3></a><span class="price text-muted">$40.00</span></div>
+  </div>
+</div>

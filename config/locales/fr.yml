@@ -34,3 +34,11 @@ fr:
     home:
       title: 'Les nouveaux téléphones sont ici'
       summary: 'Mi immobilier jupe thérapie. Mais le plus gros développeurs alcool salade. lion en direct et le prix de la gorge. mise en page du relais de la performance des soins. Dans la vallée.'
+  number:
+     currency:
+        format:
+          unit: '€'
+          delimiter: ','
+          separator: '.'
+          precision: 2
+          format: '%u%n'

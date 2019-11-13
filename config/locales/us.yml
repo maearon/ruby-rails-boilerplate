@@ -34,3 +34,11 @@ us:
     home:
       title: 'New phones are here'
       summary: 'Proin mattis lacinia justo. Mauris tincidunt sem sed arcu. Vivamus ac leo pretium faucibus. Nullam at arcu a est sollicitudin euismod. In convallis. '
+  number:
+     currency:
+        format:
+          unit: '$'
+          delimiter: ','
+          separator: '.'
+          precision: 2
+          format: '%u%n'

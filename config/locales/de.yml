@@ -34,3 +34,11 @@ de:
     home:
       title: 'Neue Telefone sind da'
       summary: 'Mid-estate skirt therapy. But the largest developers salad alcohol. Live lion and the price of the throat. Performance relay layout of the care. In the valley. '
+  number:
+     currency:
+        format:
+          unit: '€'
+          delimiter: ','
+          separator: '.'
+          precision: 2
+          format: '%u%n'
