@@ -1,0 +1,56 @@
+<%= form_with model: @product, local: true do |form| %>
+
+<% if @product.errors.any? %>
+<div id="error_explanation">
+  <h2>
+    <%= pluralize(@product.errors.count, "error") %> prohibited
+    this product from being saved:
+  </h2>
+  <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= form.label :productname %><%= form.text_area :productname %>
+<%= form.label :avatar %><%= form.file_field :avatar %>
+<%= form.label :images %><%= form.file_field :images, multiple: true %>
+<%= form.label :price %><%= form.text_area :price %>
+<%= form.label :originalpride %><%= form.text_area :originalpride %>
+<%= form.label :color_id %>
+<%= form.collection_select :color_id,Color.all, :id, :color_name, prompt: "Choose a color" %>
+<%= form.collection_select :subcolor_id,Subcolor.all, :id, :subcolor_name, prompt: "Choose a subcolor" %>
+<%= form.label :franchise_id %>
+<%= form.collection_select :franchise_id,Franchise.all, :id, :franchise_name, prompt: "Choose a franchise" %>
+<%= form.label :producttype_id %>
+<%= form.collection_select :producttype_id,Producttype.all, :id, :producttype_name, prompt: "Choose a producttype" %>
+<%= form.label :brand_id %>
+<%= form.collection_select :brand_id,Brand.all, :id, :brand_name, prompt: "Choose a brand" %>
+<%= form.label :category_id %>
+<%= form.collection_select :category_id,Category.all, :id, :category_name, prompt: "Choose a category" %>
+<%= form.collection_select :subcategory_id,Subcategory.all, :id, :subcategory_name, prompt: "Choose a subcategory" %>
+<%= form.label :sport_id %>
+<%= form.collection_select :sport_id,Sport.all, :id, :sport_name, prompt: "Choose a sport" %>
+<%= form.label :sku %><%= form.text_area :sku %>
+
+
+<%= form.submit %>
+<% end %>
+
+<!-- #bin/rails generate model Product 
+productname:text 
+productimagepath:text 
+gender_id:text 
+age_id:text 
+price:integer 
+originalpride:integer 
+color_id:text 
+colordetail:text 
+franchise_id:text 
+producttype_id:text 
+brand_id:text 
+category_id:text 
+sport_id:text 
+productdetailspath:text  -->

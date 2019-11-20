@@ -1,102 +1,72 @@
-<% if @cart_items.any? %>
-<!-- Hero Section-->
-<section class="hero hero-page gray-bg padding-small">
-  <div class="container">
-    <div class="row d-flex">
-      <div class="col-lg-9 order-2 order-lg-1">
-        <h1>Shopping cart</h1><p class="lead text-muted">You currently have 3 items in your shopping cart</p>
-      </div>
-      <div class="col-lg-3 text-right order-1 order-lg-2">
-        <ul class="breadcrumb justify-content-lg-end">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Shopping cart</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Shopping Cart Section-->
-<section class="shopping-cart">
-  <div class="container">
-    <div class="basket">
-      <div class="basket-holder">
-        <div class="basket-header">
-          <div class="row">
-            <div class="col-5">Product</div>
-            <div class="col-2">Price</div>
-            <div class="col-2">Quantity</div>
-            <div class="col-2">Total</div>
-            <div class="col-1 text-center">Remove</div>
-          </div>
-        </div>
-        <div class="basket-body">
-          <%= render @cart_items %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="CTAs d-flex align-items-center justify-content-center justify-content-md-end flex-column flex-md-row"><a href="shop.html" class="btn btn-template-outlined wide">Continue Shopping</a><a href="#" class="btn btn-template wide">Update Cart</a></div>
-  </div>
-</section>
-<%= will_paginate @cart_items, params: { controller: :cart, action: :index } %>
-<!-- Order Details Section-->
-<section class="order-details no-padding-top">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="block">
-          <div class="block-header">
-            <h6 class="text-uppercase">Coupon Code</h6>
-          </div>
-          <div class="block-body">
-            <p>If you have a coupon code, please enter it in the box below</p>
-            <form action="#">
-              <div class="form-group d-flex">
-                <input type="text" name="coupon">
-                <button type="submit" class="cart-black-button">Apply coupon</button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="block">
-          <div class="block-header">
-            <h6 class="text-uppercase">Instructions for seller</h6>
-          </div>
-          <div class="block-body">
-            <p>If you have some information for the seller you can leave them in the box below</p>
-            <form action="#">
-              <textarea name="instructions"></textarea>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="block">
-          <div class="block-header">
-            <h6 class="text-uppercase">Order Summary</h6>
-          </div>
-          <div class="block-body">
-            <p>Shipping and additional costs are calculated based on values you have entered.</p>
-            <ul class="order-menu list-unstyled">
-              <li class="d-flex justify-content-between"><span>Order Subtotal </span><strong>
-                <%= number_to_currency current_cart.total_originalvalue, unit: '$', delimiter: ".", precision: 0 %>
-              </strong></li>
-              <li class="d-flex justify-content-between"><span>Shipping and handling</span><strong>
-                <%= number_to_currency current_cart.sale, unit: '$', delimiter: ".", precision: 0 %>
-              </strong></li>
-              <li class="d-flex justify-content-between"><span>Tax</span><strong>
-                <%= number_to_currency current_cart.total_value, unit: '$', delimiter: ".", precision: 0 %>
-              </strong></li>
-              <li class="d-flex justify-content-between"><span>Total</span><strong class="text-primary price-total">
-                <%= number_to_currency current_cart.total_value, unit: '$', delimiter: ".", precision: 0 %>
-              </strong></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-12 text-center CTAs"><a href="checkout1.html" class="btn btn-template btn-lg wide">Proceed to checkout<i class="fa fa-long-arrow-right"></i></a></div>
-    </div>
-  </div>
-</section>
+<h1>Giỏ hàng của bạn</h1>
+<table border="1">
+  <tr>
+    <th>id sản phẩm:</th>
+    <th>Tên Sản Phẩm:</th> 
+    <th>Avatar:</th>  
+    <th>Images:</th>  
+    <th>Giá bán:</th>
+    <th>Giá gốc:</th>
+    <th>Màu - color:</th>
+    <th>Dòng franchise:</th>
+    <th>Loại producttype:</th>
+    <th>Nhãn brand:</th>
+    <th>Danh mục category:</th>
+    <th>Môn sport:</th>
+    <th>sku:</th>
+    <th>Số lượng:</th>
+    
+</tr>
+
+<% @cart.cart_items.each do |cart_item| %>
+<tr>
+
+    <td><%= cart_item.product.id %></td>
+    <td><%= cart_item.product.productname %></td>
+    <td><%= image_tag cart_item.product.avatar, :height => "100",:width=>"100" %><br>
+        <%= link_to 'Delete', cart_item_url(cart_item), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-info" %>
+<%= form_for cart_item.product, :url => wish_items_path, :html => { :method => :post } do |f|%>
+      <%= f.hidden_field :product_id, value: cart_item.product.id %>
+      <%= f.submit @wish.wish_items.find_by(product_id: cart_item.product.id) ? 'This is a Wish List Item' : 'Move to Wishlist', class: "btn btn-success" %>    
 <% end %>
+    </td>
+    <td>
+        <% cart_item.product.images.each do |image| %>
+        <%= image_tag image , :height => "50",:width=>"50" %>
+        <% end %> 
+    </td>
+    <td><%= cart_item.product.price %></td>
+    <td><%= cart_item.product.originalpride %></td>
+    <td>
+        <%= cart_item.product.subcolor_id && cart_item.product.color_id  ? cart_item.product.color.subcolors.find(cart_item.product.subcolor_id).subcolor_name : '' %>
+        <%= !cart_item.product.subcolor_id && cart_item.product.color_id  ? cart_item.product.color.color_name : '' %>  
+        <%= !cart_item.product.subcolor_id && !cart_item.product.color_id  ? '' : '' %> 
+        <%= cart_item.product.subcolor_id && !cart_item.product.color_id  ?  'có subcolor nhưng ko có color' : '' %> 
+        </td>
+
+    <td><%= cart_item.product.franchise_id ? cart_item.product.franchise.franchise_name: '' %></td>
+    <td><%= cart_item.product.producttype_id ? cart_item.product.producttype.producttype_name: '' %></td>
+    <td><%= cart_item.product.brand_id ? cart_item.product.brand.brand_name: '' %></td>
+    <td>
+        <%= cart_item.product.subcategory_id && cart_item.product.category_id  ? cart_item.product.category.subcategories.find(cart_item.product.subcategory_id).subcategory_name : '' %>
+        <%= !cart_item.product.subcategory_id && cart_item.product.category_id  ? cart_item.product.category.category_name : '' %>  
+        <%= !cart_item.product.subcategory_id && !cart_item.product.category_id  ? '' : '' %> 
+        <%= cart_item.product.subcategory_id && !cart_item.product.category_id  ?  'có subcategory nhưng ko có category' : '' %> 
+        </td>
+    <td><%= cart_item.product.sport_id ? cart_item.product.sport.sport_name: '' %></td>
+    <td><%= cart_item.product.sku %></td>
+    <td><%= cart_item.quantity %></td>
+    <td><%= link_to 'Xem', product_path(cart_item.product) %></td>
+    <% if current_user.try(:admin?) %>
+    <td><%= link_to 'Sửa', edit_product_path(cart_item.product) %></td>
+    <td><%= link_to 'Xóa', product_path(cart_item.product),
+    method: :delete,
+    data: { confirm: 'Bạn có chắc không?' } %></td>
+    <% end %>
+</tr>
+<% end %>
+</table>
+<br>
+<%= link_to 'Trở lại', root_path %>
+<div class="total-price"><%= link_to 'Next', 
+new_order_path, class: "btn btn-success" %></div>

@@ -1,12 +1,69 @@
-<div class="row">
-  <div class="col-md-12">
-    <h3>WISHLIST</h3>
-    <% if @wish_items.any? %>
-      <ol class="microposts">
-        <%= render @wish_items %>
-      </ol>
-      <%= will_paginate @wish_items,
-                        params: { controller: :wish, action: :index } %>
+<h1>Danh sách yêu thích</h1>
+<table border="1">
+  <tr>
+    <th>id sản phẩm:</th>
+    <th>Tên Sản Phẩm:</th> 
+    <th>Avatar:</th>  
+    <th>Images:</th>  
+    <th>Giá bán:</th>
+    <th>Giá gốc:</th>
+    <th>Màu - color:</th>
+    <th>Dòng franchise:</th>
+    <th>Loại producttype:</th>
+    <th>Nhãn brand:</th>
+    <th>Danh mục category:</th>
+    <th>Môn sport:</th>
+    <th>sku:</th>
+    
+</tr>
+
+<% @wish.wish_items.each do |wish_item| %>
+<tr>
+
+    <td><%= wish_item.product.id %></td>
+    <td><%= wish_item.product.productname %></td>
+    <td><%= image_tag wish_item.product.avatar, :height => "100",:width=>"100" %><br>
+         <%= link_to 'Remove', wish_item_url(wish_item), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-info" %>
+        <%= form_for wish_item.product, :url => cart_items_path, :html => { :method => :post } do |f|%>
+        <%= f.number_field :quantity, value: 1, class: "number-tag", min: 1 %>
+      <%= f.hidden_field :product_id, value: wish_item.product.id %>
+      <%= f.submit 'Add to Cart', class: "btn btn-success" %>
+<% end %>
+    </td>
+    <td>
+        <% wish_item.product.images.each do |image| %>
+        <%= image_tag image , :height => "50",:width=>"50" %>
+        <% end %> 
+    </td>
+    <td><%= wish_item.product.price %></td>
+    <td><%= wish_item.product.originalpride %></td>
+    <td>
+        <%= wish_item.product.subcolor_id && wish_item.product.color_id  ? wish_item.product.color.subcolors.find(wish_item.product.subcolor_id).subcolor_name : '' %>
+        <%= !wish_item.product.subcolor_id && wish_item.product.color_id  ? wish_item.product.color.color_name : '' %>  
+        <%= !wish_item.product.subcolor_id && !wish_item.product.color_id  ? '' : '' %> 
+        <%= wish_item.product.subcolor_id && !wish_item.product.color_id  ?  'có subcolor nhưng ko có color' : '' %> 
+        </td>
+
+    <td><%= wish_item.product.franchise_id ? wish_item.product.franchise.franchise_name: '' %></td>
+    <td><%= wish_item.product.producttype_id ? wish_item.product.producttype.producttype_name: '' %></td>
+    <td><%= wish_item.product.brand_id ? wish_item.product.brand.brand_name: '' %></td>
+    <td>
+        <%= wish_item.product.subcategory_id && wish_item.product.category_id  ? wish_item.product.category.subcategories.find(wish_item.product.subcategory_id).subcategory_name : '' %>
+        <%= !wish_item.product.subcategory_id && wish_item.product.category_id  ? wish_item.product.category.category_name : '' %>  
+        <%= !wish_item.product.subcategory_id && !wish_item.product.category_id  ? '' : '' %> 
+        <%= wish_item.product.subcategory_id && !wish_item.product.category_id  ?  'có subcategory nhưng ko có category' : '' %> 
+        </td>
+    <td><%= wish_item.product.sport_id ? wish_item.product.sport.sport_name: '' %></td>
+    <td><%= wish_item.product.sku %></td>
+    <td><%= link_to 'Xem', product_path(wish_item.product) %></td>
+    <% if current_user.try(:admin?) %>
+    <td><%= link_to 'Sửa', edit_product_path(wish_item.product) %></td>
+    <td><%= link_to 'Xóa', product_path(wish_item.product),
+    method: :delete,
+    data: { confirm: 'Bạn có chắc không?' } %></td>
     <% end %>
-  </div>
-</div>
+</tr>
+<% end %>
+</table>
+<br>
+<%= link_to 'Trở lại', root_path %>

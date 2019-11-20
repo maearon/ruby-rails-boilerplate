@@ -1,104 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%= full_title(yield(:title)) %></title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/font-awesome/css/font-awesome.min.css">
-    <!-- Bootstrap Select-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/bootstrap-select/css/bootstrap-select.min.css">
-    <!-- Price Slider Stylesheets -->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/nouislider/nouislider.css">
-    <!-- Custom font icons-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/css/custom-fonticons.css">
-    <!-- Google fonts - Poppins-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700">
-    <!-- owl carousel-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/owl.carousel/assets/owl.carousel.css">
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/owl.carousel/assets/owl.theme.default.css">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/css/style.default.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/css/custom.css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/favicon.ico">
-    <!-- Modernizr-->
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/js/modernizr.custom.79639.js"></script>
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <!-- favicon_link_tag asset_path('favicon-le.png') -->
-    <%= render 'layouts/shim' %>
-  </head>
-  <body>
-    <!-- navbar-->
-    <%= render 'layouts/header' %>
-    <!-- <div class="container"> -->
-    <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>"><%= message %></div>
-    <% end %>
-    <%= yield %>
-    <!-- debug(params) if Rails.env.development? -->
-    <!-- </div> -->
-    <!-- Footer-->
-    <%= render 'layouts/footer' %>
-    <button type="button" data-toggle="collapse" data-target="#style-switch" id="style-switch-button" class="btn btn-primary btn-sm d-none d-lg-block"><i class="fa fa-cog fa-2x"></i></button>
-    <div id="style-switch" class="collapse">
-      <h4 class="text-uppercase">Select theme colour</h4>
-      <form class="mb-3">
-        <select name="colour" id="colour" class="form-control style-switch-select">
-          <option value="">select colour variant</option>
-          <option value="default">violet</option>
-          <option value="pink">pink</option>
-          <option value="green">green</option>
-          <option value="red">red</option>
-          <option value="sea">sea</option>
-          <option value="blue">blue</option>
-        </select>
-      </form>
-      <p><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/template-mac.png" alt="" class="img-fluid"></p>
-      <p class="text-muted text-small">Stylesheet switching is done via JavaScript and can cause a blink while page loads. This will not happen in your production code.</p>
-    </div>
-    <!-- JavaScript files-->
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/jquery/jquery.min.js"></script>
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js"></script>
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/nouislider/nouislider.min.js"></script>
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/jquery-countdown/jquery.countdown.min.js"></script>
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/masonry-layout/masonry.pkgd.min.js"></script>
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <!-- masonry -->
-    <script>
-      $(function(){
-          var $grid = $('.masonry-wrapper').masonry({
-              itemSelector: '.item',
-              columnWidth: '.item',
-              percentPosition: true,
-              transitionDuration: 0,
-          });
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= full_title(yield(:title)) %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--===============================================================================================-->
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon.png"/>
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/fonts/themify/themify-icons.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/fonts/elegant-font/html-/css/style.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/vendor/slick/slick.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/vendor/lightbox2/css/lightbox.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+  <!--===============================================================================================-->
 
-          $grid.imagesLoaded().progress( function() {
-              $grid.masonry();
-          });
-      })
+</head>
 
+<body class="animsition">
+  <%= render 'layouts/header' %>
+  <%= yield %>
+  <%= render 'layouts/footer' %>
+  <!-- Back to top -->
+  <div class="btn-back-to-top bg0-hov" id="myBtn">
+    <span class="symbol-btn-back-to-top">
+      <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+    </span>
+  </div>
 
-    </script>
-    <!-- Main Template File-->
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/js/front.js"></script>
-  </body>
+  <!-- Container Selection -->
+  <div id="dropDownSelect1"></div>
+  <div id="dropDownSelect2"></div>
+  <!--===============================================================================================-->
+  <script type="text/javascript" src="/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+  <!--===============================================================================================-->
+  <script type="text/javascript" src="/assets/vendor/animsition/js/animsition.min.js"></script>
+  <!--===============================================================================================-->
+  <script type="text/javascript" src="/assets/vendor/bootstrap/js/popper.js"></script>
+  <script type="text/javascript" src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!--===============================================================================================-->
+  <script type="text/javascript" src="/assets/vendor/select2/select2.min.js"></script>
+  <script type="text/javascript">
+    $(".selection-1").select2({
+      minimumResultsForSearch: 20,
+      dropdownParent: $('#dropDownSelect1')
+    });
+  </script>
+  <!--===============================================================================================-->
+  <script type="text/javascript" src="/assets/vendor/slick/slick.min.js"></script>
+  <script type="text/javascript" src="/assets/js/slick-custom.js"></script>
+  <!--===============================================================================================-->
+  <script type="text/javascript" src="/assets/vendor/countdowntime/countdowntime.js"></script>
+  <!--===============================================================================================-->
+  <script type="text/javascript" src="/assets/vendor/lightbox2/js/lightbox.min.js"></script>
+  <!--===============================================================================================-->
+  <script type="text/javascript" src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
+  <script type="text/javascript">
+    $('.block2-btn-addcart').each(function(){
+      var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+      $(this).on('click', function(){
+        swal(nameProduct, "is added to cart !", "success");
+      });
+    });
+
+    $('.block2-btn-addwishlist').each(function(){
+      var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+      $(this).on('click', function(){
+        swal(nameProduct, "is added to wishlist !", "success");
+      });
+    });
+  </script>
+
+  <!--===============================================================================================-->
+  <script src="/assets/js/main.js"></script>
+
+</body>
 </html>
+

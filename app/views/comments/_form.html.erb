@@ -1,0 +1,13 @@
+<%= form_with(model: [ @product, @product.comments.build ], local: true) do |form| %>
+<p>
+  <%= form.label :'Người bình luận' %><br>
+  <%= form.text_field :commenter %>
+</p>
+<p>
+  <%= form.label :'Nội dung' %><br>
+  <%= form.text_area :body %>
+</p>
+<p>
+  <%= form.submit :'Tạo bình luận' %>
+</p>
+<% end %>

@@ -1,0 +1,23 @@
+<%= form_for(@order) do |f| %>
+  <% if @order.errors.any? %>
+<div id="error_explanation">
+<div class="alert alert-danger">
+      The form contains <%= pluralize(@order.errors.count, "error") %>.</div>
+<ul>
+    <% @order.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+ 
+<% end %></ul>
+</div>
+ 
+<% end %>
+  <%= f.label :delivery_address %>
+  <%= f.text_area :delivery_address, rows: 3, cols: 25, class: 'form-control' %>
+  <%= f.label :delivery_type %>
+  <%= f.select :delivery_type, Order::DELIVERY_TYPES, prompt: 'Select a delivery method', class: 'form-control' %>
+  <%= f.label :payment_type %>
+  <%= f.select :payment_type, Order::PAYMENT_TYPES, prompt: 'Select a payment method', class: 'form-control' %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :cart_id, value: current_cart.id %>
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>
