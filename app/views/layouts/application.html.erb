@@ -34,7 +34,10 @@
   <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
   <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
   <!--===============================================================================================-->
-
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= render 'layouts/shim' %>
 </head>
 
 <body class="animsition">
@@ -96,4 +99,3 @@
 
 </body>
 </html>
-

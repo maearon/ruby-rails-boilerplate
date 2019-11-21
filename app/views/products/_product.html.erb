@@ -1,21 +1,39 @@
-<div class="item col-xl-4 col-md-6">
-  <div class="product is-gray">
-    <div class="image d-flex align-items-center justify-content-center">
-      <div class="ribbon ribbon-primary text-uppercase">Sale</div>
-      <%= image_tag product.variants.first.images.first, alt: "product", class: "img-fluid" %>
-      <div class="hover-overlay d-flex align-items-center justify-content-center">
-        <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart">
-          <i class="fa fa-shopping-cart"></i></a>
-          <a href="<%= "/#{params[:locale]}/products/#{product.id}?variant=#{product.variants.first&.id}" %>" class="visit-product active">
-            <i class="icon-search"></i>View
-          </a>
-          <a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view">
-            <i class="fa fa-arrows-alt"></i>
-          </a>
-        </div>
+<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+  <!-- Block2 -->
+  <div class="block2">
+    <div class="block2-img wrap-pic-w of-hidden pos-relative <%=  product.variants.first.price ? 'block2-labelsale' : '' %>">
+      <a href="/collections/men/products/boxy3-t-shirt-with-roll-sleeve">
+        <%= image_tag product.variants.first.images.first %>
+      </a>
+      <div class="block2-overlay trans-0-4">
+        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+          <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+          <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+        </a>
+      <div class="block2-btn-addcart w-size1 trans-0-4">
+        <!-- Button -->
+        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" data-toggle="tooltip" data-loading-text="Loading..." title="" onclick="cart.add('8254128029738', 'Boxy3 T-Shirt with Roll Sleeve');" data-original-title="Add to Cart">
+          Add to Cart
+        </button>
       </div>
     </div>
-    <div class="title"><small class="text-muted">Men Wear</small><a href="detail.html">
-        <h3 class="h6 text-uppercase no-margin-bottom"><%= product.name %></h3></a><span class="price text-muted">$40.00</span></div>
   </div>
+  <div class="block2-txt p-t-20">
+    <a href="<%= url_for(product)<<"?variant=#{product.variants.first&.id}" %>" class="block2-name dis-block s-text3 p-b-5">
+      <%= product.name %>
+    </a>
+
+    <span class="block2-oldprice m-text7 p-r-5">
+      <span class="money">
+        <% if product.variants.first.price %>
+        <%= number_to_currency(product.variants.first.price) %>
+        <% end %>
+      </span>
+    </span>
+    <span class="block2-newprice m-text8 p-r-5">
+      <span class="money"><%= number_to_currency(product.variants.first.originalprice) %></span>
+    </span>
+
+  </div>
+</div>
 </div>

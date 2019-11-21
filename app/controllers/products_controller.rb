@@ -2,12 +2,12 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show]
 
   def index
-    @products = Product.paginate(page: params[:page])
+    @products = Product.order(:id).page(params[:page]).per(10)
   end
 
   def show
     @review  = @product.reviews.build
-    @review_items = @product.reviews.paginate(page: params[:page])
+    @review_items = @product.reviews.page(params[:page]).per(10)
   end
 
   private

@@ -1,10 +1,10 @@
-<h1>Giỏ hàng của bạn</h1>
+current_wish.list<h1>Giỏ hàng của bạn</h1>
 <table border="1">
   <tr>
     <th>id sản phẩm:</th>
-    <th>Tên Sản Phẩm:</th> 
-    <th>Avatar:</th>  
-    <th>Images:</th>  
+    <th>Tên Sản Phẩm:</th>
+    <th>Avatar:</th>
+    <th>Images:</th>
     <th>Giá bán:</th>
     <th>Giá gốc:</th>
     <th>Màu - color:</th>
@@ -15,46 +15,43 @@
     <th>Môn sport:</th>
     <th>sku:</th>
     <th>Số lượng:</th>
-    
+
 </tr>
 
-<% @cart.cart_items.each do |cart_item| %>
+<% current_cart.list.each do |cart_item| %>
 <tr>
 
     <td><%= cart_item.product.id %></td>
-    <td><%= cart_item.product.productname %></td>
-    <td><%= image_tag cart_item.product.avatar, :height => "100",:width=>"100" %><br>
+    <td><%= cart_item.product.name %></td>
+    <td><%= image_tag cart_item.variant.avatar, :height => "100",:width=>"100" %><br>
         <%= link_to 'Delete', cart_item_url(cart_item), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-info" %>
 <%= form_for cart_item.product, :url => wish_items_path, :html => { :method => :post } do |f|%>
-      <%= f.hidden_field :product_id, value: cart_item.product.id %>
-      <%= f.submit @wish.wish_items.find_by(product_id: cart_item.product.id) ? 'This is a Wish List Item' : 'Move to Wishlist', class: "btn btn-success" %>    
+      <%= f.hidden_field :product, value: cart_item.product.id %>
+      <%= f.submit current_wish.list.find_by(product: cart_item.product.id) ? 'This is a Wish List Item' : 'Move to Wishlist', class: "btn btn-success" %>
 <% end %>
     </td>
     <td>
-        <% cart_item.product.images.each do |image| %>
+        <% cart_item.variant.images.each do |image| %>
         <%= image_tag image , :height => "50",:width=>"50" %>
-        <% end %> 
+        <% end %>
     </td>
-    <td><%= cart_item.product.price %></td>
-    <td><%= cart_item.product.originalpride %></td>
+    <td><%= cart_item.variant.price %></td>
+    <td><%= cart_item.variant.originalprice %></td>
     <td>
-        <%= cart_item.product.subcolor_id && cart_item.product.color_id  ? cart_item.product.color.subcolors.find(cart_item.product.subcolor_id).subcolor_name : '' %>
-        <%= !cart_item.product.subcolor_id && cart_item.product.color_id  ? cart_item.product.color.color_name : '' %>  
-        <%= !cart_item.product.subcolor_id && !cart_item.product.color_id  ? '' : '' %> 
-        <%= cart_item.product.subcolor_id && !cart_item.product.color_id  ?  'có subcolor nhưng ko có color' : '' %> 
+        <%= cart_item.variant.color %>
         </td>
 
-    <td><%= cart_item.product.franchise_id ? cart_item.product.franchise.franchise_name: '' %></td>
-    <td><%= cart_item.product.producttype_id ? cart_item.product.producttype.producttype_name: '' %></td>
-    <td><%= cart_item.product.brand_id ? cart_item.product.brand.brand_name: '' %></td>
+    <td><%= cart_item.product.franchise ? cart_item.product.franchise: '' %></td>
+    <td><%= cart_item.product.producttype ? cart_item.product.producttype: '' %></td>
+    <td><%= cart_item.product.brand ? cart_item.product.brand : '' %></td>
     <td>
-        <%= cart_item.product.subcategory_id && cart_item.product.category_id  ? cart_item.product.category.subcategories.find(cart_item.product.subcategory_id).subcategory_name : '' %>
-        <%= !cart_item.product.subcategory_id && cart_item.product.category_id  ? cart_item.product.category.category_name : '' %>  
-        <%= !cart_item.product.subcategory_id && !cart_item.product.category_id  ? '' : '' %> 
-        <%= cart_item.product.subcategory_id && !cart_item.product.category_id  ?  'có subcategory nhưng ko có category' : '' %> 
+        <%= !cart_item.product.category && cart_item.product.category  ? cart_item.product.category : '' %>
+        <%= !cart_item.product.category && cart_item.product.category  ? cart_item.product.category : '' %>
+        <%= !cart_item.product.category && !cart_item.product.category  ? '' : '' %>
+        <%= cart_item.product.category && !cart_item.product.category  ?  'có category nhưng ko có category' : '' %>
         </td>
-    <td><%= cart_item.product.sport_id ? cart_item.product.sport.sport_name: '' %></td>
-    <td><%= cart_item.product.sku %></td>
+    <td><%= cart_item.product.sport ? cart_item.product.sport: '' %></td>
+    <td><%= cart_item.product.jan_code %></td>
     <td><%= cart_item.quantity %></td>
     <td><%= link_to 'Xem', product_path(cart_item.product) %></td>
     <% if current_user.try(:admin?) %>
@@ -68,5 +65,5 @@
 </table>
 <br>
 <%= link_to 'Trở lại', root_path %>
-<div class="total-price"><%= link_to 'Next', 
-new_order_path, class: "btn btn-success" %></div>
+<div class="total-price"><%= link_to 'Next',
+root_path, class: "btn btn-success" %></div>

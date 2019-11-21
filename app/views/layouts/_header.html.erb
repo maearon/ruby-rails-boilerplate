@@ -22,8 +22,17 @@
 
 				<div class="topbar-language rs1-select2">
 					<select class="selection-1" name="time">
-						<option>USD</option>
-						<option>EUR</option>
+					  <% I18n.available_locales.each do |c| %>
+					  <option<%= c.to_s == locale.to_s ? " selected" : ""  %>><%= flash_class(c.to_s) %></option>
+						<% end %>
+					</select>
+				</div>
+
+				<div class="topbar-language rs1-select2">
+					<select class="selection-1" name="time">
+					  <% I18n.available_locales.each do |c| %>
+					  <option<%= c.to_s == locale.to_s ? " selected" : ""  %>><%= flash_classss(c.to_s) %></option>
+						<% end %>
 					</select>
 				</div>
 			</div>
@@ -86,8 +95,8 @@
 				<!-- start wish-->
 				<div class="header-wrapicon2">
 					<img src="/assets/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-					<% totalwish = @wish.wish_items.count %>
-					<span class="header-icons-noti"><%= totalwish %></span>
+					<% totalwish = current_wish.list.count %>
+					<span class="header-icons-noti" id="followers"><%= totalwish %></span>
 
 					<!-- Header cart noti -->
 					<div class="header-cart header-dropdown">
@@ -100,19 +109,19 @@
 					<div class="header-cart header-dropdown"  style="<%= totalwish == 0 ? 'display: none' : '' %>">
 						<ul class="header-cart-wrapitem">
 							<% total = 0 %>
-							<% @wish.wish_items.each do |cart_item| %>
+							<% current_wish.list.each do |cart_item| %>
 							<li class="header-cart-item">
 								<div class="header-cart-item-img">
 									<a href="/products/<%= cart_item.product.id %>">
-										<%= image_tag cart_item.product.avatar %>
+										<%= image_tag cart_item.variant.avatar %>
 									</a>
 								</div>
 								<div class="header-cart-item-txt">
 									<a href="/products/<%= cart_item.product.id %>">
-										<%= cart_item.product.productname %>
+										<%= cart_item.product.name %>
 									</a>
 									<span class="header-cart-item-info">
-										<span class="money">$<%= cart_item.product.price %></span>
+										<span class="money">$<%= cart_item.variant.price %></span>
 									</span>
 									<button type="button" onclick="cart.remove('8250556252202');" title="Remove" class="btn btn-xs">
 										x
@@ -122,7 +131,7 @@
 							<% end %>
 						</ul>
 
-						
+
 
 						<div class="header-cart-buttons">
 							<div class="header-cart-wrapbtn">
@@ -140,10 +149,10 @@
 				<div class="header-wrapicon2">
 					<img src="/assets/images/icons/icon-header-03.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
 					<% totalquantity = 0 %>
-							<% @cart.cart_items.each do |cart_item| %>
+							<% current_cart.list.each do |cart_item| %>
 							<% totalquantity += cart_item.quantity  %>
 							<% end %>
-					<span class="header-icons-noti"><%= totalquantity %></span>
+					<span class="header-icons-noti" id="follower"><%= totalquantity %></span>
 
 					<!-- Header cart noti -->
 					<div class="header-cart header-dropdown">
@@ -153,23 +162,23 @@
 							</li>
 						</ul>
 					</div>
-					<div class="header-cart header-dropdown"  style="<%= @cart.cart_items.count == 0 ? 'display: none' : '' %>">
+					<div class="header-cart header-dropdown"  style="<%= current_cart.list.count == 0 ? 'display: none' : '' %>">
 						<ul class="header-cart-wrapitem">
 							<% total = 0 %>
-							<% @cart.cart_items.each do |cart_item| %>
-							<% total += cart_item.quantity * cart_item.product.price %>
+							<% current_cart.list.each do |cart_item| %>
+							<% total += cart_item.quantity * cart_item.variant.price %>
 							<li class="header-cart-item">
 								<div class="header-cart-item-img">
 									<a href="/products/<%= cart_item.product.id %>">
-										<%= image_tag cart_item.product.avatar %>
+										<%= image_tag cart_item.variant.avatar %>
 									</a>
 								</div>
 								<div class="header-cart-item-txt">
 									<a href="/products/<%= cart_item.product.id %>">
-										<%= cart_item.product.productname %>
+										<%= cart_item.product.name %>
 									</a>
 									<span class="header-cart-item-info">
-										<%= cart_item.quantity %> × <span class="money">$<%= cart_item.product.price %></span>
+										<%= cart_item.quantity %> × <span class="money">$<%= cart_item.variant.price %></span>
 									</span>
 									<button type="button" onclick="cart.remove('8250556252202');" title="Remove" class="btn btn-xs">
 										x
