@@ -1,0 +1,27 @@
+/************ about_us css start ***************/
+.about_part{
+  .about_tittle{
+    margin-bottom: 56px;
+    @media #{$tab}{
+      margin-bottom: 25px;
+    }
+  }
+  .single_about_part{
+    @media #{$tab}{
+      margin-bottom: 30px;
+    }
+    h4{
+      font-size: 30px;
+      margin: 55px 0 30px;
+      @media #{$tab}{
+        font-size: 25px;
+        margin: 25px 0 15px;
+      }
+      @media #{$medium_device}{
+        font-size: 25px;
+        margin: 25px 0 15px;
+      }
+    }
+  }
+}
+/************ about_us css end ***************/

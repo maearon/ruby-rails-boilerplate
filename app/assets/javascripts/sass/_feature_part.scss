@@ -1,0 +1,27 @@
+/**************** service_part css start ****************/
+.feature_part {
+  .single_feature_post_text{
+    position: relative;
+    overflow: hidden;
+    img{
+      @include transform_time(.5s);
+    }
+    
+    @media #{$tab}{
+      margin-bottom: 15px;
+    }
+    .hover_text{
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      text-align: center;
+      top: 46%;
+    }
+    &:hover{
+      img{
+        transform: scale(1.1);
+      }
+    }
+  }
+}

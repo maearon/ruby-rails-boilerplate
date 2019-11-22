@@ -1,0 +1,16 @@
+
+.breadcrumb {
+	position: relative;
+	z-index: 1;
+	background-color: #e8f0f2;
+	.breadcrumb_iner {
+		p {
+			font-size: 15px;
+			color: $font_7;
+		}
+	}
+}
+
+.breadcrumb {
+	margin-bottom: 0px !important;
+}
