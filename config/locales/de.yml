@@ -32,8 +32,8 @@
 de:
   static_pages:
     home:
-      title: 'Neue Telefone sind da'
-      summary: 'Mid-estate skirt therapy. But the largest developers salad alcohol. Live lion and the price of the throat. Performance relay layout of the care. In the valley. '
+      title: 'Nabe'
+      summary: 'Bootstrap 4 E-commerce'
   number:
      currency:
         format:
@@ -42,3 +42,19 @@ de:
           separator: '.'
           precision: 2
           format: '%u%n'
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "Showing <strong>1</strong> %{entry_name}"
+          other: "Showing <strong>all %{count}</strong> %{entry_name}"
+      more_pages:
+        display_entries: "Showing %{entry_name} <strong>%{first}&nbsp;-&nbsp;%{last}</strong> of <strong>%{total}</strong> results"

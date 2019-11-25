@@ -5,6 +5,6 @@ class GuestCartItem < ApplicationRecord
   validates_uniqueness_of :variant_id, scope: :guest_cart_id
 
   def total_price
-    product.price * quantity
+    variant.price * quantity
   end
 end

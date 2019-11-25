@@ -1,78 +1,162 @@
-<!doctype html>
-<html lang="zxx">
+<!-- render "layouts/header"
 
-<head>
-    <!-- Required meta tags -->
+yield
+
+ender "layouts/footer" -->
+
+
+<!-- https://d19m59y37dris4.cloudfront.net/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= favicon_link_tag asset_path "favicon.ico" %>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!-- animate CSS -->
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <!-- font awesome CSS -->
-    <link rel="stylesheet" href="assets/css/all.css">
-    <!-- flaticon CSS -->
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <!-- font awesome CSS -->
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <!-- swiper CSS -->
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <!-- style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
     <%= stylesheet_link_tag "application", media: "all",
                                            "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": true %>
     <%= javascript_pack_tag "application", "data-turbolinks-track": "reload" %>
+    <!-- Bootstrap CSS-->
+    <!-- <link rel="stylesheet" href="/assets/hub/1-4-2/vendor/bootstrap/css/bootstrap.min.css"> -->
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/font-awesome/css/font-awesome.min.css"> <!-- can not get local -->
+    <!-- Bootstrap Select-->
+    <!-- <link rel="stylesheet" href="/assets/hub/1-4-2/vendor/bootstrap-select/css/bootstrap-select.min.css"> -->
+    <!-- Price Slider Stylesheets -->
+    <!-- <link rel="stylesheet" href="/assets/hub/1-4-2/vendor/nouislider/nouislider.css"> -->
+    <!-- Custom font icons-->
+    <!-- <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/css/custom-fonticons.css"> --> <!-- can not get local -->
+    <!-- Google fonts - Poppins-->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700"> -->
+    <!-- owl carousel-->
+    <!-- <link rel="stylesheet" href="/assets/hub/1-4-2/vendor/owl.carousel/assets/owl.carousel.css"> -->
+    <!-- <link rel="stylesheet" href="/assets/hub/1-4-2/vendor/owl.carousel/assets/owl.theme.default.css"> -->
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/hub/1-4-2/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <!-- <link rel="stylesheet" href="/assets/hub/1-4-2/css/custom.css"> -->
+    <!-- Favicon-->
+    <%= favicon_link_tag asset_path "favicon.ico" %>
+    <!-- Modernizr-->
+    <script src="/assets/hub/1-4-2/js/modernizr.custom.79639.js"></script>
+    <!-- Main Template File-->
+    <script src="/assets/hub/1-4-2/js/front.js"></script>
+    <!-- JavaScript files-->
+    <script src="/assets/hub/1-4-2/vendor/jquery/jquery.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/hub/1-4-2/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/nouislider/nouislider.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/jquery-countdown/jquery.countdown.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/masonry-layout/masonry.pkgd.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <!-- masonry -->
+    <script>
+      $(function(){
+          var $grid = $('.masonry-wrapper').masonry({
+              itemSelector: '.item',
+              columnWidth: '.item',
+              percentPosition: true,
+              transitionDuration: 0,
+          });
+
+          $grid.imagesLoaded().progress( function() {
+              $grid.masonry();
+          });
+      })
+
+
+    </script>
+    <!-- Main Template File-->
+    <!-- <script src="/assets/hub/1-4-2/js/front.js"></script> -->
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <%= render "layouts/shim" %>
-</head>
-
-<body>
-    <%= render "layouts/header" %>
-
+  </head>
+  <body>
+    <%= render 'layouts/header' %>
     <%= yield %>
+    <%= render 'layouts/footer' %>
+<!--     <button type="button" data-toggle="collapse" data-target="#style-switch" id="style-switch-button" class="btn btn-primary btn-sm d-none d-lg-block"><i class="fa fa-cog fa-2x"></i></button>
+    <div id="style-switch" class="collapse">
+      <h4 class="text-uppercase">Select theme colour</h4>
+      <form class="mb-3">
+        <select name="colour" id="colour" class="form-control style-switch-select">
+          <option value="">select colour variant</option>
+          <option value="default">violet</option>
+          <option value="pink">pink</option>
+          <option value="green">green</option>
+          <option value="red">red</option>
+          <option value="sea">sea</option>
+          <option value="blue">blue</option>
+        </select>
+      </form>
+      <p><img src="/assets/hub/1-4-2/img/template-mac.png" alt="" class="img-fluid"></p>
+      <p class="text-muted text-small">Stylesheet switching is done via JavaScript and can cause a blink while page loads. This will not happen in your production code.</p>
+    </div> -->
+    <!-- Main Template File-->
+    <script src="/assets/hub/1-4-2/js/front.js"></script>
+    <!-- JavaScript files-->
+    <!-- <script src="/assets/hub/1-4-2/vendor/jquery/jquery.min.js"></script> -->
+    <script src="/assets/hub/1-4-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/hub/1-4-2/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/nouislider/nouislider.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/jquery-countdown/jquery.countdown.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/masonry-layout/masonry.pkgd.min.js"></script>
+    <script src="/assets/hub/1-4-2/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <!-- masonry -->
+    <script>
+      $(function(){
+          var $grid = $('.masonry-wrapper').masonry({
+              itemSelector: '.item',
+              columnWidth: '.item',
+              percentPosition: true,
+              transitionDuration: 0,
+          });
 
-    <%= render "layouts/footer" %>
+          $grid.imagesLoaded().progress( function() {
+              $grid.masonry();
+          });
+      })
 
-    <!-- jquery plugins here-->
-    <script src="/assets/js/jquery-1.12.1.min.js"></script>
-    <!-- popper js -->
-    <script src="/assets/js/popper.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <!-- easing js -->
-    <script src="/assets/js/jquery.magnific-popup.js"></script>
-    <!-- swiper js -->
-    <script src="/assets/js/swiper.min.js"></script>
-    <!-- swiper js -->
-    <script src="/assets/js/mixitup.min.js"></script>
-    <!-- particles js -->
-    <script src="/assets/js/owl.carousel.min.js"></script>
-    <script src="/assets/js/jquery.nice-select.min.js"></script>
-    <!-- slick js -->
-    <script src="/assets/js/slick.min.js"></script>
-    <script src="/assets/js/jquery.counterup.min.js"></script>
-    <script src="/assets/js/waypoints.min.js"></script>
-    <script src="/assets/js/contact.js"></script>
-    <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
-    <script src="/assets/js/jquery.form.js"></script>
-    <script src="/assets/js/jquery.validate.min.js"></script>
-    <script src="/assets/js/mail-script.js"></script>
-    <!-- custom js -->
-    <script src="/assets/js/custom.js"></script>
-</body>
 
+    </script>
+    <script>
+      var snapSlider = document.getElementById('slider-snap');
+
+      noUiSlider.create(snapSlider, {
+        start: [ 40, 110 ],
+        snap: false,
+        connect: true,
+          step: 1,
+        range: {
+          'min': 0,
+          'max': 250
+        }
+      });
+      var snapValues = [
+        document.getElementById('slider-snap-value-lower'),
+        document.getElementById('slider-snap-value-upper')
+      ];
+      snapSlider.noUiSlider.on('update', function( values, handle ) {
+        snapValues[handle].innerHTML = values[handle];
+      });
+
+
+    </script>
+    <!-- Main Template File-->
+    <script src="/assets/hub/1-4-2/js/front.js"></script>
+  </body>
 </html>
-<%= debug(params) if Rails.env.development? %>
-
-<style type="text/css">
-.main_menu .cart i:after {
-    content: "<%= current_cart.total_item %>" !important;
-}
-</style>
+<!-- debug(params) if Rails.env.development? -->

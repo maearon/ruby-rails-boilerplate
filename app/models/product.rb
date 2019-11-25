@@ -4,7 +4,7 @@
 class Product < ApplicationRecord
   GENDER = %w{ Men Women Kids }
   FRANCHISE = %w{ Alphabounce Tubular }
-  PRODUCTTYPE = %w{ Underwear Pants }
+  PRODUCTTYPE = %w{ Wear Underwear Pants }
   BRAND = %w{ Originals Athletics Essentials }
   CATEGORY = %w{ Shoes Compression Accessories Apparel }
   SPORT = %w{ Running Soccer Football }
