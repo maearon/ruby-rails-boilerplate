@@ -2,8 +2,7 @@
 <div class="item">
   <div class="row d-flex align-items-center">
     <div class="col-5">
-      <div class="d-flex align-items-center">
-        <%= image_tag cart_item.variant.images.first, alt: "...", class: "img-fluid" %>
+      <div class="d-flex align-items-center"><%= image_tag cart_item.variant.images.first, alt: "...", class: "img-fluid" %>
         <div class="title"><a href="detail.html">
             <h5><%= cart_item.product.name %></h5><span class="text-muted">Size: Large</span></a></div>
       </div>
@@ -18,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="col-2"><span><%= number_to_currency(cart_item.variant.price) %></span></div>
+    <div class="col-2"><span><%= number_to_currency(cart_item.total_price) %></span></div>
     <%= link_to cart_item_url(cart_item), method: :delete, data: { confirm: "You sure?" } do %>
     <div class="col-1 text-center"><i class="delete fa fa-trash"></i></div>
     <% end %>

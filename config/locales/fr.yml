@@ -32,8 +32,8 @@
 fr:
   static_pages:
     home:
-      title: 'Les nouveaux téléphones sont ici'
-      summary: 'Mi immobilier jupe thérapie. Mais le plus gros développeurs alcool salade. lion en direct et le prix de la gorge. mise en page du relais de la performance des soins. Dans la vallée.'
+      title: 'Centre'
+      summary: 'Bootstrap 4 E-commerce'
   number:
      currency:
         format:
@@ -42,3 +42,19 @@ fr:
           separator: '.'
           precision: 2
           format: '%u%n'
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "Showing <strong>1</strong> %{entry_name}"
+          other: "Showing <strong>all %{count}</strong> %{entry_name}"
+      more_pages:
+        display_entries: "Showing %{entry_name} <strong>%{first}&nbsp;-&nbsp;%{last}</strong> of <strong>%{total}</strong> results"

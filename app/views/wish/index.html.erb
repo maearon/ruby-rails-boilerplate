@@ -1,168 +1,90 @@
-<!-- breadcrumb start-->
-<section class="breadcrumb breadcrumb_bg">
-  <div class="container">
-      <div class="row justify-content-center">
-          <div class="col-lg-12">
-              <div class="breadcrumb_iner">
-                  <div class="breadcrumb_iner_item">
-                      <p>Home/Shop/Single product/Cart list</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
-<!-- breadcrumb start-->
 
-<!--================Cart Area =================-->
-<section class="cart_area section_padding">
-<div class="container">
-  <div class="cart_inner">
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="media">
-                <div class="d-flex">
-                  <img src="/assets/img/arrivel/arrivel_1.png" alt="" />
-                </div>
-                <div class="media-body">
-                  <p>Minimalistic shop for multipurpose use</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <h5>$360.00</h5>
-            </td>
-            <td>
-              <div class="product_count">
-                <!-- <input type="text" value="1" min="0" max="10" title="Quantity:"
-                  class="input-text qty input-number" />
-                <button
-                  class="increase input-number-increment items-count" type="button">
-                  <i class="ti-angle-up"></i>
-                </button>
-                <button
-                  class="reduced input-number-decrement items-count" type="button">
-                  <i class="ti-angle-down"></i>
-                </button> -->
-                <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                <input class="input-number" type="text" value="1" min="0" max="10">
-                <span class="input-number-increment"> <i class="ti-plus"></i></span>
-              </div>
-            </td>
-            <td>
-              <h5>$720.00</h5>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="media">
-                <div class="d-flex">
-                  <img src="/assets/img/arrivel/arrivel_2.png" alt="" />
-                </div>
-                <div class="media-body">
-                  <p>Minimalistic shop for multipurpose use</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <h5>$360.00</h5>
-            </td>
-            <td>
-              <div class="product_count">
-                  <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                  <input class="input-number" type="text" value="1" min="0" max="10">
-                  <span class="input-number-increment"> <i class="ti-plus"></i></span>
-              </div>
-            </td>
-            <td>
-              <h5>$720.00</h5>
-            </td>
-          </tr>
-          <tr class="bottom_button">
-            <td>
-              <a class="btn_1" href="#">Update Cart</a>
-            </td>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="cupon_text float-right">
-                <a class="btn_1" href="#">Close Coupon</a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>
-              <h5>Subtotal</h5>
-            </td>
-            <td>
-              <h5>$2160.00</h5>
-            </td>
-          </tr>
-          <tr class="shipping_area">
-            <td></td>
-            <td></td>
-            <td>
-              <h5>Shipping</h5>
-            </td>
-            <td>
-              <div class="shipping_box">
-                <ul class="list">
-                  <li>
-                    Flat Rate: $5.00
-                    <input type="radio" aria-label="Radio button for following text input">
-                  </li>
-                  <li>
-                    Free Shipping
-                    <input type="radio" aria-label="Radio button for following text input">
-                  </li>
-                  <li>
-                    Flat Rate: $10.00
-                    <input type="radio" aria-label="Radio button for following text input">
-                  </li>
-                  <li class="active">
-                    Local Delivery: $2.00
-                    <input type="radio" aria-label="Radio button for following text input">
-                  </li>
-                </ul>
-                <h6>
-                  Calculate Shipping
-                  <i class="fa fa-caret-down" aria-hidden="true"></i>
-                </h6>
-                <select class="shipping_select">
-                  <option value="1">Bangladesh</option>
-                  <option value="2">India</option>
-                  <option value="4">Pakistan</option>
-                </select>
-                <select class="shipping_select section_bg">
-                  <option value="1">Select a State</option>
-                  <option value="2">Select a State</option>
-                  <option value="4">Select a State</option>
-                </select>
-                <input class="post_code" type="text" placeholder="Postcode/Zipcode" />
-                <a class="btn_1" href="#">Update Details</a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="checkout_btn_inner float-right">
-        <a class="btn_1" href="#">Continue Shopping</a>
-        <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+    <!-- Hero Section-->
+    <!-- <section class="hero hero-page gray-bg padding-small">
+      <div class="container">
+        <div class="row d-flex">
+          <div class="col-lg-9 order-2 order-lg-1">
+            <h1>Shopping wish</h1><p class="lead text-muted">You currently have <%= current_wish.total_item %> items in your shopping cart</p>
+          </div>
+          <div class="col-lg-3 text-right order-1 order-lg-2">
+            <ul class="breadcrumb justify-content-lg-end">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active">Shopping cart</li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-<!--================End Cart Area =================-->
+    </section> -->
+    <!-- Shopping Cart Section-->
+    <section class="shopping-cart">
+      <div class="container">
+        <div class="basket">
+          <div class="basket-holder">
+            <div class="basket-header">
+              <div class="row">
+                <div class="col-5">Product</div>
+                <div class="col-2">Price</div>
+                <div class="col-1 text-center">Remove</div>
+              </div>
+            </div>
+            <div class="basket-body">
+              <%= render current_wish.list %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="CTAs d-flex align-items-center justify-content-center justify-content-md-end flex-column flex-md-row"><a href="shop.html" class="btn btn-template-outlined wide">Continue Shopping</a><a href="#" class="btn btn-template wide">Update Cart</a></div>
+      </div>
+    </section>
+    <!-- Order Details Section-->
+    <section class="order-details no-padding-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="block">
+              <div class="block-header">
+                <h6 class="text-uppercase">Coupon Code</h6>
+              </div>
+              <div class="block-body">
+                <p>If you have a coupon code, please enter it in the box below</p>
+                <form action="#">
+                  <div class="form-group d-flex">
+                    <input type="text" name="coupon">
+                    <button type="submit" class="cart-black-button">Apply coupon</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="block">
+              <div class="block-header">
+                <h6 class="text-uppercase">Instructions for seller</h6>
+              </div>
+              <div class="block-body">
+                <p>If you have some information for the seller you can leave them in the box below</p>
+                <form action="#">
+                  <textarea name="instructions"></textarea>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="block">
+              <div class="block-header">
+                <h6 class="text-uppercase">Order Summary</h6>
+              </div>
+              <div class="block-body">
+                <p>Shipping and additional costs are calculated based on values you have entered.</p>
+                <ul class="order-menu list-unstyled">
+                  <li class="d-flex justify-content-between"><span>Order Subtotal </span><strong>$390.00</strong></li>
+                  <li class="d-flex justify-content-between"><span>Shipping and handling</span><strong>$10.00</strong></li>
+                  <li class="d-flex justify-content-between"><span>Tax</span><strong>$0.00</strong></li>
+                  <li class="d-flex justify-content-between"><span>Total</span><strong class="text-primary price-total">$400.00</strong></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 text-center CTAs"><a href="checkout1.html" class="btn btn-template btn-lg wide">Proceed to checkout<i class="fa fa-long-arrow-right"></i></a></div>
+        </div>
+      </div>
+    </section>
