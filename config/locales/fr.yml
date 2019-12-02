@@ -29,7 +29,7 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-fr:
+us:
   static_pages:
     home:
       title: 'Centre'
@@ -37,17 +37,17 @@ fr:
   number:
      currency:
         format:
-          unit: '€'
+          unit: '$'
           delimiter: ','
           separator: '.'
           precision: 2
           format: '%u%n'
   views:
     pagination:
-      first: "&laquo; First"
-      last: "Last &raquo;"
-      previous: "&lsaquo; Prev"
-      next: "Next &rsaquo;"
+      first: "First"
+      last: "Last"
+      previous: "Prev"
+      next: "Next"
       truncate: "&hellip;"
   helpers:
     page_entries_info:

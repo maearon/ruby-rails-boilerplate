@@ -1,6 +1,22 @@
-
+<div class="item col-xl-4 col-md-6">
+  <div class="product is-gray">
+    <div class="image d-flex align-items-center justify-content-center">
+      <div class="ribbon ribbon-success text-uppercase">New</div><%= image_tag product.variants.first.avatar, alt: "product", class: "img-fluid" %>
+      <div class="hover-overlay d-flex align-items-center justify-content-center">
+        <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="<%= url_for(product)<<"?variant=#{product&.variants&.first&.id}" %>" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
+      </div>
+    </div>
+    <div class="title"><small class="text-muted">Women Wear</small><a href="<%= url_for(product)<<"?variant=#{product&.variants&.first&.id}" %>">
+        <h3 class="h6 text-uppercase no-margin-bottom"><%= product.name %> <%= product.variants.first.color %></h3></a><span class="price text-muted">
+            <% if product.variants.first.price %>
+            <%= number_to_currency(product.variants.first.price) %>
+            <% end %>
+            <%= number_to_currency(product.variants.first.originalprice) %>
+          </span></div>
+  </div>
+</div>
     <!-- Hero Section-->
-    <section class="hero hero-page gray-bg padding-small">
+    <!-- <section class="hero hero-page gray-bg padding-small">
       <div class="container">
         <div class="row d-flex">
           <div class="col-lg-9 order-2 order-lg-1">
@@ -14,7 +30,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <main>
       <div class="container">
         <div class="row">
@@ -106,7 +122,15 @@
           <!-- /Sidebar end-->
           <!-- Grid -->
           <div class="products-grid col-xl-9 col-lg-8 sidebar-left">
-            <header class="d-flex justify-content-between align-items-start"><span class="visible-items">Showing <strong>1-15 </strong>of <strong>158 </strong>results</span>
+            <%= paginate @products %>
+            <div class="row">
+              <!-- item ribbon-primary-Sale 2 ribbon-success-New 3 4 ribbon-info-Fresh 6 ribbon-danger-Sold 8 ribbon-info-Fresh Sold 10 ribbon-danger-Sold 12 -->
+              <%= render @products %>
+            </div>
+            <header class="d-flex justify-content-between align-items-start">
+              <span class="visible-items">
+                <%= page_entries_info @products, entry_name: 'item' %>
+              </span>
               <select id="sorting" class="bs-select">
                 <option value="newest">Newest</option>
                 <option value="oldest">Oldest</option>
@@ -114,158 +138,6 @@
                 <option value="heigh-price">High Price</option>
               </select>
             </header>
-            <div class="row">
-              <!-- item-->
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center">
-                    <div class="ribbon ribbon-primary text-uppercase">Sale</div><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-man-1.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Men Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Lake</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-man-2.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Men Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Blue</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center">
-                    <div class="ribbon ribbon-success text-uppercase">New</div><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-man-3.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Men Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Black</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-man-4.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Men Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Gray</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center">
-                    <div class="ribbon ribbon-info text-uppercase">Fresh</div><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-woman-1.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Women Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Gray</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-woman-2.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Women Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Black</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center">
-                    <div class="ribbon ribbon-danger text-uppercase">Sold</div><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-woman-3.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Women Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Blue</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-woman-4.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Women Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Lake</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center">
-                    <div class="ribbon ribbon-info text-uppercase">Fresh</div><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-woman-1.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Women Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Gray</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-woman-2.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Women Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Black</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center">
-                    <div class="ribbon ribbon-danger text-uppercase">Sold</div><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-woman-3.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Women Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Blue</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-              <div class="item col-xl-4 col-md-6">
-                <div class="product is-gray">
-                  <div class="image d-flex align-items-center justify-content-center"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/hoodie-woman-4.png" alt="product" class="img-fluid">
-                    <div class="hover-overlay d-flex align-items-center justify-content-center">
-                      <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
-                    </div>
-                  </div>
-                  <div class="title"><small class="text-muted">Women Wear</small><a href="detail.html">
-                      <h3 class="h6 text-uppercase no-margin-bottom">Elegant Lake</h3></a><span class="price text-muted">$40.00</span></div>
-                </div>
-              </div>
-            </div>
-            <nav aria-label="page navigation example" class="d-flex justify-content-center">
-              <ul class="pagination pagination-custom">
-                <li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">Prev</span><span class="sr-only">Previous</span></a></li>
-                <li class="page-item"><a href="#" class="page-link active">1       </a></li>
-                <li class="page-item"><a href="#" class="page-link">2       </a></li>
-                <li class="page-item"><a href="#" class="page-link">3       </a></li>
-                <li class="page-item"><a href="#" class="page-link">4       </a></li>
-                <li class="page-item"><a href="#" class="page-link">5 </a></li>
-                <li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">Next</span><span class="sr-only">Next     </span></a></li>
-              </ul>
-            </nav>
           </div>
           <!-- / Grid End-->
         </div>
