@@ -39,6 +39,7 @@
             </div>
           </div>
           <div class="details col-lg-6">
+            <h3><%= @product.name.upcase %></h3>
             <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row">
               <ul class="price list-inline no-margin">
                 <li class="list-inline-item current">$65.00</li>
@@ -55,7 +56,7 @@
               </div>
             </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
-            <div class="d-flex align-items-center justify-content-center justify-content-lg-start">
+            <!-- <div class="d-flex align-items-center justify-content-center justify-content-lg-start">
               <div class="quantity d-flex align-items-center">
                 <div class="dec-btn">-</div>
                 <input type="text" value="1" class="quantity-no">
@@ -71,7 +72,7 @@
             <ul class="CTAs list-inline">
               <li class="list-inline-item"><a href="#" class="btn btn-template wide"> <i class="icon-cart"></i>Add to Cart</a></li>
               <li class="list-inline-item"><a href="#" class="btn btn-template-outlined wide"> <i class="fa fa-heart-o"></i>Add to wishlist</a></li>
-            </ul>
+            </ul> -->
             <%= render 'cart_form' %>
             <%= render 'wish_form' %>
           </div>
