@@ -19,6 +19,10 @@
     <div class="row">
       <!-- Grid -->
       <div class="products-grid col-12 sidebar-none">
+        <%= paginate @products %>
+        <div class="row">
+          <%= render @products %>
+        </div>
         <header class="d-flex justify-content-between align-items-start"><span class="visible-items"><%= page_entries_info @products, entry_name: 'item' %></span>
           <select id="sorting" class="bs-select">
             <option value="newest">Newest</option>
@@ -27,10 +31,6 @@
             <option value="heigh-price">High Price</option>
           </select>
         </header>
-        <div class="row">
-          <%= render @products %>
-        </div>
-        <%= paginate @products %>
       </div>
       <!-- / Grid End-->
     </div>
