@@ -24,6 +24,7 @@ class OrdersController < ApplicationController
   end
 
   def checkout4
+    @order = Order.new
   end
 
   def checkout5
@@ -33,13 +34,49 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+    # Generate order_items for a subset of vatiants (products) in current_cart (current_order).
 
-    if @order.save
+
+    order = current_user.order.create
+
+    current_cart.list.each { |order_item|
+      order_items.create!(order_item)
+    }
+
+    if order.list == current_cart.list
       redirect_to orders_path
     else
-      render 'new'
+      redirect_to request.referrer
     end
+
+    # @product = Product.find(params[:product_id])
+    # @variant = Variant.find(params[:variant_id])
+    # current_cart.cart(@product, @variant, params[:cart_item][:quantity], params[:cart_item][:action])
+    # respond_to do |format|
+    #   format.html { redirect_to request.referrer }
+    #   format.js
+    # end
+
+
+    # def cart(product, variant, quantity, action)
+    #   if current_item = cart_items.find_by(variant: variant)
+    #     current_item.quantity ||= 1
+    #     action == 'edit' ? current_item.quantity = quantity.to_i : current_item.quantity += quantity.to_i
+    #     current_item.save
+    #   else
+    #     cart_items.create(product: product,variant: variant, cart: self, quantity: quantity)
+    #   end
+    # end
+
+
+
+    # @order = Order.new(order_params)
+
+    # if @order.save
+    #   redirect_to orders_path
+    # else
+    #   redirect_to request.referrer
+    # end
   end
 
   def update

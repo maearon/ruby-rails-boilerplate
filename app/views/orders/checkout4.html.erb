@@ -73,6 +73,48 @@
               <a href="checkout5.html" class="btn btn-template wide next">Place an order<i class="fa fa-angle-right"></i></a>
 
 
+              <% details = '' %>
+              <% tonggiaban = 0 %>
+              <% tonggiagoc = 0 %>
+              <% i = 0 %>
+              <% @cart.cart_items.order(:id).each do |cart_item| %>
+                      <% giaban = cart_item.variant.price %>
+                      <% if !cart_item.variant.originalprice.nil? then giagoc = cart_item.variant.originalprice end %>
+                      <% soluong = cart_item.quantity %>
+                      <% tonggiaban += soluong * giaban %>
+                      <% giagoc ? tonggiagoc += soluong * giagoc : tonggiagoc += soluong * giaban %>
+                      <% details<<cart_item.product.name %>
+                      <% details<<'(' %>
+                      <% details<<cart_item.variant_id.to_s %>
+                      <% details<<')' %>
+                      <% details<<'x' %>
+                      <% details<<soluong.to_s %>
+                      <% details<<',' %>
+              <% end %>
+
+                  <br>
+                      <% details<<'TỔNG: ' %>
+
+                      <% details<<number_to_currency(tonggiaban*23000, precision: 0, separator: ',',delimiter: '.', unit: '₫', format: "%n %u").to_s %>
+
+              <%= form_for(@order) do |f| %>
+                <% if @order.errors.any? %>
+                  <div id="error_explanation">
+                    <div class="alert alert-danger">
+                      The form contains <%= pluralize(@order.errors.count, "error") %>.
+                    </div>
+                    <ul>
+                      <% @order.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+
+                <%= f.submit 'Tạo đơn hàng',class: "materialize-btn materialize-btn-black" %>
+              <% end %>
+
+
 
             </div>
           </div>
