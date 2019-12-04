@@ -48,7 +48,7 @@ scope "(:locale)", locale: /us|de|fr/ do
   get 'checkout3', to: 'orders#checkout3'
   get 'checkout4', to: 'orders#checkout4'
   get 'checkout5', to: 'orders#checkout5'
-  get 'addresses', to: 'orders#addresses'
+  get 'addresses', to: 'addresses#index'
 
   namespace :admin do
     root 'static_pages#home'

@@ -33,4 +33,30 @@ module ApplicationHelper
       # when "en" then "GBP"
    end
   end
+
+  def is_active_controller(controller_name)
+    if params[:controller] == controller_name
+      "active"
+    else
+      nil
+    end
+  end
+
+  def is_active_controllers(controller_names)
+    controller_names.each do |name|
+      if params[:controller] == name
+        return "active"
+      else
+        nil
+      end
+    end
+  end
+
+  def is_active_controller_and_action(controller_name, action_name)
+    if params[:controller] == controller_name && params[:action] == action_name
+      "active"
+    else
+      nil
+    end
+  end
 end
