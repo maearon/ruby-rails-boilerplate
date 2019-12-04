@@ -28,11 +28,24 @@
         <div class="tab-content">
           <div id="payment-method" class="tab-block">
             <div id="accordion" role="tablist" aria-multiselectable="true">
+
               <div class="card">
                 <div id="headingOne" role="tab" class="card-header">
-                  <h6><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Credit Card</a></h6>
+                  <h6><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">Pay on delivery</a></h6>
                 </div>
                 <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne" class="collapse show">
+                  <div class="card-body">
+                    <input type="radio" name="shippping" id="payment-method-2" class="radio-template" checked>
+                    <label for="payment-method-2"><strong>Pay on Delivery</strong><br><span class="label-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div id="headingTwo" role="tab" class="card-header">
+                  <h6><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Credit Card</a></h6>
+                </div>
+                <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" class="collapse">
                   <div class="card-body">
                     <form action="#">
                       <div class="row">
@@ -61,28 +74,19 @@
                   </div>
                 </div>
               </div>
+
               <div class="card">
-                <div id="headingTwo" role="tab" class="card-header">
-                  <h6><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed">Paypal</a></h6>
+                <div id="headingThree" role="tab" class="card-header">
+                  <h6><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">Paypal</a></h6>
                 </div>
-                <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" class="collapse">
+                <div id="collapseThree" role="tabpanel" aria-labelledby="headingThree" class="collapse">
                   <div class="card-body">
                     <input type="radio" name="shippping" id="payment-method-1" class="radio-template">
                     <label for="payment-method-1"><strong>Continue with Paypal</strong><br><span class="label-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></label>
                   </div>
                 </div>
               </div>
-              <div class="card">
-                <div id="headingThree" role="tab" class="card-header">
-                  <h6><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">Pay on delivery</a></h6>
-                </div>
-                <div id="collapseThree" role="tabpanel" aria-labelledby="headingThree" class="collapse">
-                  <div class="card-body">
-                    <input type="radio" name="shippping" id="payment-method-2" class="radio-template">
-                    <label for="payment-method-2"><strong>Pay on Delivery</strong><br><span class="label-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></label>
-                  </div>
-                </div>
-              </div>
+
             </div>
             <div class="CTAs d-flex justify-content-between flex-column flex-lg-row"><a href="checkout2.html" class="btn btn-template-outlined wide prev"><i class="fa fa-angle-left"></i>Back to delivery method</a><a href="checkout4.html" class="btn btn-template wide next">Continue to order review<i class="fa fa-angle-right"></i></a></div>
           </div>
