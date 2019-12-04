@@ -65,7 +65,7 @@
                   </div> -->
                 </div>
               </div>
-              <div class="total row"><span class="col-md-10 col-2">Total</span><span class="col-md-2 col-10 text-primary">$400.00</span></div>
+              <div class="total row"><span class="col-md-10 col-2">Total</span><span class="col-md-2 col-10 text-primary"><%= number_to_currency(current_cart.total_value+5.04) %></span></div>
             </div>
             <div class="CTAs d-flex justify-content-between flex-column flex-lg-row"><a href="checkout3.html" class="btn btn-template-outlined wide prev"><i class="fa fa-angle-left"></i>Back to payment method</a><a href="checkout5.html" class="btn btn-template wide next">Place an order<i class="fa fa-angle-right"></i></a></div>
           </div>
