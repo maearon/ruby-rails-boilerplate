@@ -1,0 +1,8 @@
+<ul class="order-menu list-unstyled">
+  <li class="d-flex justify-content-between"><span>ORIGINAL PRICE</span><strong><%= number_to_currency(current_cart.total_originalvalue) %></strong></li>
+  <li class="d-flex justify-content-between"><span>SALE</span><strong><%= number_to_currency(current_cart.sale) %></strong></li>
+  <li class="d-flex justify-content-between"><span>DELIVERY</span><strong>FREE</strong></li>
+  <li class="d-flex justify-content-between"><span>SALES TAX*</span><strong>$5.04</strong></li>
+  <li class="d-flex justify-content-between"><span>TOTAL</span><strong class="text-primary price-total"><%= number_to_currency(current_cart.total_value+5.04) %></strong></li>
+</ul>
+<p>* Please note: Tax amount is an estimate - the amount you are charged may differ slightly</p>

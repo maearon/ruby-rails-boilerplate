@@ -38,8 +38,9 @@
                   </div>
                 </div>
                 <div class="basket-body">
+                  <%= render current_cart.list %>
                   <!-- Product-->
-                  <div class="item row d-flex align-items-center">
+                  <!-- <div class="item row d-flex align-items-center">
                     <div class="col-6">
                       <div class="d-flex align-items-center"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/shirt.png" alt="..." class="img-fluid">
                         <div class="title"><a href="detail.html">
@@ -49,9 +50,9 @@
                     <div class="col-2"><span>$65.00</span></div>
                     <div class="col-2"><span>4</span></div>
                     <div class="col-2"><span>$325.00</span></div>
-                  </div>
+                  </div> -->
                   <!-- Product-->
-                  <div class="item row d-flex align-items-center">
+                  <!-- <div class="item row d-flex align-items-center">
                     <div class="col-6">
                       <div class="d-flex align-items-center"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/shirt-black.png" alt="..." class="img-fluid">
                         <div class="title"><a href="detail.html">
@@ -61,7 +62,7 @@
                     <div class="col-2"><span>$65.00</span></div>
                     <div class="col-2"><span>4</span></div>
                     <div class="col-2"><span>$325.00</span></div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div class="total row"><span class="col-md-10 col-2">Total</span><span class="col-md-2 col-10 text-primary">$400.00</span></div>
@@ -73,13 +74,7 @@
       <div class="col-lg-4">
         <div class="block-body order-summary">
           <h6 class="text-uppercase">Order Summary</h6>
-          <p>Shipping and additional costs are calculated based on values you have entered</p>
-          <ul class="order-menu list-unstyled">
-            <li class="d-flex justify-content-between"><span>Order Subtotal </span><strong>$390.00</strong></li>
-            <li class="d-flex justify-content-between"><span>Shipping and handling</span><strong>$10.00</strong></li>
-            <li class="d-flex justify-content-between"><span>Tax</span><strong>$0.00</strong></li>
-            <li class="d-flex justify-content-between"><span>Total</span><strong class="text-primary price-total">$400.00</strong></li>
-          </ul>
+          <%= render 'invoice' %>
         </div>
       </div>
     </div>
