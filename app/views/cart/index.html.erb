@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row d-flex">
           <div class="col-lg-9 order-2 order-lg-1">
-            <h1>Shopping cart</h1><p class="lead text-muted">You currently have <%= current_cart.total_item %> items in your shopping cart</p>
+            <h1>Shopping cart</h1><p class="lead text-muted">You currently have <%= current_cart.total_item %> items in your shopping cart, Total: (<%= current_cart.total_item %> items) <%= number_to_currency(current_cart.total_value+5.04) %></p>
           </div>
           <div class="col-lg-3 text-right order-1 order-lg-2">
             <ul class="breadcrumb justify-content-lg-end">
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="container">
-        <div class="CTAs d-flex align-items-center justify-content-center justify-content-md-end flex-column flex-md-row"><a href="<%= url_for(root_path) %>" class="btn btn-template-outlined wide">Continue Shopping</a><a href="#" class="btn btn-template wide">Update Cart</a></div>
+        <div class="CTAs d-flex align-items-center justify-content-center justify-content-md-end flex-column flex-md-row"><a href="<%= url_for(root_path) %>" class="btn btn-template-outlined wide">Continue Shopping</a><a href="#" class=" btn-template wide nav-link disabled"><%= number_to_currency(current_cart.total_value+5.04) %></a></div>
       </div>
     </section>
     <!-- Order Details Section-->
