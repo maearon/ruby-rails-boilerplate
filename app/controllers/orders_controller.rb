@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
   def create
     # Generate order_items for a subset of vatiants (products) in current_cart (current_order).
 
-    unless current_cart.list.blank? && current_user.blank?
+    unless current_cart.list.blank? || current_user.blank?
       order = current_user.orders.create
 
       current_cart.list.each { |cart_item|
