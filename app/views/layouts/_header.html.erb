@@ -1,4 +1,3 @@
-<!-- navbar-->
 <header class="header">
   <!-- Tob Bar-->
   <div class="top-bar">
@@ -12,34 +11,12 @@
         </div>
         <div class="col-lg-6 d-flex justify-content-end">
           <!-- Language Dropdown-->
-          <div class="dropdown show">
-
-            <a id="langsDropdown" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-              <img src="/assets/hub/1-4-2/img/<%= flash_classs(locale.to_s) %>.svg" alt="english"><%= flash_class(locale.to_s) %>
-            </a>
-
-            <div aria-labelledby="langsDropdown" class="dropdown-menu">
-              <% I18n.available_locales.each do |c| %>
-              <a href="<%= "/#{c.to_s}#{request.env['PATH_INFO'].partition(locale.to_s).last}" %>" class="dropdown-item">
-                <img src="/assets/hub/1-4-2/img/<%= flash_classs(c.to_s) %>.svg" alt="german"><%= flash_class(c.to_s) %>
-              </a>
-              <% end %>
-            </div>
+          <div class="dropdown show"><a id="langsDropdown" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/<%= flash_classs(locale.to_s) %>.svg" alt="english"><%= flash_class(locale.to_s) %></a>
+            <div aria-labelledby="langsDropdown" class="dropdown-menu"><% I18n.available_locales.each do |c| %><a href="<%= "/#{c.to_s}#{request.env['PATH_INFO'].partition(locale.to_s).last}" %>" class="dropdown-item"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/<%= flash_classs(c.to_s) %>.svg" alt="<%= flash_classs(c.to_s) %>"><%= flash_class(c.to_s) %></a><% end %></div>
           </div>
-
           <!-- Currency Dropdown-->
-          <div class="dropdown show">
-            <a id="currencyDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-              <%= flash_classss(locale.to_s) %>
-            </a>
-
-            <div aria-labelledby="currencyDropdown" class="dropdown-menu">
-              <% I18n.available_locales.each do |c| %>
-              <a href="<%= "/#{c.to_s}#{request.env['PATH_INFO'].partition(locale.to_s).last}" %>" class="dropdown-item">
-                <%= flash_classss(c.to_s) %>
-              </a>
-              <% end %>
-            </div>
+          <div class="dropdown show"><a id="currencyDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><%= flash_classss(locale.to_s) %></a>
+            <div aria-labelledby="currencyDropdown" class="dropdown-menu"><% I18n.available_locales.each do |c| %><a href="<%= "/#{c.to_s}#{request.env['PATH_INFO'].partition(locale.to_s).last}" %>" class="dropdown-item"><%= flash_classss(c.to_s) %></a><% end %></div>
           </div>
         </div>
       </div>
@@ -58,14 +35,14 @@
       </div>
     </div>
     <div class="container-fluid">
-      <!-- Navbar Header  --><a href="<%= url_for(root_path) %>" class="navbar-brand"><img src="/assets/logo.png" alt="..." height="48" width="48"></a>
+      <!-- Navbar Header  --><a href="<%= url_for(root_path) %>" class="navbar-brand"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/logo.png" alt="..."></a>
       <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
       <!-- Navbar Collapse -->
       <div id="navbarCollapse" class="collapse navbar-collapse">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item dropdown"><a id="navbarHomeLink" href="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link active">Home<i class="fa fa-angle-down"></i></a>
+          <li class="nav-item dropdown"><a id="navbarHomeLink" href="index.html" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link active">Home<i class="fa fa-angle-down"></i></a>
             <ul aria-labelledby="navbarDropdownHomeLink" class="dropdown-menu">
-              <li><a href="/" class="dropdown-item">Classic Home</a></li>
+              <li><a href="index.html" class="dropdown-item">Classic Home</a></li>
               <li><a href="index2.html" class="dropdown-item">Parallax sections</a></li>
               <li><a href="index3.html" class="dropdown-item">Video background                     </a></li>
             </ul>
@@ -80,12 +57,12 @@
                   <div class="row">
                     <div class="col-lg-3"><strong class="text-uppercase">Home</strong>
                       <ul class="list-unstyled">
-                        <li><a href="/">Classic homepage</a></li>
+                        <li><a href="index.html">Classic homepage</a></li>
                         <li><a href="index2.html">Parallax sections <span class="badge badge-success ml-2">New</span></a></li>
                         <li><a href="index3.html">Video background  <span class="badge badge-success ml-2">New</span></a></li>
                       </ul><strong class="text-uppercase">Shop</strong>
                       <ul class="list-unstyled">
-                        <li><a href="/products">Category - left sidebar</a></li>
+                        <li><a href="category.html">Category - left sidebar</a></li>
                         <li><a href="category-right.html">Category - right sidebar</a></li>
                         <li><a href="category-full.html">Category - full width</a></li>
                         <li><a href="category-masonry.html">Category - Masonry layout <span class="badge badge-success ml-2">New</span> </a></li>
@@ -94,7 +71,7 @@
                     </div>
                     <div class="col-lg-3"><strong class="text-uppercase">Order process</strong>
                       <ul class="list-unstyled">
-                        <li><a href="<%= url_for(cart_path) %>">Shopping cart</a></li>
+                        <li><a href="cart.html">Shopping cart</a></li>
                         <li><a href="checkout1.html">Checkout 1 - Address</a></li>
                         <li><a href="checkout2.html">Checkout 2 - Delivery</a></li>
                         <li><a href="checkout3.html">Checkout 3 - Payment</a></li>
@@ -121,9 +98,9 @@
                     <div class="col-lg-3"><strong class="text-uppercase">Customer</strong>
                       <ul class="list-unstyled">
                         <li><a href="customer-login.html">Login/sign up</a></li>
-                        <li><a href="<%= url_for(orders_path) %>">Orders</a></li>
+                        <li><a href="customer-orders.html">Orders</a></li>
                         <li><a href="customer-order.html">Order detail</a></li>
-                        <li><a href="addresses.html">Addresses</a></li>
+                        <li><a href="customer-addresses.html">Addresses</a></li>
                         <li><a href="customer-account.html">Profile</a></li>
                       </ul>
                     </div>
@@ -155,7 +132,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-3 text-center product-col hidden-lg-down"><a href="detail.html" class="product-image"><img src="/assets/hub/1-4-2/img/shirt.png" alt="..." class="img-fluid"></a>
+                <div class="col-lg-3 text-center product-col hidden-lg-down"><a href="detail.html" class="product-image"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/shirt.png" alt="..." class="img-fluid"></a>
                   <h6 class="text-uppercase product-heading"><a href="detail.html">Lose Oversized Shirt</a></h6>
                   <ul class="rate list-inline">
                     <li class="list-inline-item"><i class="fa fa-star-o text-primary"></i></li>
@@ -211,8 +188,6 @@
           <div class="cart dropdown show"><a id="cartdetails" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="icon-heart"></i>
               <div class="cart-no" id="followers"><%= current_wish.total_item %></div></a><a href="<%= url_for(wish_path) %>" class="text-primary view-cart">View Wish</a>
             <div aria-labelledby="cartdetails" class="dropdown-menu">
-              <%= render partial: "wish_items/wish_item_header", collection: current_wish.list, as: :wish_item if logged_in? %>
-              <%= render partial: "guest_wish_items/guest_wish_item_header", collection: current_wish.list, as: :guest_wish_item unless logged_in? %>
               <!-- call to actions-->
               <div class="dropdown-item CTA d-flex"><a href="<%= url_for(wish_path) %>" class="btn btn-template wide">View Wish</a><a href="<%= url_for(wish_path) %>" class="btn btn-template wide">View Wish</a></div>
             </div>
@@ -221,10 +196,6 @@
           <div class="cart dropdown show"><a id="cartdetails" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="icon-cart"></i>
               <div class="cart-no" id="follower"><%= current_cart.total_item %></div></a><a href="<%= url_for(cart_path) %>" class="text-primary view-cart">View Cart</a>
             <div aria-labelledby="cartdetails" class="dropdown-menu">
-              <%= render partial: "cart_items/cart_item_header", collection: current_cart.list, as: :cart_item if logged_in? %>
-              <%= render partial: "guest_cart_items/guest_cart_item_header", collection: current_cart.list, as: :guest_cart_item unless logged_in? %>
-              <!-- total price-->
-              <div class="dropdown-item total-price d-flex justify-content-between"><span>Total</span><strong class="text-primary"><%= number_to_currency(current_cart.total_value+5.04) %></strong></div>
               <!-- call to actions-->
               <div class="dropdown-item CTA d-flex"><a href="<%= url_for(cart_path) %>" class="btn btn-template wide">View Cart</a><a href="<%= "/#{locale.to_s}/checkout1" %>" class="btn btn-template wide">Checkout</a></div>
             </div>
