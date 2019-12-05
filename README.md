@@ -23,34 +23,7 @@ Things you may want to cover:
 
 * ...
 
-git init
-
-git add .
-
-git commit -am "first commit"
-
-git push -u origin master
-
-sudo snap install heroku --classic
-
-heroku --version
-
 heroku login
-
 heroku keys:add
-
-git remote rm heroku
-
 heroku create
-
-heroku run rails db:migrate
-
-heroku pg:reset
-
-heroku logs -t
-
-heroku run rake db:version
-
-heroku restart
-
-git add . && git commit --amend && git push -u heroku master -f && heroku pg:reset && heroku run rails db:migrate && heroku open
+git add . && git commit -m upgrade && git push -u heroku master -f && heroku pg:reset && heroku run rails db:migrate && heroku run rails db:seed && heroku open
