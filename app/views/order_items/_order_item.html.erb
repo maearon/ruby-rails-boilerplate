@@ -1,0 +1,14 @@
+<!-- Product-->
+<div class="item">
+  <div class="row d-flex align-items-center">
+    <div class="col-6">
+      <div class="d-flex align-items-center"><%= image_tag order_item.variant.images.first, alt: "...", class: "img-fluid" %>
+        <div class="title"><a href="detail.html">
+            <h6><%= order_item.product.name %></h6><span class="text-muted">Size: Large</span></a></div>
+      </div>
+    </div>
+    <div class="col-2"><span><%= number_to_currency(order_item.variant.price) %></span></div>
+    <div class="col-2"><%= order_item.quantity %></div>
+    <div class="col-2 text-right"><span><%= number_to_currency(order_item.total_price) %></span></div>
+  </div>
+</div>

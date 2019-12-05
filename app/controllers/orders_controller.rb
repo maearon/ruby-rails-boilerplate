@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
   end
 
   def new
@@ -36,17 +37,19 @@ class OrdersController < ApplicationController
   def create
     # Generate order_items for a subset of vatiants (products) in current_cart (current_order).
 
+    unless current_cart.list.blank? && current_user.blank?
+      order = current_user.orders.create
 
-    order = current_user.order.create
+      current_cart.list.each { |cart_item|
+        order.order_items.create!(quantity: cart_item.quantity,
+                                  order_id: order.id,product_id: cart_item.product_id ,variant_id: cart_item.variant_id)
+      }
 
-    current_cart.list.each { |order_item|
-      order_items.create!(order_item)
-    }
-
-    if order.list == current_cart.list
-      redirect_to orders_path
-    else
-      redirect_to request.referrer
+      if order.save
+        redirect_to checkout5_path
+      else
+        redirect_to request.referrer
+      end
     end
 
     # @product = Product.find(params[:product_id])
@@ -99,6 +102,9 @@ class OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(:user_id, :address, :phone, :method, :status, :details)
+  end
+  def cart_params
+    params.require(:cart).permit(:quantity, :cart_id, :product_id, :product_id, :variant_id)
   end
   def filtering_params(params)
     params.slice(:status, :location, :starts_with)

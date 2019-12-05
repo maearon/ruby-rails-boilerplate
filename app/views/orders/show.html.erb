@@ -3,13 +3,13 @@
       <div class="container">
         <div class="row d-flex">
           <div class="col-lg-9 order-2 order-lg-1">
-            <h1>Order #1735</h1><p class="lead">Order #1735 was placed on <strong>22/06/2013</strong> and is currently <strong>Being prepared</strong>.</p><p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
+            <h1>Order #<%= @order.id %></h1><p class="lead">Order #<%= @order.id %> was placed on <strong><%= @order.created_at %></strong> and is currently <strong>Being prepared</strong>.</p><p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
           </div>
           <div class="col-lg-3 text-right order-1 order-lg-2">
             <ul class="breadcrumb justify-content-lg-end">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item"><a href="customer-orders.html">Orders</a></li>
-              <li class="breadcrumb-item active">Order #1735</li>
+              <li class="breadcrumb-item"><a href="<%= url_for(orders_path) %>">Orders</a></li>
+              <li class="breadcrumb-item active">Order #<%= @order.id %></li>
             </ul>
           </div>
         </div>
@@ -19,14 +19,7 @@
       <div class="container">
         <div class="row">
           <!-- Customer Sidebar-->
-          <div class="customer-sidebar col-xl-3 col-lg-4 mb-md-5">
-            <div class="customer-profile"><a href="#" class="d-inline-block"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/person-3.jpg" class="img-fluid rounded-circle customer-image"></a>
-              <h5>Julie Machallova</h5>
-              <p class="text-muted text-small">Ostrava, Czech republic</p>
-            </div>
-            <nav class="list-group customer-nav"><a href="customer-orders.html" class="active list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-bag"></span>Orders</span><small class="badge badge-pill badge-light">5</small></a><a href="customer-account.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-profile"></span>Profile</span></a><a href="addresses.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-map"></span>Addresses</span></a><a href="customer-login.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="fa fa-sign-out"></span>Log out</span></a>
-            </nav>
-          </div>
+          <%= render 'users/sidebar' %>
           <div class="col-lg-8 col-xl-9 pl-lg-3">
             <div class="basket basket-customer-order">
               <div class="basket-holder">
@@ -39,58 +32,37 @@
                   </div>
                 </div>
                 <div class="basket-body">
-                  <!-- Product-->
-                  <div class="item">
-                    <div class="row d-flex align-items-center">
-                      <div class="col-6">
-                        <div class="d-flex align-items-center"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/shirt.png" alt="..." class="img-fluid">
-                          <div class="title"><a href="detail.html">
-                              <h6>Loose Oversised Shirt</h6><span class="text-muted">Size: Large</span></a></div>
-                        </div>
-                      </div>
-                      <div class="col-2"><span>$65.00</span></div>
-                      <div class="col-2">4</div>
-                      <div class="col-2 text-right"><span>$325.00</span></div>
-                    </div>
-                  </div>
-                  <!-- Product-->
-                  <div class="item">
-                    <div class="row d-flex align-items-center">
-                      <div class="col-6">
-                        <div class="d-flex align-items-center"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/shirt-black.png" alt="..." class="img-fluid">
-                          <div class="title"><a href="detail.html">
-                              <h6>Loose Oversised Shirt</h6><span class="text-muted">Size: Medium</span></a></div>
-                        </div>
-                      </div>
-                      <div class="col-2"><span>$55.00</span></div>
-                      <div class="col-2">3</div>
-                      <div class="col-2 text-right"><span>$165.00</span></div>
-                    </div>
-                  </div>
+                  <%= render @order.order_items %>
                 </div>
                 <div class="basket-footer">
                   <div class="item">
                     <div class="row">
-                      <div class="offset-md-6 col-4"> <strong>Order subtotal</strong></div>
-                      <div class="col-2 text-right"><strong>$446.00</strong></div>
+                      <div class="offset-md-6 col-4"> <strong>ORIGINAL PRICE</strong></div>
+                      <div class="col-2 text-right"><strong><%= number_to_currency(@order.total_originalvalue) %></strong></div>
                     </div>
                   </div>
                   <div class="item">
                     <div class="row">
-                      <div class="offset-md-6 col-4"> <strong>Shipping and handling</strong></div>
-                      <div class="col-2 text-right"><strong>$10.00</strong></div>
+                      <div class="offset-md-6 col-4"> <strong>SALE</strong></div>
+                      <div class="col-2 text-right"><strong><%= number_to_currency(@order.sale) %></strong></div>
                     </div>
                   </div>
                   <div class="item">
                     <div class="row">
-                      <div class="offset-md-6 col-4"> <strong>Tax</strong></div>
-                      <div class="col-2 text-right"><strong>$0.00</strong></div>
+                      <div class="offset-md-6 col-4"> <strong>DELIVERY</strong></div>
+                      <div class="col-2 text-right"><strong>FREE</strong></div>
                     </div>
                   </div>
                   <div class="item">
                     <div class="row">
-                      <div class="offset-md-6 col-4"> <strong>Total</strong></div>
-                      <div class="col-2 text-right"><strong>$456.00</strong></div>
+                      <div class="offset-md-6 col-4"> <strong>SALES TAX*</strong></div>
+                      <div class="col-2 text-right"><strong>$5.04</strong></div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="row">
+                      <div class="offset-md-6 col-4"> <strong>TOTAL</strong></div>
+                      <div class="col-2 text-right"><strong><%= number_to_currency(@order.total_value+5.04) %></strong></div>
                     </div>
                   </div>
                 </div>
