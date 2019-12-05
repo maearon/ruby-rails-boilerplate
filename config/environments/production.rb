@@ -66,14 +66,14 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
-  host = 'dry-oasis-67187.herokuapp.com'
+  host = 'ancient-gorge-12628.herokuapp.com'
   config.action_mailer.default_url_options = { host: host, protocol: 'https'}
   ActionMailer::Base.smtp_settings = {
     address: 'smtp.gmail.com',
     port: 587,
     authentication: 'plain',
-    user_name: '*********@gmail.com',
-    password:  '**************',
+    user_name: 'mdnvng@gmail.com',
+    password:  '0915827299',
     domain:    'heroku.com',
     enable_starttls_auto: true
   }

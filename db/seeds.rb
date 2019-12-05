@@ -40,7 +40,7 @@ i = 1
 u = "#{Rails.root.to_s}/app/assets/images/img"
 93.times do |i|
   i +=1
-  p = Product.create!(name: 'elegant',
+  p = Product.create!(name: 'Loose Oversized Shirt',
                       gender: 'Men',
                       franchise: 'Tubular',
                       producttype: 'Wear',
