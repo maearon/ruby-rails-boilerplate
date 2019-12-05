@@ -18,7 +18,6 @@ gem 'jbuilder',                   '2.9.1'
 gem 'bootsnap',                   '1.4.4', require: false
 
 group :development, :test do
-  # gem 'sqlite3', '1.4.1'
   gem 'pry', '~> 0.12.2', platforms: [:mri, :mingw, :x64_mingw]
 end
 
@@ -27,7 +26,6 @@ group :development do
   gem 'listen',                '3.1.5'
   gem 'spring',                '2.1.0'
   gem 'spring-watcher-listen', '2.0.1'
-  gem 'pg', '1.1.4'
 end
 
 group :test do
@@ -42,16 +40,13 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '1.1.4'
   gem 'aws-sdk-s3', '1.46.0', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# gem 'sqlite3', '1.4.1'
-# gem 'pg', '1.1.4'
-# gem 'mysql2'
+gem 'pg'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem "ransack", "~> 2.3"
 gem "react-rails", "~> 2.6"
