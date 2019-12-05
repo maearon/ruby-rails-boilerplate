@@ -6,7 +6,7 @@
         <div class="CTA d-flex align-items-center justify-content-center"><a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a><a href="<%= url_for(product)<<"?variant=#{product&.variants&.first&.id}" %>" class="visit-product active"><i class="icon-search"></i>View</a><a href="#" data-toggle="modal" data-target="#exampleModal" class="quick-view"><i class="fa fa-arrows-alt"></i></a></div>
       </div>
     </div>
-    <div class="title"><small class="text-muted">Men Wear</small><a href="detail.html">
+    <div class="title"><small class="text-muted">Men Wear</small><a href="<%= url_for(product)<<"?variant=#{product&.variants&.first&.id}" %>">
         <h3 class="h6 text-uppercase no-margin-bottom"><%= product.name %> <%= product.variants.first.color %></h3></a><span class="price text-muted"><% if product.variants.first.price %>
             <%= number_to_currency(product.variants.first.price) %>
             <% end %>

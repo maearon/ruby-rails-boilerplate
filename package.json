@@ -1,5 +1,7 @@
 {
   "name": "sample_app",
+  "description": "Simple To-Do App",
+  "main": "app.js",
   "private": true,
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
