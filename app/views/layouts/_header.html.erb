@@ -211,36 +211,20 @@
           <div class="cart dropdown show"><a id="cartdetails" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="icon-heart"></i>
               <div class="cart-no" id="followers"><%= current_wish.total_item %></div></a><a href="<%= url_for(wish_path) %>" class="text-primary view-cart">View Wish</a>
             <div aria-labelledby="cartdetails" class="dropdown-menu">
-              <!-- wish item-->
-              <div class="dropdown-item cart-product">
-                <div class="d-flex align-items-center">
-                  <div class="img"><img src="/assets/hub/1-4-2/img/hoodie-man-1.png" alt="..." class="img-fluid"></div>
-                  <div class="details d-flex justify-content-between">
-                    <div class="text"> <a href="#"><strong>Heather Gray Hoodie</strong></a><small>Quantity: 1 </small><span class="price">$75.00 </span></div><a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
-                  </div>
-                </div>
-              </div>
-              <!-- total item-->
-              <div class="dropdown-item total-price d-flex justify-content-between"><span>Total</span><strong class="text-primary">$75.00</strong></div>
+              <%= render partial: "wish_items/wish_item_header", collection: current_wish.list, as: :wish_item if logged_in? %>
+              <%= render partial: "guest_wish_items/guest_wish_item_header", collection: current_wish.list, as: :guest_wish_item unless logged_in? %>
               <!-- call to actions-->
-              <div class="dropdown-item CTA d-flex"><a href="<%= url_for(wish_path) %>" class="btn btn-template wide">View Wish</a><a href="checkout1.html" class="btn btn-template wide">Checkout</a></div>
+              <div class="dropdown-item CTA d-flex"><a href="<%= url_for(wish_path) %>" class="btn btn-template wide">View Wish</a><a href="<%= url_for(wish_path) %>" class="btn btn-template wide">View Wish</a></div>
             </div>
           </div>
           <!-- Cart Dropdown-->
           <div class="cart dropdown show"><a id="cartdetails" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="icon-cart"></i>
               <div class="cart-no" id="follower"><%= current_cart.total_item %></div></a><a href="<%= url_for(cart_path) %>" class="text-primary view-cart">View Cart</a>
             <div aria-labelledby="cartdetails" class="dropdown-menu">
-              <!-- cart item-->
-              <div class="dropdown-item cart-product">
-                <div class="d-flex align-items-center">
-                  <div class="img"><img src="/assets/hub/1-4-2/img/hoodie-man-1.png" alt="..." class="img-fluid"></div>
-                  <div class="details d-flex justify-content-between">
-                    <div class="text"> <a href="#"><strong>Heather Gray Hoodie</strong></a><small>Quantity: 1 </small><span class="price">$75.00 </span></div><a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
-                  </div>
-                </div>
-              </div>
+              <%= render partial: "cart_items/cart_item_header", collection: current_cart.list, as: :cart_item if logged_in? %>
+              <%= render partial: "guest_cart_items/guest_cart_item_header", collection: current_cart.list, as: :guest_cart_item unless logged_in? %>
               <!-- total price-->
-              <div class="dropdown-item total-price d-flex justify-content-between"><span>Total</span><strong class="text-primary">$75.00</strong></div>
+              <div class="dropdown-item total-price d-flex justify-content-between"><span>Total</span><strong class="text-primary"><%= number_to_currency(current_cart.total_value+5.04) %></strong></div>
               <!-- call to actions-->
               <div class="dropdown-item CTA d-flex"><a href="<%= url_for(cart_path) %>" class="btn btn-template wide">View Cart</a><a href="<%= "/#{locale.to_s}/checkout1" %>" class="btn btn-template wide">Checkout</a></div>
             </div>

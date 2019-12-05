@@ -1,0 +1,9 @@
+<!-- cart item-->
+<div class="dropdown-item cart-product">
+  <div class="d-flex align-items-center">
+    <div class="img"><%= image_tag guest_wish_item.variant.images.first, alt: "...", class: "img-fluid" %></div>
+    <div class="details d-flex justify-content-between">
+      <div class="text"> <a href="#"><strong><%= guest_wish_item.product.name %></strong></a><span class="price"><%= number_to_currency(guest_wish_item.variant.price) %> </span></div><a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+    </div>
+  </div>
+</div>
