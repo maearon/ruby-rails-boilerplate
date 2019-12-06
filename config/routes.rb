@@ -13,7 +13,9 @@ scope "(:locale)", locale: /en|de|fr/ do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  resources :users do
+  get    '/my-account',    to: 'users#show'
+  get    '/my-account/profile' ,    to: 'users#edit'
+  resources :users, except: [:edit] do
     member do
       get :following, :followers
     end
