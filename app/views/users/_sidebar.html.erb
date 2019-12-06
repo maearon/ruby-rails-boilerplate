@@ -7,7 +7,7 @@
 
     <a href="<%= url_for(my_account_path) %>" class="<%= is_active_controller("users") %> list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-profile"></span>Profile</span></a>
 
-    <a href="<%= url_for(orders_path) %>" class="<%= is_active_controller("orders") %> list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-bag"></span>Orders</span><small class="badge badge-pill badge-primary">5</small></a>
+    <a href="<%= url_for(orders_path) %>" class="<%= is_active_controller("orders") %> list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-bag"></span>Orders</span><small class="badge badge-pill badge-primary"><%= current_user.orders.length %></small></a>
 
     <a href="<%= url_for(addresses_path) %>" class="<%= is_active_controller("addresses") %> list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-map"></span>Addresses</span></a>
 
