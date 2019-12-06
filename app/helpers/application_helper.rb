@@ -11,7 +11,7 @@ module ApplicationHelper
 
   def flash_classs(message_type)
   	case message_type
-    	when "us" then "united-kingdom"
+    	when "en" then "united-kingdom"
     	when "de" then "germany"
     	when "fr" then "france"
 	 end
@@ -19,7 +19,7 @@ module ApplicationHelper
 
   def flash_class(message_type)
     case message_type
-      when "us" then "English"
+      when "en" then "English"
       when "de" then "German"
       when "fr" then "French"
    end
@@ -27,7 +27,7 @@ module ApplicationHelper
 
   def flash_classss(message_type)
     case message_type
-      when "us" then "USD"
+      when "en" then "enD"
       when "de" then "EUR"
       when "fr" then "EUR"
       # when "en" then "GBP"

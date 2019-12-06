@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 # scope "/:locale" do
-scope "(:locale)", locale: /us|de|fr/ do
+scope "(:locale)", locale: /en|de|fr/ do
   resources :projects
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'password_resets/new'
