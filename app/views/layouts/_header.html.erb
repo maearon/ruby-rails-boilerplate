@@ -185,9 +185,11 @@
           <div class="user"> <a title="Login" id="userdetails" href="<%= url_for(login_path) %>" class="user-link"><i class="icon-profile">                   </i></a></div>
           <% end %>
           <!-- Wish Dropdown-->
+          <% unless current_wish.total_item.zero? %>
           <div class="cart dropdown show"><a id="cartdetails" href="<%= url_for(wish_path) %>" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="icon-heart"></i><div class="cart-no" id="followers"><%= current_wish.total_item %></div></a></div>
+          <% end %>
           <!-- Cart Dropdown-->
-          <div class="cart dropdown show"><a id="cartdetails" href="<%= url_for(cart_path) %>" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="icon-cart"></i><div class="cart-no" id="follower"><%= current_cart.total_item %></div></a></div>
+          <div class="cart dropdown show"><a title="<%= current_cart.total_item.zero? ? "YOUR CART IS EMPTY" : "Checkout" %>" id="cartdetails" href="<%= url_for(cart_path) %>" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="icon-cart"></i><% unless current_cart.total_item.zero? %><div class="cart-no" id="follower"><%= current_cart.total_item %></div><% end %></a></div>
         </div>
       </div>
     </div>
