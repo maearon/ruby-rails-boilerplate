@@ -31,7 +31,7 @@ module SampleApp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-
+    config.eager_load_paths << Rails.root.join("lib/cookie_products")
   end
 end
 Rails.application.config.active_record.belongs_to_required_by_default = false
