@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 # scope "/:locale" do
 scope "(:locale)", locale: /en|de|fr/ do
-  resources :projects
+  get '/:locale' => 'static_pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'password_resets/new'
   get 'password_resets/edit'
-  get '/:locale' => 'static_pages#home'
   root   'static_pages#home'
   get    '/help',    to: 'static_pages#help'
   get    '/about',   to: 'static_pages#about'
@@ -14,9 +13,7 @@ scope "(:locale)", locale: /en|de|fr/ do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  get    '/my-account',    to: 'users#show'
-  get    '/my-account/profile' ,    to: 'users#edit'
-  resources :users, except: [:edit] do
+  resources :users do
     member do
       get :following, :followers
     end
