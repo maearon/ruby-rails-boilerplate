@@ -1,8 +1,8 @@
 $("#wish_form").html("<%= escape_javascript(render('products/unwish')) %>");
 <% if current_wish.total_item.zero? %>
-$("#wishlist").toggle();
+$("#wishlist").hide();
 <% end %>
 <% if current_wish.total_item == 1 %>
-$("#wishlist").toggle();
+$("#wishlist").show();
 <% end %>
 $("#followers").html('<%= current_wish.total_item %>');

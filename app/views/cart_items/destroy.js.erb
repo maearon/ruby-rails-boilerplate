@@ -1,1 +1,7 @@
+<% if current_cart.total_item.zero? %>
+$("#follower").hide();
+<% end %>
+<% if current_cart.total_item == 1 %>
+$("#follower").show();
+<% end %>
 $("#follower").html('<%= current_cart.total_item %>');
