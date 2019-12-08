@@ -47,6 +47,9 @@
   <body>
     <!-- navbar-->
     <%= render 'layouts/header' %>
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
     <!-- Hero Section-->
     <%= yield %>
     <div id="scrollTop"><i class="fa fa-long-arrow-up"></i></div>
@@ -119,5 +122,6 @@
     </script>
     <!-- Main Template File-->
     <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/js/front.js"></script>
+    <div class="container"><%= debug(params) if Rails.env.development? %></div>
   </body>
 </html>
