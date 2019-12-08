@@ -66,6 +66,17 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#sidebarCollapse').on("click", function() {
+                if (localStorage.getItem("close_sidebar_menu") == "false") {
+                  localStorage.setItem("close_sidebar_menu", true);
+                } else {
+                  localStorage.setItem("close_sidebar_menu", false);
+                }
+            });
+            if (localStorage.getItem("close_sidebar_menu") == "true") {
+                $("#sidebar").toggleClass('active');
+                $("#sidebarCollapse").toggleClass('active');
+            }
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
