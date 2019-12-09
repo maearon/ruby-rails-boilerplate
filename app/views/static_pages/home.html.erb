@@ -66,6 +66,18 @@
     </div>
   </div>
 </section>
+<!-- Divider Section-->
+<section style="background: url(https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/divider-bg.jpg);" class="divider">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <p>Old Collection                  </p>
+        <h2 class="h1 text-uppercase no-margin">Huge Sales</h2>
+        <p>At our outlet stores</p><a href="#" class="btn btn-template wide shop-now">Shop Now<i class="icon-bag"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- Men's Collection -->
 <section class="men-collection gray-bg">
   <div class="container">
@@ -144,19 +156,7 @@
     </div>
   </div>
 </section>
-<!-- Divider Section-->
-<section style="background: url(https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/divider-bg.jpg);" class="divider">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6">
-        <p>Old Collection                  </p>
-        <h2 class="h1 text-uppercase no-margin">Huge Sales</h2>
-        <p>At our outlet stores</p><a href="#" class="btn btn-template wide shop-now">Shop Now<i class="icon-bag"></i></a>
-      </div>
-    </div>
-  </div>
-</section>
-<% unless recent_products.length.zero? %>
+<% unless recent_products.length.zero? || recent_products == [nil] %>
 <!-- Women's Collection -->
 <section class="women-collection">
   <div class="container">
