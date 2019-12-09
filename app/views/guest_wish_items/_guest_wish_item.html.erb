@@ -3,7 +3,7 @@
   <div class="row d-flex align-items-center">
     <div class="col-5">
       <div class="d-flex align-items-center"><%= image_tag guest_wish_item.variant.images.first, alt: "...", class: "img-fluid" %>
-        <div class="title"><a href="detail.html">
+        <div class="title"><a href="<%= url_for(guest_wish_item.product)<<"?variant=#{guest_wish_item&.variant_id}" %>">
             <h5><%= guest_wish_item.product.name %></h5><span class="text-muted">Size: Large</span></a></div>
       </div>
     </div>
