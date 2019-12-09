@@ -23,10 +23,13 @@
             <div class="ribbon-info text-uppercase">Fresh</div>
             <div class="ribbon-primary text-uppercase">Sale</div>
             <div data-slider-id="1" class="owl-carousel items-slider owl-drag">
-              <div class="item"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/shirt.png" alt="shirt"></div>
+              <!-- <div class="item"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/shirt.png" alt="shirt"></div>
               <div class="item"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/shirt-black.png" alt="shirt"></div>
               <div class="item"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/shirt-green.png" alt="shirt"></div>
-              <div class="item"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/shirt-red.png" alt="shirt"></div>
+              <div class="item"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/shirt-red.png" alt="shirt"></div> -->
+              <% @product.variants.order(:id).each do |variant| %>
+              <div class="item"><%= image_tag variant.images.first, alt: "shirt" %></div>
+              <% end %>
             </div>
             <div data-slider-id="1" class="owl-thumbs">
               <% @product.variants.order(:id).each do |variant| %>
