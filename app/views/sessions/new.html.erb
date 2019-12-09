@@ -61,6 +61,7 @@
             <p>With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process will not take you more than a minute!</p>
             <p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
             <hr>
+            <% @user ||= User.new %>
             <%= form_with(model: @user, local: true) do |f| %>
               <%= render 'shared/error_messages', object: f.object %>
               <div class="form-group">
