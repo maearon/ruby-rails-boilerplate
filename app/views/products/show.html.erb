@@ -42,8 +42,8 @@
             <h3><%= @product.name.upcase %></h3>
             <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row">
               <ul class="price list-inline no-margin">
-                <li class="list-inline-item current">$65.00</li>
-                <li class="list-inline-item original">$90.00</li>
+                <li class="list-inline-item current"><%= number_to_currency(@product.variants.first.price) %></li>
+                <li class="list-inline-item original"><%= number_to_currency(@product.variants.first.originalprice) %></li>
               </ul>
               <div class="review d-flex align-items-center">
                 <ul class="rate list-inline">

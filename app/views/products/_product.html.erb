@@ -7,9 +7,8 @@
       </div>
     </div>
     <div class="title"><small class="text-muted">Men Wear</small><a href="<%= url_for(product)<<"?variant=#{product&.variants&.first&.id}" %>">
-        <h3 class="h6 text-uppercase no-margin-bottom"><%= product.name %> <%= product.variants.first.color %></h3></a><span class="price text-muted"><% if product.variants.first.price %>
+        <h3 class="h6 text-uppercase no-margin-bottom"><%= product.name %> <%= product.variants.first.color %></h3></a><span class="price text-muted">
             <%= number_to_currency(product.variants.first.price) %>
-            <% end %>
-            <%= number_to_currency(product.variants.first.originalprice) %></span></div>
+            <strike><%= number_to_currency(product.variants.first.originalprice) %></strike></span></div>
   </div>
 </div>
