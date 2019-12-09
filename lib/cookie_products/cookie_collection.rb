@@ -18,13 +18,11 @@ class CookieCollection < Array
 
   private
   def update_cookie
-    ids = map(&:id) if ids
-    if ids
+    ids = map(&:id)
     @cookies[cookie_name] = {
       value: ids.join(','),
       expires: LIFE_TIME.years.from_now
     }
-    end
   end
 
   def cookie_name
