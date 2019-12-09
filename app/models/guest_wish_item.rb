@@ -3,4 +3,5 @@ class GuestWishItem < ApplicationRecord
   belongs_to :variant
   belongs_to :guest_wish
   validates_uniqueness_of :variant_id, scope: :guest_wish_id
+  default_scope { order(created_at: :asc) }
 end

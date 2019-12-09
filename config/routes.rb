@@ -35,8 +35,8 @@ scope "(:locale)", locale: /en|de|fr/ do
   resources :products, only: [:index, :show] do
     resources :reviews
   end
-  resources :cart_items, only: [:create, :destroy]
-  resources :guest_cart_items, only: [:create, :destroy]
+  resources :cart_items, only: [:create, :update, :destroy]
+  resources :guest_cart_items, only: [:create, :update, :destroy]
   get 'cart', to: 'cart#index'
   resources :wish_items, only: [:create, :destroy]
   resources :guest_wish_items, only: [:create, :destroy]

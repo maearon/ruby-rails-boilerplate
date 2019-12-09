@@ -11,9 +11,9 @@
     <div class="col-2">
       <div class="d-flex align-items-center">
         <div class="quantity d-flex align-items-center">
-          <div class="dec-btn">-</div>
-          <input type="text" value="<%= cart_item.quantity %>" class="quantity-no">
-          <div class="inc-btn">+</div>
+          <div class="dec-btn"><%= link_to cart_item_url(cart_item, dec: "dec"), method: :put, remote: true do %>-<% end %></div>
+          <input type="text" value="<%= cart_item.quantity %>" min="1" max="15" class="quantity-no">
+          <div class="inc-btn"><%= link_to cart_item_url(cart_item, inc: "inc"), method: :put, remote: true do %>+<% end %></div>
         </div>
       </div>
     </div>
