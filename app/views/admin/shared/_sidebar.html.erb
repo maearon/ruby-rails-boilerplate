@@ -1,41 +1,30 @@
 <nav id="sidebar">
     <div class="sidebar-header">
-        <h3><!-- Welcome to the  -->Admin Page</h3>
+        <h3>Bootstrap Sidebar</h3>
     </div>
 
     <ul class="list-unstyled components">
         <p>Dummy Heading</p>
-        <!-- <li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                    <a href="#">Home 1</a>
-                </li>
-                <li>
-                    <a href="#">Home 2</a>
-                </li>
-                <li>
-                    <a href="#">Home 3</a>
-                </li>
-            </ul>
-        </li> -->
-        <li class="active">
+        <li class="<%= is_active_controller("admin/static_pages") %>">
             <%= link_to "Admin", admin_root_path, class: "dropdown-toggle" %>
         </li>
-        <li class="active">
+        <li class="<%= is_active_controller("admin/users") %>">
             <%= link_to "User", admin_users_path, class: "dropdown-toggle" %>
         </li>
-        <li class="active">
+        <li class="<%= is_active_controller("admin/products") %>">
             <%= link_to "Product", admin_products_path, class: "dropdown-toggle" %>
         </li>
-        <li class="active">
+        <li class="<%= is_active_controller("admin/orders") %>">
             <%= link_to "Order", admin_orders_path, class: "dropdown-toggle" %>
         </li>
     </ul>
 
     <ul class="list-unstyled CTAs">
         <li>
-            <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="download">Download source</a>
+            <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+        </li>
+        <li>
+            <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
         </li>
         <li>
             <%= link_to "Back to shop", root_path, class: "article" %>
