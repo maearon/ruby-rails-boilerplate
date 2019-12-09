@@ -20,7 +20,7 @@
     <!-- Bootstrap Select-->
     <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/bootstrap-select/css/bootstrap-select.min.css">
     <!-- Price Slider Stylesheets -->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/nouislider/nouislider.css">
+    <!-- <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/nouislider/nouislider.css"> -->
     <!-- Custom font icons-->
     <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/css/custom-fonticons.css">
     <!-- Google fonts - Poppins-->
@@ -79,7 +79,7 @@
     <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/owl.carousel/owl.carousel.min.js"></script>
     <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js"></script>
     <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
-    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/nouislider/nouislider.min.js"></script>
+    <!-- <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/nouislider/nouislider.min.js"></script> -->
     <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/jquery-countdown/jquery.countdown.min.js"></script>
     <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/masonry-layout/masonry.pkgd.min.js"></script>
     <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
@@ -101,24 +101,24 @@
 
     </script>
     <script>
-      var snapSlider = document.getElementById('slider-snap');
-      noUiSlider.create(snapSlider, {
-        start: [ 40, 110 ],
-        snap: false,
-        connect: true,
-          step: 1,
-        range: {
-          'min': 0,
-          'max': 250
-        }
-      });
+      // var snapSlider = document.getElementById('slider-snap');
+      // noUiSlider.create(snapSlider, {
+      //   start: [ 40, 110 ],
+      //   snap: false,
+      //   connect: true,
+      //     step: 1,
+      //   range: {
+      //     'min': 0,
+      //     'max': 250
+      //   }
+      // });
       var snapValues = [
         document.getElementById('slider-snap-value-lower'),
         document.getElementById('slider-snap-value-upper')
       ];
-      snapSlider.noUiSlider.on('update', function( values, handle ) {
-        snapValues[handle].innerHTML = values[handle];
-      });
+      // snapSlider.noUiSlider.on('update', function( values, handle ) {
+      //   snapValues[handle].innerHTML = values[handle];
+      // });
     </script>
     <!-- Main Template File-->
     <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/js/front.js"></script>
