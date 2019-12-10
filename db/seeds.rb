@@ -9,7 +9,7 @@ User.create!(name:  "Example User",
 
 # Generate a bunch of additional users.
 99.times do |n|
-  name  = 'User Name'
+  name  = 'Example User #{n+1}'
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
   User.create!(name:  name,

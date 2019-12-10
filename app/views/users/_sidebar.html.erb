@@ -1,5 +1,5 @@
 <div class="customer-sidebar col-xl-3 col-lg-4 mb-md-5">
-  <div class="customer-profile"><a href="#" class="d-inline-block"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/person-3.jpg" class="img-fluid rounded-circle customer-image"></a>
+  <div class="customer-profile"><a href="#" class="d-inline-block"><%= gravatar_for @user %></a>
     <h5><%= current_user.name %></h5>
     <p class="text-muted text-small">Ostrava, Czech republic</p>
   </div>
