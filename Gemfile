@@ -58,3 +58,10 @@ gem "font-awesome-sass", "~> 5.11"
 gem "slim", "~> 4.0"
 gem 'rails-i18n', '~> 6.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
+
+# kill -9 $(lsof -i tcp:3000 -t)
+# gem 'simple_form', '~> 5.0', '>= 5.0.1'
+# gem 'country_select', '~> 4.0'
+# gem 'countries', '~> 3.0'
+# gem 'tzinfo', '~> 2.0'
+# gem 'money', '~> 6.13', '>= 6.13.6'
