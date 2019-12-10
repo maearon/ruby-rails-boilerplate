@@ -14,6 +14,7 @@ module ApplicationHelper
     	when "en" then "united-kingdom"
     	when "de" then "germany"
     	when "fr" then "france"
+      when "vi" then "vietnam"
 	 end
 	end
 
@@ -22,6 +23,7 @@ module ApplicationHelper
       when "en" then "English"
       when "de" then "German"
       when "fr" then "French"
+      when "vi" then "Vietnamese"
    end
   end
 
@@ -30,7 +32,7 @@ module ApplicationHelper
       when "en" then "USD"
       when "de" then "EUR"
       when "fr" then "EUR"
-      # when "en" then "GBP"
+      when "vi" then "VND"
    end
   end
 

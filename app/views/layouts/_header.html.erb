@@ -11,8 +11,8 @@
         </div>
         <div class="col-lg-6 d-flex justify-content-end">
           <!-- Language Dropdown-->
-          <div class="dropdown show"><a id="langsDropdown" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/<%= flash_classs(locale.to_s) %>.svg" alt="english"><%= flash_class(locale.to_s) %></a>
-            <div aria-labelledby="langsDropdown" class="dropdown-menu"><% I18n.available_locales.each do |c| %><a href="<%= "/#{c.to_s}#{request.env['PATH_INFO'].partition(locale.to_s).last}" %>" class="dropdown-item"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/<%= flash_classs(c.to_s) %>.svg" alt="<%= flash_classs(c.to_s) %>"><%= flash_class(c.to_s) %></a><% end %></div>
+          <div class="dropdown show"><a id="langsDropdown" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><%= image_tag("#{flash_classs(locale.to_s)}.svg", alt: "#{flash_class(locale.to_s).downcase}") %><%= flash_class(locale.to_s) %></a>
+            <div aria-labelledby="langsDropdown" class="dropdown-menu"><% I18n.available_locales.each do |c| %><a href="<%= "/#{c.to_s}#{request.env['PATH_INFO'].partition(locale.to_s).last}" %>" class="dropdown-item"><%= image_tag("#{flash_classs(c.to_s)}.svg", alt: "#{flash_class(c.to_s).downcase}") %><%= flash_class(c.to_s) %></a><% end %></div>
           </div>
           <!-- Currency Dropdown-->
           <div class="dropdown show"><a id="currencyDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><%= flash_classss(locale.to_s) %></a>
