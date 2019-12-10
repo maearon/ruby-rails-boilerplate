@@ -32,6 +32,10 @@ module SampleApp
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.eager_load_paths << Rails.root.join("lib/cookie_products")
+    # https://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html
+    config.time_zone = 'Hanoi'
+    config.active_record.default_timezone = :local
+
   end
 end
 Rails.application.config.active_record.belongs_to_required_by_default = false
