@@ -1,0 +1,39 @@
+<h1>Listing users</h1>
+<%= link_to 'New user', new_admin_user_path %>
+<%= paginate @users %>
+<%= page_entries_info @users, entry_name: 'item' %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <!-- <th scope="col">Pasword</th> -->
+      <th scope="col">Admin</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <% @users.order(:id).each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <!-- <td><%= user.password_digest %></td> -->
+      <td><%= user.admin %></td>
+      <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
+      <td>
+        <% if current_user.id != user.id %>
+        <%= link_to 'Delete', admin_user_path(user),
+                remote: true,
+                method: :delete,
+                data: { confirm: 'You sure?' },
+                class: "user-#{user.id}" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<br>
+<%= link_to 'Back', admin_root_path %>

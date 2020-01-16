@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with model: [:admin, @user] , local: true do |form| %>
+
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@user.errors.count, "error") %> prohibited
+            this user from being saved:
+          </h2>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= form.label :name %>
+      <%= form.text_field :name, class: "form-control" %>
+
+      <%= form.label :email %>
+      <%= form.email_field :email, class: "form-control" %>
+
+      <% if action_name == 'new' or action_name == 'create' %>
+        <%= form.label :password %>
+        <%= form.password_field :password, class: "form-control" %>
+        <%= form.label :password_confirmation, "Confirmation" %>
+        <%= form.password_field :password_confirmation, class: 'form-control' %>
+      <% end %>
+
+      <%= form.label :admin %>
+      <%= form.select(:admin, User.admins.keys.map { |w| [w.humanize, w] }, {include_blank: "Select"}, {class: "form-control"} ) %>
+
+      <%= form.submit button_text, class: "btn btn-primary"%>
+
+    <% end %>
+  </div>
+</div>
