@@ -1,0 +1,21 @@
+<tr>
+  <th># <%= order.id %></th>
+  <td><%= order.created_at %></td>
+  <td><%= number_to_currency(order.total_value+5.04) %></td>
+  <td><span class="badge badge-info">Being prepared</span></td>
+  <!-- <td><span class="badge badge-warning">Action needed</span></td>
+  <td><span class="badge badge-success">Received</span></td>
+  <td><span class="badge badge-danger">Cancelled</span></td> -->
+  <td>
+    <a href="<%= "/#{locale.to_s}/orders/1" %>" ></a>
+    <%= link_to 'View', admin_order_path(order) %>
+  </td>
+  <td>
+    <%= link_to 'Delete', admin_order_path(order),
+            remote: true,
+            method: :delete,
+            data: { confirm: 'You sure?' },
+            class: "order-#{order.id}" %>
+  </td>
+</tr>
+
