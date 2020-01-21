@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_one :cart, dependent: :destroy
   has_one :wish, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   default_scope { order(id: :asc) }
 

@@ -3,9 +3,13 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include CartsHelper
   include WishesHelper
-  before_action :current_cart, :current_wish
+  before_action :current_cart, :current_wish, :require_admin
   around_action :switch_locale
   helper_method [:recent_products, :last_viewed_product]
+
+  def require_admin
+    redirect_to request.referrer if self.class.parent == Admin && !current_user&.admin?
+  end
 
   def recent_products
     @recent_products ||= RecentProducts.new cookies

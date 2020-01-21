@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="col-2"><span><%= number_to_currency(guest_wish_item.variant.price) %></span></div>
-    <%= link_to guest_wish_item_url(guest_wish_item), method: :delete, data: { confirm: "You sure?" } do %>
+    <%= link_to guest_wish_item_url(guest_wish_item), method: :delete do %>
     <div class="col-1 text-center"><i class="delete fa fa-trash"></i></div>
     <% end %>
   </div>

@@ -148,12 +148,13 @@ ActiveRecord::Schema.define(version: 2019_09_30_020813) do
   end
 
   create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "reviewer"
     t.text "content"
     t.bigint "product_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_reviews_on_product_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -228,6 +229,7 @@ ActiveRecord::Schema.define(version: 2019_09_30_020813) do
   add_foreign_key "order_items", "variants"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
   add_foreign_key "tasks", "projects"
   add_foreign_key "variants", "products"
   add_foreign_key "wish_items", "products"

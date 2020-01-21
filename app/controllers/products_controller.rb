@@ -6,8 +6,8 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @review  = @product.reviews.build
-    @review_items = @product.reviews.page(params[:page]).per(10)
+
+    @review_items = @product.reviews
     recent_products.push @product
     recent_products
   end

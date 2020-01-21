@@ -1,14 +1,16 @@
-<li id="review-<%= review.id %>">
-  <%= link_to gravatar_for(current_user, size: 50), current_user if current_user %>
-  <span class="user"><%= review.reviewer %></span>
-  <span class="content">
-    <%= review.content %>
-  </span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(review.created_at || Time.now) %> ago.
-    <% if current_user.name == review.reviewer %>
+<div class="row review">
+  <div class="col-3 text-center"><%= gravatar_for(review.user, size: 120) %><span class="text-uppercase text-muted text-small"><!-- Dec 2018 -->Posted <%= time_ago_in_words(review.created_at || Time.now) %> ago.</span></div>
+
+  <div class="col-9 review-text">
+    <h6><%= review.user.name %></h6>
+    <div class="mb-2"><i class="fa fa-star text-primary"></i><i class="fa fa-star text-primary"></i><i class="fa fa-star text-primary"></i><i class="fa fa-star text-primary"></i><i class="fa fa-star text-primary"></i>
+    </div>
+    <p class="text-muted text-small">
+      <%= review.content %>
+      <% if current_user == review.user %>
       <%= link_to "delete", [review.product, review], method: :delete,
                                        data: { confirm: "You sure?" } %>
-    <% end if current_user%>
-  </span>
-</li>
+      <% end %>
+    </p>
+  </div>
+</div>
