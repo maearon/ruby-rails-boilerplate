@@ -65,3 +65,5 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 # gem 'countries', '~> 3.0'
 # gem 'tzinfo', '~> 2.0'
 # gem 'money', '~> 6.13', '>= 6.13.6'
+
+gem 'rack-cors'
