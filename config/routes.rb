@@ -5,6 +5,7 @@ scope "(:locale)", locale: /en|de|fr|vi/ do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'password_resets/new'
   get 'password_resets/edit'
+  get 'confirmations/new'
   root   'static_pages#home'
   get    '/help',    to: 'static_pages#help'
   get    '/about',   to: 'static_pages#about'
@@ -22,6 +23,7 @@ scope "(:locale)", locale: /en|de|fr|vi/ do
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :confirmations,     only: [:new, :create]
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   namespace :api, format: "json" do
