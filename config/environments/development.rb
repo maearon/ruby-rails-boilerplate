@@ -44,14 +44,15 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     port: 587,
     domain:  'example.com',
-    user_name: 'manh11117@gmail.com',
-    password:  'Abc@0123456789',
+    user_name: 'mdnvng@gmail.com',
+    password:  'klkuulvoguwpykgf',
     authentication: 'plain',
     enable_starttls_auto: true
   }
 
   # https://myaccount.google.com/lesssecureapps
   # https://accounts.google.com/DisplayUnlockCaptcha
+  # https://support.google.com/mail/answer/185833?hl=en
 
   host = 'localhost:3000'
 
