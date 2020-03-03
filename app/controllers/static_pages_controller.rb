@@ -1,10 +1,11 @@
 class StaticPagesController < ApplicationController
 
   def home
-    if logged_in?
-      @micropost  = current_user.microposts.build
-      @feed_items = current_user.feed.page(params[:page]).per(12)
-    end
+  end
+
+  def detect_locale
+    I18n.locale = extract_locale_from_accept_language_header
+    redirect_to root_path(locale: I18n.locale)
   end
 
   def help
@@ -14,5 +15,11 @@ class StaticPagesController < ApplicationController
   end
 
   def contact
+  end
+
+  private
+
+  def extract_locale_from_accept_language_header
+     request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
   end
 end
