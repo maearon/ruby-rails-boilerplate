@@ -1,12 +1,21 @@
 module ApplicationHelper
   # Returns the full title on a per-page basis.
   def full_title(page_title = '')
-    base_title = "Hub - Bootstrap 4 Ecommerce Template"
+    base_title = "clotheshub #{title_locale(locale.to_s)}"
     if page_title.empty?
       base_title
     else
       page_title + " | " + base_title
     end
+  end
+
+  def title_locale(locale)
+    case locale
+      when "en" then "US"
+      when "de" then "DE"
+      when "fr" then "FR"
+      when "vi" then "VN"
+   end
   end
 
   def flash_classs(message_type)
