@@ -14,7 +14,7 @@ module WishesHelper
     if (guest_wish_id = session[:guest_wish_id])
       if (user_id = session[:user_id])
         # 1
-        current_user.wish.present? ? wish = current_user.wish : wish = Wish.create(user_id: user_id)
+        current_user.reload.wish.present? ? wish = current_user.reload.wish : wish = Wish.create(user_id: user_id)
         guest_wish = GuestWish.find_by(id: guest_wish_id)
         unless guest_wish.guest_wish_items.blank?
           guest_wish.guest_wish_items.each {
@@ -39,7 +39,7 @@ module WishesHelper
     else
       if (user_id = session[:user_id])
         # 3
-        current_user.wish.present? ? wish = current_user.wish : wish = Wish.create(user_id: user_id)
+        current_user.reload.wish.present? ? wish = current_user.reload.wish : wish = Wish.create(user_id: user_id)
         log_in_wish wish
         @wish = wish
       else
