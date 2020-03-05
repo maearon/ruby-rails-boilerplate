@@ -13,8 +13,7 @@ json.products do
     json.currencyId flash_classss(locale.to_s)
     json.currencyFormat I18n.translate('number.currency.format.unit', locale: locale.to_s )
     json.isFreeShipping true
-
-    json.image_url "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"+url_for(product.variants.first.avatar)
+    json.image_url "#{request.ssl? ? 'https' : 'http'}://#{request.env['HTTP_HOST']}"+url_for(product.variants.first.avatar)
 
   end
 end
