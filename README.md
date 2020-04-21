@@ -27,4 +27,7 @@ heroku login
 heroku keys:add
 heroku apps:create clotheshub
 heroku create (create an with a random name)
-git add . && git commit -m upgrade && git push -u heroku master -f && heroku pg:reset && heroku run rails db:migrate && heroku run rails db:seed && heroku open
+git add . && git commit -m upgrade && 
+git push -u heroku master -f && 
+git push heroku api:master (for api branch)
+heroku pg:reset && heroku run rails db:migrate && heroku run rails db:seed && heroku open
