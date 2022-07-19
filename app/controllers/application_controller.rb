@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method [:recent_products, :last_viewed_product]
 
   def require_admin
-    redirect_to request.referrer if self.class.parent == Admin && !current_user&.admin?
+    # redirect_to request.referrer if self.class.parent == Admin && !current_user&.admin?
   end
 
   def recent_products
