@@ -12,7 +12,7 @@
     <%= stylesheet_link_tag "application", media: "all",
                                            "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": true %>
-    <%= javascript_pack_tag "application", "data-turbolinks-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
@@ -42,7 +42,8 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-    <%= render "layouts/shim" %>
+    <%= javascript_importmap_tags %>
+    <%= render 'layouts/shim' %>
   </head>
   <body>
     <!-- navbar-->
