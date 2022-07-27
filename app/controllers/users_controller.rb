@@ -8,11 +8,11 @@ class UsersController < ApplicationController
   before_action :set_user,     except: [:index, :new, :create]
 
   def index
-    @users = User.page(params[:page]).per(12)
+    @users = User.page(params[:page]).per_page(12)
   end
 
   def show
-    @microposts = @user.microposts.page(params[:page]).per(12)
+    @microposts = @user.microposts.page(params[:page]).per_page(12)
   end
 
   def new
@@ -56,14 +56,14 @@ class UsersController < ApplicationController
   def following
     @title = "Following"
     @user  = User.find(params[:id])
-    @users = @user.following.page(params[:page]).per(12)
+    @users = @user.following.page(params[:page]).per_page(12)
     render 'show_follow'
   end
 
   def followers
     @title = "Followers"
     @user  = User.find(params[:id])
-    @users = @user.followers.page(params[:page]).per(12)
+    @users = @user.followers.page(params[:page]).per_page(12)
     render 'show_follow'
   end
 
