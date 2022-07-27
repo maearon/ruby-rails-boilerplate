@@ -58,7 +58,7 @@ class Admin::OrdersController < ApplicationController
     # current_cart.cart(@product, @variant, params[:cart_item][:quantity], params[:cart_item][:action])
     # respond_to do |format|
     #   format.html { redirect_to request.referrer }
-    #   format.js
+    #   format.turbo_stream
     # end
 
 

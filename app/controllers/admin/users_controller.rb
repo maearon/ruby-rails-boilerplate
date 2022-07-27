@@ -32,7 +32,7 @@ class Admin::UsersController < ApplicationController
     def destroy
       @user.destroy
       respond_to do |format|
-        format.js
+        format.turbo_stream
       end
     end
 

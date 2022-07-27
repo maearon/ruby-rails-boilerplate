@@ -49,7 +49,7 @@ class UsersController < ApplicationController
         flash[:success] = 'User successfully deleted!'
         redirect_to users_url
       }
-      format.js
+      format.turbo_stream
     end
   end
 

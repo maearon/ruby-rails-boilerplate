@@ -7,7 +7,7 @@ class GuestCartItemsController < ApplicationController
     current_cart.cart(@product, @variant, params[:guest_cart_item][:quantity], params[:guest_cart_item][:action])
     respond_to do |format|
       format.html { redirect_to request.referrer }
-      format.js
+      format.turbo_stream
     end
   end
 
@@ -26,7 +26,7 @@ class GuestCartItemsController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_to request.referrer }
-      format.js
+      format.turbo_stream
     end
   end
 

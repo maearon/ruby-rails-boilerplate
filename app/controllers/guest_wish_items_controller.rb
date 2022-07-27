@@ -5,7 +5,7 @@ class GuestWishItemsController < ApplicationController
     current_wish.wish(@product, @variant)
     respond_to do |format|
       format.html { redirect_to request.referrer }
-      format.js
+      format.turbo_stream
     end
   end
 
@@ -16,7 +16,7 @@ class GuestWishItemsController < ApplicationController
     current_wish.unwish(@current_item)
     respond_to do |format|
       format.html { redirect_to request.referrer }
-      format.js
+      format.turbo_stream
     end
   end
 end
