@@ -1,6 +1,6 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails/all'
+require "rails/all"
 # Pick the frameworks you want:
 # require "active_model/railtie"
 # require "active_job/railtie"
@@ -22,7 +22,12 @@ Bundler.require(*Rails.groups)
 module SampleApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 7.0
+
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -30,12 +35,21 @@ module SampleApp
     # the framework and any gems in your application.
 
     # Don't generate system test files.
-    config.generators.system_tests = nil
-    config.eager_load_paths << Rails.root.join("lib/cookie_products")
+    # config.generators.system_tests = nil
+    # config.generators do |g|
+    #   g.system_tests = nil
+    #   g.orm :active_record
+    #   g.test_framework :test_unit
+    # end
+
+    #
     # https://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html
+    # config.time_zone = "Central Time (US & Canada)"
     config.time_zone = 'UTC'
     config.active_record.default_timezone = :local
-
+    # config.eager_load_paths << Rails.root.join("extras")
+    config.eager_load_paths << Rails.root.join("lib/cookie_products")
   end
 end
-Rails.application.config.active_record.belongs_to_required_by_default = false
+# Rails.application.config.action_view.form_with_generates_remote_forms = false
+# Rails.application.config.active_record.belongs_to_required_by_default = false

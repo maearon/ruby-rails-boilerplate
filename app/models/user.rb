@@ -43,6 +43,13 @@ class User < ApplicationRecord
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
+    remember_digest
+  end
+
+  # Returns a session token to prevent session hijacking.
+  # We reuse the remember digest for convenience.
+  def session_token
+    remember_digest || remember
   end
 
   # Returns true if the given token matches the digest.
@@ -91,11 +98,12 @@ class User < ApplicationRecord
                      WHERE  follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
+             .includes(:user, image_attachment: :blob)
   end
 
   # Follows a user.
   def follow(other_user)
-    following << other_user
+    following << other_user unless self == other_user
   end
 
   # Unfollows a user.
@@ -110,7 +118,7 @@ class User < ApplicationRecord
 
   private
 
-    # Converts email to all lower-case.
+    # Converts email to all lowercase.
     def downcase_email
       self.email = email.downcase
     end

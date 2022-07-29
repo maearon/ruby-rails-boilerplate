@@ -1,18 +1,17 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
                                         :following, :followers]
+  before_action :set_user,       except: [:index, :new, :create]
   before_action :correct_user,   only: [:edit, :update,
                                         :following, :followers]
-  before_action :admin_user,     only: [:destroy, :index]
-
-  before_action :set_user,     except: [:index, :new, :create]
+  before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.page(params[:page]).per_page(12)
+    @users = User.paginate(page: params[:page])
   end
 
   def show
-    @microposts = @user.microposts.page(params[:page]).per_page(12)
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def new
@@ -26,7 +25,7 @@ class UsersController < ApplicationController
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
     else
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -36,9 +35,10 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = "Profile updated"
-      redirect_to my_account_path
+      # redirect_to my_account_path
+      redirect_to @user
     else
-      render 'edit'
+      render 'edit', status: :unprocessable_entity
     end
   end
 
@@ -46,25 +46,27 @@ class UsersController < ApplicationController
     @user.destroy
     respond_to do |format|
       format.html {
-        flash[:success] = 'User successfully deleted!'
-        redirect_to users_url
+        # flash[:success] = 'User successfully deleted!'
+        flash[:success] = "User deleted"
+        redirect_to users_url, status: :see_other
       }
       format.turbo_stream
-    end
+    end      
+    # redirect_to users_url, status: :see_other
   end
 
   def following
     @title = "Following"
     @user  = User.find(params[:id])
-    @users = @user.following.page(params[:page]).per_page(12)
-    render 'show_follow'
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow', status: :unprocessable_entity
   end
 
   def followers
     @title = "Followers"
     @user  = User.find(params[:id])
-    @users = @user.followers.page(params[:page]).per_page(12)
-    render 'show_follow'
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow', status: :unprocessable_entity
   end
 
   private
@@ -72,6 +74,7 @@ class UsersController < ApplicationController
       params[:id] ||= session[:user_id]
       @user = User.find(params[:id])
     end
+    
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
@@ -84,7 +87,8 @@ class UsersController < ApplicationController
     def correct_user
       params[:id] ||= session[:user_id]
       @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
+      # redirect_to(root_url) unless current_user?(@user)
+      redirect_to(root_url) unless @user == current_user
     end
 
     # Confirms an admin user.

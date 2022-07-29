@@ -1,7 +1,7 @@
 class PasswordResetsController < ApplicationController
   before_action :get_user,         only: [:edit, :update]
   before_action :valid_user,       only: [:edit, :update]
-  before_action :check_expiration, only: [:edit, :update]    # Case (1)
+  before_action :check_expiration, only: [:edit, :update]    # Case 1
 
   def new
   end
@@ -15,7 +15,7 @@ class PasswordResetsController < ApplicationController
       redirect_to root_url
     else
       flash.now[:danger] = "Email address not found"
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -23,16 +23,16 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    if params[:user][:password].empty?                  # Case (3)
+    if params[:user][:password].empty?                  # Case 3
       @user.errors.add(:password, "can't be empty")
-      render 'edit'
-    elsif @user.update(user_params)                     # Case (4)
+      render 'edit', status: :unprocessable_entity
+    elsif @user.update(user_params)                     # Case 4
+      reset_session
       log_in @user
-      remember(user)
       flash[:success] = "Password has been reset."
       redirect_to @user
     else
-      render 'edit'                                     # Case (2)
+      render 'edit', status: :unprocessable_entity      # Case 2
     end
   end
 

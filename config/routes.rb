@@ -14,9 +14,11 @@ scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  get    '/my-account',    to: 'users#show'
-  get    '/my-account/profile' ,    to: 'users#edit'
-  resources :users, except: [:edit] do
+  get    '/my-account',    to: 'users#show'                # tag 1
+  get    '/my-account/order-history' ,    to: 'users#edit' # tag 2
+  get    '/my-account/profile' ,    to: 'orders#index'     # tag 3
+  # resources :users, except: [:edit] do
+  resources :users do
     member do
       get :following, :followers
     end
@@ -26,6 +28,7 @@ scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
   resources :confirmations,     only: [:new, :create]
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
+  get '/microposts', to: 'microposts#home'
   namespace :api, format: "json" do
     namespace :v1 do
       get "users", to: "users#index"
@@ -56,6 +59,22 @@ scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
     resources :users
     resources :products
     resources :orders
+  end
+
+  namespace :api, format: "json" do
+    root   'static_pages#home'
+    resources :sessions,          only: [:index]
+    delete '/logout',             to: 'sessions#destroy'
+    post   '/login',              to: 'sessions#create'
+    resources :users do
+      member do
+        get :following, :followers
+      end
+    end
+    resources :account_activations, only: [:update]
+    resources :password_resets,     only: [:create, :update]
+    resources :microposts,          only: [:create, :destroy]
+    resources :relationships,       only: [:create, :destroy]
   end
 end
 end
