@@ -4,40 +4,40 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.1.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem "rails",                      "7.0.3"
+gem "rails",                      "7.0.3.1"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing",           "1.12.2"
+gem "image_processing"
 # This gems doing it for you. Just use attached: true or content_type: 'image/png' validation.
-gem "active_storage_validations", "0.9.8"
+gem "active_storage_validations"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-gem "bcrypt",                     "3.1.18"
+gem "bcrypt"
 # Create fake data types
-gem "faker",                      "2.21.0"
-gem "will_paginate",              "3.3.1"
-gem "bootstrap-will_paginate",    "1.0.0"
-gem "bootstrap-sass",             "3.4.1"
+gem "faker"
+gem "will_paginate"
+gem "bootstrap-will_paginate"
+gem "bootstrap-sass"
 # Use Sass(not use) OR Scss(using) to process CSS
-gem "sassc-rails",                "2.1.2"
+gem "sassc-rails"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails",            "3.4.2"
+gem "sprockets-rails"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails",            "1.1.0"
+gem "importmap-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails",                "1.1.1"
+gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails",             "1.0.4"
+gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder",                   "2.11.5"
+gem "jbuilder"
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma",                       "5.6.4"
+gem "puma"
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap",                   "1.12.0", require: false
+gem "bootsnap", require: false
 
 group :development, :test do
-  # Use sqlite3 as the database for Active Record
-  gem "sqlite3", "1.4.2"
+  # Use pg as the database for Active Record
+  gem "pg"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug",   "1.5.0", platforms: %i[ mri mingw x64_mingw ]
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
@@ -45,19 +45,19 @@ group :development do
 end
 
 group :test do
-  gem "capybara",                 "3.37.1"
-  gem "selenium-webdriver",       "4.2.0"
-  gem "webdrivers",               "5.0.0"
-  gem "rails-controller-testing", "1.0.5"
-  gem "minitest",                 "5.15.0"
-  gem "minitest-reporters",       "1.5.0"
-  gem "guard",                    "2.18.0"
-  gem "guard-minitest",           "2.4.6"
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "webdrivers"
+  gem "rails-controller-testing"
+  gem "minitest"
+  gem "minitest-reporters"
+  gem "guard"
+  gem "guard-minitest"
 end
 
 group :production do
-  gem "pg",         "1.3.5"
-  gem "aws-sdk-s3", "1.114.0", require: false
+  gem "pg"
+  gem "aws-sdk-s3", require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem.
@@ -79,7 +79,7 @@ end
 # gem 'bootstrap-will_paginate'
 # gem 'bootstrap-sass'
 # gem 'sassc-rails'
-# gem 'mysql2'
+# gem 'pg'
 # gem 'mini_magick'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
