@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# These two are needed to make will_paginate work with AA.
 Kaminari.configure do |config|
   config.default_per_page = 5
   # config.default_per_page = 25
@@ -12,4 +13,13 @@ Kaminari.configure do |config|
   # config.param_name = :page
   # config.max_pages = nil
   # config.params_on_first_page = false
+end
+
+require 'will_paginate/active_record'
+module WillPaginate
+  module ActiveRecord
+    module RelationMethods
+      alias_method :total_count, :count
+    end
+  end
 end
