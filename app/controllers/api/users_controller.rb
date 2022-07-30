@@ -7,7 +7,7 @@ class Api::UsersController < Api::ApiController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.page(params[:page]).per_page(5)
+    @users = User.page(params[:page])
   end
 
   def show

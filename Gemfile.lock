@@ -78,7 +78,7 @@ GEM
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.612.0)
+    aws-partitions (1.613.0)
     aws-sdk-core (3.131.5)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -104,8 +104,6 @@ GEM
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
-    bootstrap-will_paginate (1.0.0)
-      will_paginate
     builder (3.2.4)
     capybara (3.37.1)
       addressable
@@ -344,7 +342,6 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    will_paginate (3.3.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.0)
@@ -359,7 +356,6 @@ DEPENDENCIES
   bcrypt
   bootsnap
   bootstrap-sass
-  bootstrap-will_paginate
   capybara
   cocoon
   debug
@@ -392,7 +388,6 @@ DEPENDENCIES
   turbo-rails
   web-console (= 4.2.0)
   webdrivers
-  will_paginate
 
 RUBY VERSION
    ruby 3.1.2p20

@@ -13,8 +13,8 @@ gem "active_storage_validations"
 gem "bcrypt"
 # Create fake data types
 gem "faker"
-gem "will_paginate"
-gem "bootstrap-will_paginate"
+# gem "will_paginate"
+# gem "bootstrap-will_paginate"
 gem "bootstrap-sass"
 # Use Sass(not use) OR Scss(using) to process CSS
 gem "sassc-rails"
