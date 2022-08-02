@@ -28,6 +28,7 @@ scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
   resources :confirmations,     only: [:new, :create]
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
+  resources :rooms
   get '/microposts', to: 'microposts#home'
   namespace :api, format: "json" do
     namespace :v1 do
