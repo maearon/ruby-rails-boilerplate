@@ -28,6 +28,8 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
+
+gem "hotwire-rails"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma"
 # Reduces boot times through caching; required in config/boot.rb
@@ -66,7 +68,7 @@ end
 # gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem "redis"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem 'kredis'
@@ -106,7 +108,6 @@ gem 'jquery-rails'
 gem 'rack-cors'
 gem 'jwt'
 # gem 'dotenv'
-# gem 'redis'
 # gem 'graphql'
 # gem "graphiql-rails", group: :development
 # gem 'search_object_graphql'
