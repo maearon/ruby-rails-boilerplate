@@ -1,16 +1,18 @@
-<p id="notice" style="color: green"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
-<%= render @room %>
+<%= turbo_stream_from @room %>
 
-<div>
-  <%= link_to "Edit this room", edit_room_path(@room) %> |
-  <%= link_to "Back to rooms", rooms_path %>
+<%= turbo_frame_tag "room" do %>
+  <%= render @room %>
 
-  <%= button_to "Destroy this room", @room, method: :delete %>
-</div>
+  <p>
+    <%= link_to 'Edit', edit_room_path(@room) %> |
+    <%= link_to 'Back', rooms_path, "data-turbo-frame": "_top" %>
+  </p>
+<% end %>
 
 <div id="messages">
   <%= render @room.messages %>
 </div>
 
-<%= link_to "New message", new_room_message_path(@room) %>
+<%= turbo_frame_tag "new_message", src: new_room_message_path(@room), target: "_top" %>
