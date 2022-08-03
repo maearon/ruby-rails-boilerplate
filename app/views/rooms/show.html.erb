@@ -1,4 +1,4 @@
-<p style="color: green"><%= notice %></p>
+<p id="notice" style="color: green"><%= notice %></p>
 
 <%= render @room %>
 
@@ -8,3 +8,9 @@
 
   <%= button_to "Destroy this room", @room, method: :delete %>
 </div>
+
+<div id="messages">
+  <%= render @room.messages %>
+</div>
+
+<%= link_to "New message", new_room_message_path(@room) %>
