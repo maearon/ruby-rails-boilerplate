@@ -33,7 +33,7 @@ module ApplicationHelper
       when "en" then "English"
       when "de" then "German"
       when "fr" then "French"
-      when "vi" then "Vietnamese"
+      when "vi" then "Tiếng Việt"
    end
   end
 
