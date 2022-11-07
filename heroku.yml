@@ -1,0 +1,10 @@
+build:
+  docker:
+    web: Dockerfile
+  config:
+    BUNDLE_INSTALL_ARGS: --jobs 10 --retry=3
+    RAILS_ENV: production
+    # Put extra deps here
+    INSTALL_DEPENDENCIES: curl openssh-server python
+run:
+  web: bundle exec puma -C config/puma.rb

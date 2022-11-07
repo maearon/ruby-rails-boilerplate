@@ -37,7 +37,7 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # Use pg as the database for Active Record
-  gem "pg"
+  # gem "pg"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
@@ -58,7 +58,7 @@ group :test do
 end
 
 group :production do
-  gem "pg"
+  # gem "pg"
   gem "aws-sdk-s3", require: false
 end
 
@@ -81,7 +81,7 @@ gem "redis"
 # gem 'bootstrap-will_paginate'
 # gem 'bootstrap-sass'
 # gem 'sassc-rails'
-# gem 'pg'
+gem 'pg'
 # gem 'mini_magick'
 gem 'kaminari'
 gem 'kaminari-bootstrap'

@@ -1,19 +1,11 @@
 class Api::AccountActivationsController < Api::ApiController
+  before_action :authenticate!, except: %i[update]
 
   def update
     @user = User.find_by(email: params[:email])
-    if @user && !@user.activated? && @user.authenticated?(:activation, params[:id])
-      @user.activate
-      # log_in @user
-      # remember(@user)
-      payload = {user_id: @user.id}
-      @token = encode_token(payload)
-      # render json: { flash: ["success", "Account activated!"] }
-      # redirect_to @user
-      # redirect_to "https://sample-app-nextjs.vercel.app/users/#{@user.id}"
-    else
-      # render json: { flash: ["danger", "Invalid activation link"] }
-      # redirect_to "https://sample-app-nextjs.vercel.app"
-    end
+    response401_with_error(error_message(:invalid_activation_link)) unless @user && !@user.activated? && @user.authenticated?(:activation, params[:id])
+
+    @user.generate_tokens! if @user.activate
+    response200
   end
 end

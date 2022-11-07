@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  include RefreshTokenUpdatable
+  attr_accessor :activation_token, :reset_token
+
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
@@ -26,6 +29,22 @@ class User < ApplicationRecord
   default_scope { order(id: :asc) }
 
   enum admin: { admin: true, user: false }
+
+  attribute :token, :string
+  attribute :token_expiration_at, :string
+  validates :refresh_token, uniqueness: true, allow_nil: true
+  validates_by_type(type: :string, except: %i[email password_digest refresh_token], opt: STRING_VALIDATION)
+
+  def auth?(password)
+    authenticate(password)
+  end
+
+  def generate_tokens!
+    access_token, access_token_expiration_at, refresh_token, refresh_token_expiration_at = Jwt::User::EncodeTokenService.call(id)
+    update_refresh_token!(refresh_token, refresh_token_expiration_at)
+    self.token = access_token
+    self.token_expiration_at = access_token_expiration_at
+  end
 
   # Returns the hash digest of the given string.
   def User.digest(string)

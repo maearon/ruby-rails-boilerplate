@@ -1,35 +1,50 @@
 class Api::SessionsController < Api::ApiController
+  before_action :authenticate!, except: %i[create]
+
   def index
-    if current_user
-      @user = current_user
-      # render json: { user: current_user }
-    else
-      head :ok
-    end
+    @current_user = current_user if current_user
   end
+
   def create
-    @user = User.find_by(email: params[:session][:email].downcase)
-    if @user && @user.authenticate(params[:session][:password])
+    @user = User.find_by(email: auth_params[:email])
+    if @user&.auth?(auth_params[:password])
       if @user.activated?
-        log_in @user
-        params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-        # redirect_back_or user
-        payload = {user_id: @user.id}
-        @token = encode_token(payload)
-        # render json: {
-        #   user: user
-        # }
+        @user.generate_tokens!
       else
-        message  = "Account not activated. "
-        message += "Check your email for the activation link."
-        # render json: { flash: ["warning", message] }
+        response401_with_error(error_message(:not_activated))
       end
     else
-      # render json: { flash: ["danger", "Invalid email/password combination"] }
+      response401_with_error(error_message(:invalid_email_or_password))
     end
   end
+
   def destroy
-    log_out if logged_in?
-    head :ok
+    current_user.revoke_refresh_token!
+    response200
+  end
+
+  def refresh
+    @user = User.find_by(refresh_token: refresh_params[:refresh_token])
+    if @user.present? && (@user.refresh_token_expiration_at&.> Time.current)
+      @user.generate_tokens!
+    else
+      response401_with_error(error_message(:invalid_refresh_token))
+    end
+  end
+
+  def revoke
+    @user = User.find_by(refresh_token: refresh_params[:refresh_token])
+    @user.revoke_refresh_token! if @user.present? && (@user.refresh_token_expiration_at&.> Time.current)
+    response200
+  end
+
+  private
+
+  def auth_params
+    params.require(:auth).permit(:email, :password)
+  end
+
+  def refresh_params
+    params.require(:auth).permit(:refresh_token)
   end
 end

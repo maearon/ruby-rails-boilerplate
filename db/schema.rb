@@ -192,6 +192,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_020815) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.string "refresh_token"
+    t.datetime "refresh_token_expiration_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
@@ -202,7 +204,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_020815) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.index ["email"], name: "index_admin_users_email_uniqueness", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["refresh_token"], name: "index_admin_users_refresh_token_uniqueness", unique: true
   end
 
   create_table "variants", force: :cascade do |t|

@@ -1,7 +1,3 @@
-json.user do
-  json.extract! @user, :id, :email, :name
-  json.role @user.admin
-end
 json.tokens do
   json.access do
     json.token @user.token
