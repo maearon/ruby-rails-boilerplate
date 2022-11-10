@@ -2,6 +2,9 @@ class Api::SessionsController < Api::ApiController
   before_action :authenticate!, except: %i[create]
 
   def index
+    # binding.b
+    # sudo docker ps
+    # sudo docker attach 32b385027bd8
     @current_user = current_user if current_user
   end
 

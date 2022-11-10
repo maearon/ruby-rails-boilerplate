@@ -18,6 +18,7 @@ scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
   get    '/my-account/order-history' ,    to: 'users#edit' # tag 2
   get    '/my-account/profile' ,    to: 'orders#index'     # tag 3
   # resources :users, except: [:edit] do
+  # mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   resources :users do
     member do
       get :following, :followers

@@ -31,7 +31,7 @@ class Jwt::User::EncodeTokenService
 
   def encode_token(type)
     payload = jwt_claims.merge(user_claims, {type: type})
-    JWT.encode(payload, Rails.application.credentials.secret_key_base, ALGORITHM, { typ: 'JWT' }) # ALGORITHM = HS256
+    JWT.encode(payload, Rails.application.credentials[:secret_key_base], ALGORITHM, { typ: 'JWT' }) # ALGORITHM = HS256
   end
 
   def jwt_claims

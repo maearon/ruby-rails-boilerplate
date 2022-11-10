@@ -15,7 +15,7 @@ class Jwt::User::DecodeTokenService
   attr_reader :auth_header
 
   def id_from_claim
-    decoded_token[0].fetch('rails_boilerplate_user_claim').fetch('id') if decoded_token
+    decoded_token[0].fetch('sub') if decoded_token
   end
 
   def decoded_token
@@ -32,9 +32,9 @@ class Jwt::User::DecodeTokenService
 
   def jwt_claims
     {
-      iss: ISS, verify_iss: true,
-      sub: SUB, verify_sub: true,
-      aud: AUD, verify_aud: true,
+      # iss: ISS, verify_iss: true,
+      # sub: SUB, verify_sub: true,
+      # aud: AUD, verify_aud: true,
       algorithm: ALGORITHM
     }
   end
