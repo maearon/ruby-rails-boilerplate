@@ -44,7 +44,7 @@ class Api::SessionsController < Api::ApiController
   private
 
   def auth_params
-    params.require(:auth).permit(:email, :password)
+    params.require(:session).permit(:email, :password)
   end
 
   def refresh_params

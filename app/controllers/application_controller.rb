@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception,
-    if: Proc.new { |c| c.request.format =~ %r{application/json} }
+  protect_from_forgery with: :exception, if: -> { request.format.json? }
   include SessionsHelper
   include CartsHelper
   include WishesHelper

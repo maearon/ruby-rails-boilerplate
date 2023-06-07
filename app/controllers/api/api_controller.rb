@@ -1,6 +1,9 @@
 class Api::ApiController < ActionController::API
   include ResponsesHandler
   include ErrorsHandler
+  include ActionController::RequestForgeryProtection
+
+  protect_from_forgery with: :exception
   
   skip_before_action :verify_authenticity_token
   before_action :authenticate!
