@@ -17,22 +17,19 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: postgres
-  username: postgres
-  password: password
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: rails_boilerplate_development
+  database: ruby_rails_boilerplate_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: rails_boilerplate
+  #username: ruby_rails_boilerplate
 
   # The password associated with the postgres role (username).
   #password:
@@ -60,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: rails_boilerplate_test
+  database: ruby_rails_boilerplate_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -84,9 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: rails_boilerplate_production
-  # username: rails_boilerplate
-  # password: <%= ENV["RAILS_BOILERPLATE_DATABASE_PASSWORD"] %>
-  host: <%= ENV.fetch("DB_HOST", "db") %>
-  username: <%= ENV.fetch("DB_USERNAME", "postgres") %>
-  password: <%= ENV.fetch("DB_PASSWORD", "password") %>
+  database: ruby_rails_boilerplate_production
+  username: ruby_rails_boilerplate
+  password: <%= ENV["RUBY_RAILS_BOILERPLATE_DATABASE_PASSWORD"] %>

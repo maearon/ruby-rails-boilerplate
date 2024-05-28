@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.1.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem "rails",                      "7.0.3.1"
+gem "rails",                      "7.0.4"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing"
 # This gems doing it for you. Just use attached: true or content_type: 'image/png' validation.
@@ -83,7 +83,7 @@ gem "redis"
 # gem 'bootstrap-will_paginate'
 # gem 'bootstrap-sass'
 # gem 'sassc-rails'
-gem 'pg'
+gem "pg", "~> 1.1"
 # gem 'mini_magick'
 gem 'kaminari'
 gem 'kaminari-bootstrap'

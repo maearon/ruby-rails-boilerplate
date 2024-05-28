@@ -1,4 +1,4 @@
-json.user do
-  json.extract! @user, :id, :email, :name
-  json.role @user.admin
+json.microposts do
+  json.array! @microposts
 end
+json.total_count @total

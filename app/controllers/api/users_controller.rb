@@ -5,8 +5,13 @@ class Api::UsersController < Api::ApiController
   before_action :admin_user,     only: %i[destroy]
 
   def index
-    users = User.all.order(id: :asc)
-    @total, @users = pager(users)
+    @users = User.all.page(params[:page])
+    @total, users = pager(User.all.order(id: :asc))
+  end
+
+  def show
+    @microposts = @user.microposts.page(params[:page])
+    @total, microposts = pager(@user.microposts.order(id: :asc))
   end
 
   def create
