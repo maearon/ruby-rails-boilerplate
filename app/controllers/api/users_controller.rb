@@ -12,6 +12,8 @@ class Api::UsersController < Api::ApiController
   def show
     @microposts = @user.microposts.page(params[:page])
     @total, microposts = pager(@user.microposts.order(id: :asc))
+    @current_user = current_user if current_user
+    # binding.b
   end
 
   def create

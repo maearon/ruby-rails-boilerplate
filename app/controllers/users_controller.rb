@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def show
     @microposts = @user.microposts.page(params[:page])
+    @current_user = current_user if current_user
   end
 
   def new
