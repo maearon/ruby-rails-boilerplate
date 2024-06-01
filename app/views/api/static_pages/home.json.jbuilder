@@ -11,7 +11,7 @@ json.feed_items do
   end
 end
 json.total_count @feed_items.total_count
-json.following current_user.following.count
-json.followers current_user.followers.count
-json.micropost current_user.microposts.count
-json.gravatar Digest::MD5::hexdigest(current_user.email.downcase)
+json.following @current_user.following.count
+json.followers @current_user.followers.count
+json.micropost @current_user.microposts.count
+json.gravatar Digest::MD5::hexdigest(@current_user.email.downcase)
