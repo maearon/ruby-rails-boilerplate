@@ -8,8 +8,8 @@ class ProductsController < ApplicationController
   def show
 
     @review_items = @product.reviews
-    recent_products.push @product
-    recent_products
+    # recent_products.push @product
+    # recent_products
   end
 
   private

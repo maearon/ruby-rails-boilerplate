@@ -5,18 +5,18 @@ class ApplicationController < ActionController::Base
   include WishesHelper
   before_action :current_cart, :current_wish, :require_admin
   around_action :switch_locale
-  helper_method [:recent_products, :last_viewed_product]
+  # helper_method [:recent_products, :last_viewed_product]
 
   def require_admin
     # redirect_to request.referrer if self.class.parent == Admin && !current_user&.admin?
   end
 
   def recent_products
-    @recent_products ||= RecentProducts.new cookies
+    # @recent_products ||= RecentProducts.new cookies
   end
 
   def last_viewed_product
-    recent_products.reverse.second
+    # recent_products.reverse.second
   end
 
   private

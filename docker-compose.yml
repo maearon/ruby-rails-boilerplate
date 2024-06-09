@@ -18,8 +18,7 @@ services:
       - postgres
     environment:
       DATABASE_URL: postgres://postgres:password@5432:5432/rails_boilerplate_development
-    environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      POSTGRES_HOST_AUTH_METHOD: trust
     stdin_open: true
     tty: true
 

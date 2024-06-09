@@ -9,6 +9,7 @@ class StaticPagesController < ApplicationController
     if logged_in?
       @micropost  = current_user.microposts.build
       @feed_items = current_user.feed.page(params[:page])
+      # @recent_products = recent_products.fetch_recent_products
     end
   end
 

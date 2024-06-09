@@ -55,23 +55,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
-    origins 'https://railstutorialreact.herokuapp.com'
-
-    resource '*',
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
-  end
-
-  allow do
-    origins 'https://boiling-depths-89533.herokuapp.com'
-
-    resource '*',
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
-  end
-
-  allow do
-    origins 'https://sample-app-nextjs.vercel.app'
+    origins 'https://funny-movies-pied.vercel.app/'
 
     resource '*',
       headers: :any,
