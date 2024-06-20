@@ -6,11 +6,12 @@ class Api::SessionsController < Api::ApiController
     # sudo docker ps
     # sudo docker attach 32b385027bd8
     @current_user = current_user if current_user
+    @current_user_token = current_user_token if current_user_token
   end
 
   def create
-    @user = User.find_by(email: auth_params[:email])
-    if @user&.auth?(auth_params[:password])
+    @user = User.find_by(email: session_params[:email])
+    if @user&.auth?(session_params[:password])
       if @user.activated?
         @user.generate_tokens!
       else
@@ -43,8 +44,8 @@ class Api::SessionsController < Api::ApiController
 
   private
 
-  def auth_params
-    params.require(:session).permit(:email, :password)
+  def session_params
+    params.require(:session).permit(:email, :password, :remember_me)
   end
 
   def refresh_params

@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
-  before_create :create_activation_digest
+  # before_create :create_activation_digest
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
@@ -21,10 +21,6 @@ class User < ApplicationRecord
                     uniqueness: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  has_one :cart, dependent: :destroy
-  has_one :wish, dependent: :destroy
-  has_many :orders, dependent: :destroy
-  has_many :reviews, dependent: :destroy
 
   default_scope { order(id: :asc) }
 
@@ -34,6 +30,10 @@ class User < ApplicationRecord
   attribute :token_expiration_at, :string
   validates :refresh_token, uniqueness: true, allow_nil: true
   validates_by_type(type: :string, except: %i[email password_digest refresh_token], opt: STRING_VALIDATION)
+  has_one :cart, dependent: :destroy
+  has_one :wish, dependent: :destroy
+  has_many :orders, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   def auth?(password)
     authenticate(password)
@@ -94,6 +94,13 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
+  # Sets the email activation attributes.
+  def create_activation_digest
+    self.activation_token = User.new_token
+    update_attribute(:activation_digest,  User.digest(activation_token))
+    # update_attribute(:activation_sent_at, Time.zone.now)
+  end
+
   # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token
@@ -143,8 +150,8 @@ class User < ApplicationRecord
     end
 
     # Creates and assigns the activation token and digest.
-    def create_activation_digest
-      self.activation_token  = User.new_token
-      self.activation_digest = User.digest(activation_token)
-    end
+    # def create_activation_digest
+    #   self.activation_token  = User.new_token
+    #   self.activation_digest = User.digest(activation_token)
+    # end
 end

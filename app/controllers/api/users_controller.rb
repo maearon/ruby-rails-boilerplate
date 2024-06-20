@@ -18,8 +18,8 @@ class Api::UsersController < Api::ApiController
 
   def create
     @user = User.new(user_params)
-
     if @user.save
+      @user.create_activation_digest
       @user.send_activation_email
     else
       response422_with_error(@user.errors.messages)
@@ -28,7 +28,7 @@ class Api::UsersController < Api::ApiController
 
   def update
     if @user.update(user_params)
-      @user.unactivate if @user.saved_change_to_email? && @user.send_activation_email
+      # @user.unactivate if @user.saved_change_to_email? && @user.send_activation_email
       response200
     else
       response422_with_error(@user.errors.messages)
