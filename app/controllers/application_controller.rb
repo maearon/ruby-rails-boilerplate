@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include CartsHelper
   include WishesHelper
   before_action :current_cart, :current_wish, :require_admin
+  before_action :set_current_cart, :set_current_wish
   around_action :switch_locale
   # helper_method [:recent_products, :last_viewed_product]
 
@@ -20,6 +21,14 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+    def set_current_cart
+      @current_cart = current_cart
+    end
+
+    def set_current_wish
+      @current_wish = current_wish
+    end
 
     def switch_locale(&action)
       locale = params[:locale] || I18n.default_locale
