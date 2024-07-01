@@ -17,9 +17,8 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://postgres:password@5432:5432/rails_boilerplate_production
-    environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      DATABASE_URL: postgres://postgres:password@5432:5432/api_production
+      POSTGRES_HOST_AUTH_METHOD: trust
     stdin_open: true
     tty: true
 

@@ -30,4 +30,8 @@ class Api::ApiController < ActionController::API
     user_id = Jwt::User::DecodeTokenService.call(request.headers['Authorization'])
     User.find_by(id: user_id) if user_id
   end
+
+  def current_user_token
+    request.headers['Authorization']&.split[1]
+  end
 end
