@@ -26,6 +26,9 @@ class Api::UsersController < Api::ApiController
     end
   end
 
+  def edit
+  end
+
   def update
     if @user.update(user_params)
       # @user.unactivate if @user.saved_change_to_email? && @user.send_activation_email
