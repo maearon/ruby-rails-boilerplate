@@ -12,7 +12,7 @@ json.xusers do
     json.id u.id
     json.name u.name
     json.gravatar_id Digest::MD5::hexdigest(u.email.downcase)
-    json.size 50
+    json.size 30
   end
 end
 json.user do

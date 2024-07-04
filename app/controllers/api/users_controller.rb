@@ -47,12 +47,14 @@ class Api::UsersController < Api::ApiController
     @title = "Following"
     @user  = User.find(params[:id])
     @users = @user.following.page(params[:page])
+    @xusers = @user.following
   end
 
   def followers
     @title = "Followers"
     @user  = User.find(params[:id])
     @users = @user.followers.page(params[:page])
+    @xusers = @user.followers
   end
 
   private
