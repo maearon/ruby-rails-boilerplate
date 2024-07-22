@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_09_30_020815) do
+ActiveRecord::Schema[7.1].define(version: 0) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "MediaType", ["IMAGE", "VIDEO"]
+  create_enum "NotificationType", ["LIKE", "FOLLOW", "COMMENT"]
+
+  create_table "_prisma_migrations", id: { type: :string, limit: 36 }, force: :cascade do |t|
+    t.string "checksum", limit: 64, null: false
+    t.timestamptz "finished_at"
+    t.string "migration_name", limit: 255, null: false
+    t.text "logs"
+    t.timestamptz "rolled_back_at"
+    t.timestamptz "started_at", default: -> { "now()" }, null: false
+    t.integer "applied_steps_count", default: 0, null: false
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -42,6 +57,13 @@ ActiveRecord::Schema[7.1].define(version: 2022_09_30_020815) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bookmarks", id: :text, force: :cascade do |t|
+    t.text "userId", null: false
+    t.text "postId", null: false
+    t.datetime "createdAt", precision: 3, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["userId", "postId"], name: "bookmarks_userId_postId_key", unique: true
+  end
+
   create_table "cart_items", force: :cascade do |t|
     t.integer "quantity"
     t.bigint "cart_id", null: false
@@ -54,11 +76,17 @@ ActiveRecord::Schema[7.1].define(version: 2022_09_30_020815) do
     t.index ["variant_id"], name: "index_cart_items_on_variant_id"
   end
 
-  create_table "carts", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_carts_on_user_id"
+  create_table "comments", id: :text, force: :cascade do |t|
+    t.text "content", null: false
+    t.text "userId", null: false
+    t.text "postId", null: false
+    t.datetime "createdAt", precision: 3, default: -> { "CURRENT_TIMESTAMP" }, null: false
+  end
+
+  create_table "follows", id: false, force: :cascade do |t|
+    t.text "followerId", null: false
+    t.text "followingId", null: false
+    t.index ["followerId", "followingId"], name: "follows_followerId_followingId_key", unique: true
   end
 
   create_table "guest_cart_items", force: :cascade do |t|
@@ -94,6 +122,12 @@ ActiveRecord::Schema[7.1].define(version: 2022_09_30_020815) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "likes", id: false, force: :cascade do |t|
+    t.text "userId", null: false
+    t.text "postId", null: false
+    t.index ["userId", "postId"], name: "likes_userId_postId_key", unique: true
+  end
+
   create_table "messages", force: :cascade do |t|
     t.bigint "room_id", null: false
     t.text "content"
@@ -109,6 +143,15 @@ ActiveRecord::Schema[7.1].define(version: 2022_09_30_020815) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "notifications", id: :text, force: :cascade do |t|
+    t.text "recipientId", null: false
+    t.text "issuerId", null: false
+    t.text "postId"
+    t.enum "type", null: false, enum_type: ""NotificationType""
+    t.boolean "read", default: false, null: false
+    t.datetime "createdAt", precision: 3, default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -128,6 +171,19 @@ ActiveRecord::Schema[7.1].define(version: 2022_09_30_020815) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "post_media", id: :text, force: :cascade do |t|
+    t.text "postId"
+    t.enum "type", null: false, enum_type: ""MediaType""
+    t.text "url", null: false
+    t.datetime "createdAt", precision: 3, default: -> { "CURRENT_TIMESTAMP" }, null: false
+  end
+
+  create_table "posts", id: :text, force: :cascade do |t|
+    t.text "content", null: false
+    t.text "userId", null: false
+    t.datetime "createdAt", precision: 3, default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
   create_table "products", force: :cascade do |t|
@@ -180,6 +236,11 @@ ActiveRecord::Schema[7.1].define(version: 2022_09_30_020815) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sessions", id: :text, force: :cascade do |t|
+    t.text "userId", null: false
+    t.datetime "expiresAt", precision: 3, null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "description"
     t.boolean "done"
@@ -189,14 +250,21 @@ ActiveRecord::Schema[7.1].define(version: 2022_09_30_020815) do
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :text, force: :cascade do |t|
     t.string "name"
+    t.text "username", null: false
+    t.text "displayName", null: false
     t.string "email"
     t.string "refresh_token"
     t.datetime "refresh_token_expiration_at"
     t.datetime "created_at", null: false
+    t.datetime "createdAt", precision: 3, default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.text "passwordHash"
+    t.text "googleId"
+    t.text "avatarUrl"
+    t.text "bio"
     t.string "remember_digest"
     t.boolean "admin", default: false
     t.string "activation_digest"
@@ -205,8 +273,9 @@ ActiveRecord::Schema[7.1].define(version: 2022_09_30_020815) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.index ["email"], name: "index_admin_users_email_uniqueness", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["googleId"], name: "users_googleId_key", unique: true
     t.index ["refresh_token"], name: "index_admin_users_refresh_token_uniqueness", unique: true
+    t.index ["username"], name: "users_username_key", unique: true
   end
 
   create_table "variants", force: :cascade do |t|
@@ -241,28 +310,36 @@ ActiveRecord::Schema[7.1].define(version: 2022_09_30_020815) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "cart_items", "carts"
+  add_foreign_key "bookmarks", "posts", column: "postId", name: "bookmarks_postId_fkey", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "bookmarks", "users", column: "userId", name: "bookmarks_userId_fkey", on_update: :cascade, on_delete: :cascade
   add_foreign_key "cart_items", "products"
   add_foreign_key "cart_items", "variants"
-  add_foreign_key "carts", "users"
+  add_foreign_key "comments", "posts", column: "postId", name: "comments_postId_fkey", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "comments", "users", column: "userId", name: "comments_userId_fkey", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "follows", "users", column: "followerId", name: "follows_followerId_fkey", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "follows", "users", column: "followingId", name: "follows_followingId_fkey", on_update: :cascade, on_delete: :cascade
   add_foreign_key "guest_cart_items", "guest_carts"
   add_foreign_key "guest_cart_items", "products"
   add_foreign_key "guest_cart_items", "variants"
   add_foreign_key "guest_wish_items", "guest_wishes"
   add_foreign_key "guest_wish_items", "products"
   add_foreign_key "guest_wish_items", "variants"
+  add_foreign_key "likes", "posts", column: "postId", name: "likes_postId_fkey", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "likes", "users", column: "userId", name: "likes_userId_fkey", on_update: :cascade, on_delete: :cascade
   add_foreign_key "messages", "rooms"
-  add_foreign_key "microposts", "users"
+  add_foreign_key "notifications", "posts", column: "postId", name: "notifications_postId_fkey", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "notifications", "users", column: "issuerId", name: "notifications_issuerId_fkey", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "notifications", "users", column: "recipientId", name: "notifications_recipientId_fkey", on_update: :cascade, on_delete: :cascade
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "order_items", "variants"
-  add_foreign_key "orders", "users"
+  add_foreign_key "post_media", "posts", column: "postId", name: "post_media_postId_fkey", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "posts", "users", column: "userId", name: "posts_userId_fkey", on_update: :cascade, on_delete: :cascade
   add_foreign_key "reviews", "products"
-  add_foreign_key "reviews", "users"
+  add_foreign_key "sessions", "users", column: "userId", name: "sessions_userId_fkey", on_update: :cascade, on_delete: :cascade
   add_foreign_key "tasks", "projects"
   add_foreign_key "variants", "products"
   add_foreign_key "wish_items", "products"
   add_foreign_key "wish_items", "variants"
   add_foreign_key "wish_items", "wishes"
-  add_foreign_key "wishes", "users"
 end

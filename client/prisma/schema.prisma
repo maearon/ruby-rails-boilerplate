@@ -1,0 +1,538 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  // id                          BigInt       @id @default(autoincrement())
+  id                    String         @id
+  name                        String?      @db.VarChar
+  username              String         @unique
+  displayName           String
+  email                       String?      @unique(map: "index_admin_users_email_uniqueness") @db.VarChar
+  refresh_token               String?      @unique(map: "index_admin_users_refresh_token_uniqueness") @db.VarChar
+  refresh_token_expiration_at DateTime?    @db.Timestamp(6)
+  created_at                  DateTime     @db.Timestamp(6)
+  createdAt DateTime @default(now())
+  updated_at                  DateTime     @db.Timestamp(6)
+  password_digest             String?      @db.VarChar
+  passwordHash          String?
+  googleId              String?        @unique
+  avatarUrl             String?
+  bio                   String?
+  remember_digest             String?      @db.VarChar
+  admin                       Boolean?     @default(false)
+  activation_digest           String?      @db.VarChar
+  activated                   Boolean?     @default(false)
+  activated_at                DateTime?    @db.Timestamp(6)
+  reset_digest                String?      @db.VarChar
+  reset_sent_at               DateTime?    @db.Timestamp(6)
+  // carts                       carts[]
+  // microposts                  microposts[]
+  // orders                      orders[]
+  // reviews                     reviews[]
+  sessions                    Session[]
+  // wishes                      wishes[]
+  posts                 Post[]
+  following             Follow[]       @relation("Following")
+  followers             Follow[]       @relation("Followers")
+  likes                 Like[]
+  bookmarks             Bookmark[]
+  comments              Comment[]
+  receivedNotifications Notification[] @relation("Recipient")
+  issuedNotifications   Notification[] @relation("Issuer")
+
+  @@map("users")
+}
+
+// model User {
+//   id                    String         @id
+//   username              String         @unique
+//   displayName           String
+//   email                 String?        @unique
+//   passwordHash          String?
+//   googleId              String?        @unique
+//   avatarUrl             String?
+//   bio                   String?
+//   sessions              Session[]
+//   posts                 Post[]
+//   following             Follow[]       @relation("Following")
+//   followers             Follow[]       @relation("Followers")
+//   likes                 Like[]
+//   bookmarks             Bookmark[]
+//   comments              Comment[]
+//   receivedNotifications Notification[] @relation("Recipient")
+//   issuedNotifications   Notification[] @relation("Issuer")
+
+//   createdAt DateTime @default(now())
+
+//   @@map("users")
+// }
+
+// model Session {
+//   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.VarChar
+//   expiresAt DateTime @db.Timestamp(6)
+//   userId    BigInt
+//   user      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_cb343d5f27")
+
+//   @@map("sessions")
+// }
+
+model active_storage_attachments {
+  id                   BigInt               @id @default(autoincrement())
+  name                 String               @db.VarChar
+  record_type          String               @db.VarChar
+  record_id            BigInt
+  blob_id              BigInt
+  created_at           DateTime             @db.Timestamp(6)
+  active_storage_blobs active_storage_blobs @relation(fields: [blob_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_c3b3935057")
+
+  @@unique([record_type, record_id, name, blob_id], map: "index_active_storage_attachments_uniqueness")
+  @@index([blob_id], map: "index_active_storage_attachments_on_blob_id")
+}
+
+model active_storage_blobs {
+  id                             BigInt                           @id @default(autoincrement())
+  key                            String                           @unique(map: "index_active_storage_blobs_on_key") @db.VarChar
+  filename                       String                           @db.VarChar
+  content_type                   String?                          @db.VarChar
+  metadata                       String?
+  service_name                   String                           @db.VarChar
+  byte_size                      BigInt
+  checksum                       String?                          @db.VarChar
+  created_at                     DateTime                         @db.Timestamp(6)
+  active_storage_attachments     active_storage_attachments[]
+  active_storage_variant_records active_storage_variant_records[]
+}
+
+model active_storage_variant_records {
+  id                   BigInt               @id @default(autoincrement())
+  blob_id              BigInt
+  variation_digest     String               @db.VarChar
+  active_storage_blobs active_storage_blobs @relation(fields: [blob_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_993965df05")
+
+  @@unique([blob_id, variation_digest], map: "index_active_storage_variant_records_uniqueness")
+}
+
+model ar_internal_metadata {
+  key        String   @id @db.VarChar
+  value      String?  @db.VarChar
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+}
+
+model cart_items {
+  id         BigInt   @id @default(autoincrement())
+  quantity   Int?
+  cart_id    BigInt
+  product_id BigInt
+  variant_id BigInt
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  variants   variants @relation(fields: [variant_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_5e1fd37f08")
+  products   products @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_681a180e84")
+  // carts      carts    @relation(fields: [cart_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_6cdb1f0139")
+
+  @@index([cart_id], map: "index_cart_items_on_cart_id")
+  @@index([product_id], map: "index_cart_items_on_product_id")
+  @@index([variant_id], map: "index_cart_items_on_variant_id")
+}
+
+// model carts {
+//   id         BigInt       @id @default(autoincrement())
+//   user_id    BigInt
+//   created_at DateTime     @db.Timestamp(6)
+//   updated_at DateTime     @db.Timestamp(6)
+//   cart_items cart_items[]
+//   users      User         @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_ea59a35211")
+
+//   @@index([user_id], map: "index_carts_on_user_id")
+// }
+
+model guest_cart_items {
+  id            BigInt      @id @default(autoincrement())
+  quantity      Int?
+  guest_cart_id BigInt
+  product_id    BigInt
+  variant_id    BigInt
+  created_at    DateTime    @db.Timestamp(6)
+  updated_at    DateTime    @db.Timestamp(6)
+  guest_carts   guest_carts @relation(fields: [guest_cart_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_3bdfea312e")
+  products      products    @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_4ba9457f5f")
+  variants      variants    @relation(fields: [variant_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_603cdced22")
+
+  @@index([guest_cart_id], map: "index_guest_cart_items_on_guest_cart_id")
+  @@index([product_id], map: "index_guest_cart_items_on_product_id")
+  @@index([variant_id], map: "index_guest_cart_items_on_variant_id")
+}
+
+model guest_carts {
+  id               BigInt             @id @default(autoincrement())
+  created_at       DateTime           @db.Timestamp(6)
+  updated_at       DateTime           @db.Timestamp(6)
+  guest_cart_items guest_cart_items[]
+}
+
+model guest_wish_items {
+  id            BigInt       @id @default(autoincrement())
+  guest_wish_id BigInt
+  product_id    BigInt
+  variant_id    BigInt
+  created_at    DateTime     @db.Timestamp(6)
+  updated_at    DateTime     @db.Timestamp(6)
+  variants      variants     @relation(fields: [variant_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_5004853ca5")
+  guest_wishes  guest_wishes @relation(fields: [guest_wish_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_df1d3a30db")
+  products      products     @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_ed1f2f0948")
+
+  @@index([guest_wish_id], map: "index_guest_wish_items_on_guest_wish_id")
+  @@index([product_id], map: "index_guest_wish_items_on_product_id")
+  @@index([variant_id], map: "index_guest_wish_items_on_variant_id")
+}
+
+model guest_wishes {
+  id               BigInt             @id @default(autoincrement())
+  created_at       DateTime           @db.Timestamp(6)
+  updated_at       DateTime           @db.Timestamp(6)
+  guest_wish_items guest_wish_items[]
+}
+
+model messages {
+  id         BigInt   @id @default(autoincrement())
+  room_id    BigInt
+  content    String?
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  rooms      rooms    @relation(fields: [room_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_a8db0fb63a")
+
+  @@index([room_id], map: "index_messages_on_room_id")
+}
+
+model microposts {
+  id         BigInt   @id @default(autoincrement())
+  content    String?
+  user_id    BigInt
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  // users      User     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_558c81314b")
+
+  @@index([user_id], map: "index_microposts_on_user_id")
+  @@index([user_id, created_at], map: "index_microposts_on_user_id_and_created_at")
+}
+
+model order_items {
+  id         BigInt   @id @default(autoincrement())
+  quantity   Int?
+  order_id   BigInt
+  product_id BigInt
+  variant_id BigInt
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  variants   variants @relation(fields: [variant_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_476172d337")
+  orders     orders   @relation(fields: [order_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_e3cb28f071")
+  products   products @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_f1a29ddd47")
+
+  @@index([order_id], map: "index_order_items_on_order_id")
+  @@index([product_id], map: "index_order_items_on_product_id")
+  @@index([variant_id], map: "index_order_items_on_variant_id")
+}
+
+model orders {
+  id          BigInt        @id @default(autoincrement())
+  user_id     BigInt
+  created_at  DateTime      @db.Timestamp(6)
+  updated_at  DateTime      @db.Timestamp(6)
+  order_items order_items[]
+  // users       User          @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_f868b47f6a")
+
+  @@index([user_id], map: "index_orders_on_user_id")
+}
+
+model products {
+  id               BigInt             @id @default(autoincrement())
+  name             String?            @db.VarChar
+  jan_code         String?            @db.VarChar
+  gender           String?            @db.VarChar
+  franchise        String?            @db.VarChar
+  producttype      String?            @db.VarChar
+  brand            String?            @db.VarChar
+  category         String?            @db.VarChar
+  sport            String?            @db.VarChar
+  description_h5   String?
+  description_p    String?
+  specifications   String?
+  care             String?
+  created_at       DateTime           @db.Timestamp(6)
+  updated_at       DateTime           @db.Timestamp(6)
+  cart_items       cart_items[]
+  guest_cart_items guest_cart_items[]
+  guest_wish_items guest_wish_items[]
+  order_items      order_items[]
+  reviews          reviews[]
+  variants         variants[]
+  wish_items       wish_items[]
+}
+
+model projects {
+  id          BigInt   @id @default(autoincrement())
+  name        String?  @db.VarChar
+  description String?  @db.VarChar
+  created_at  DateTime @db.Timestamp(6)
+  updated_at  DateTime @db.Timestamp(6)
+  tasks       tasks[]
+}
+
+model relationships {
+  id          BigInt   @id @default(autoincrement())
+  follower_id Int?
+  followed_id Int?
+  created_at  DateTime @db.Timestamp(6)
+  updated_at  DateTime @db.Timestamp(6)
+
+  @@unique([follower_id, followed_id], map: "index_relationships_on_follower_id_and_followed_id")
+  @@index([followed_id], map: "index_relationships_on_followed_id")
+  @@index([follower_id], map: "index_relationships_on_follower_id")
+}
+
+model reviews {
+  id         BigInt   @id @default(autoincrement())
+  content    String?
+  product_id BigInt
+  user_id    BigInt
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  // users      User     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_74a66bd6c5")
+  products   products @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_bedd9094d4")
+
+  @@index([product_id], map: "index_reviews_on_product_id")
+  @@index([user_id], map: "index_reviews_on_user_id")
+}
+
+model rooms {
+  id         BigInt     @id @default(autoincrement())
+  name       String?    @db.VarChar
+  created_at DateTime   @db.Timestamp(6)
+  updated_at DateTime   @db.Timestamp(6)
+  messages   messages[]
+}
+
+model schema_migrations {
+  version String @id @db.VarChar
+}
+
+model tasks {
+  id          BigInt    @id @default(autoincrement())
+  description String?   @db.VarChar
+  done        Boolean?
+  project_id  BigInt?
+  created_at  DateTime  @db.Timestamp(6)
+  updated_at  DateTime  @db.Timestamp(6)
+  projects    projects? @relation(fields: [project_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_02e851e3b7")
+
+  @@index([project_id], map: "index_tasks_on_project_id")
+}
+
+model variants {
+  id               BigInt             @id @default(autoincrement())
+  color            String?            @db.VarChar
+  price            Float?
+  originalprice    Float?
+  sku              String?
+  stock            Int?
+  product_id       BigInt
+  created_at       DateTime           @db.Timestamp(6)
+  updated_at       DateTime           @db.Timestamp(6)
+  cart_items       cart_items[]
+  guest_cart_items guest_cart_items[]
+  guest_wish_items guest_wish_items[]
+  order_items      order_items[]
+  products         products           @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_19f8efee69")
+  wish_items       wish_items[]
+
+  @@index([product_id], map: "index_variants_on_product_id")
+}
+
+model wish_items {
+  id         BigInt   @id @default(autoincrement())
+  wish_id    BigInt
+  product_id BigInt
+  variant_id BigInt
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  variants   variants @relation(fields: [variant_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_5fe4dae293")
+  wishes     wishes   @relation(fields: [wish_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_6357d5ef81")
+  products   products @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_f4c6b03fcc")
+
+  @@index([product_id], map: "index_wish_items_on_product_id")
+  @@index([variant_id], map: "index_wish_items_on_variant_id")
+  @@index([wish_id], map: "index_wish_items_on_wish_id")
+}
+
+model wishes {
+  id         BigInt       @id @default(autoincrement())
+  user_id    BigInt
+  created_at DateTime     @db.Timestamp(6)
+  updated_at DateTime     @db.Timestamp(6)
+  wish_items wish_items[]
+  // users      User         @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_80dc2ed976")
+
+  @@index([user_id], map: "index_wishes_on_user_id")
+}
+
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// generator client {
+//   provider        = "prisma-client-js"
+//   previewFeatures = ["fullTextSearch"]
+// }
+
+// datasource db {
+//   provider  = "postgresql"
+//   url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+//   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+// }
+
+// model User {
+//   id                    String         @id
+//   username              String         @unique
+//   displayName           String
+//   email                 String?        @unique
+//   passwordHash          String?
+//   googleId              String?        @unique
+//   avatarUrl             String?
+//   bio                   String?
+//   sessions              Session[]
+//   posts                 Post[]
+//   following             Follow[]       @relation("Following")
+//   followers             Follow[]       @relation("Followers")
+//   likes                 Like[]
+//   bookmarks             Bookmark[]
+//   comments              Comment[]
+//   receivedNotifications Notification[] @relation("Recipient")
+//   issuedNotifications   Notification[] @relation("Issuer")
+
+//   createdAt DateTime @default(now())
+
+//   @@map("users")
+// }
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+
+model Follow {
+  followerId  String
+  follower    User   @relation("Following", fields: [followerId], references: [id], onDelete: Cascade)
+  followingId String
+  following   User   @relation("Followers", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@map("follows")
+}
+
+model Post {
+  id                  String         @id @default(cuid())
+  content             String
+  userId              String
+  user                User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attachments         Media[]
+  likes               Like[]
+  bookmarks           Bookmark[]
+  comments            Comment[]
+  linkedNotifications Notification[]
+
+  createdAt DateTime @default(now())
+
+  @@map("posts")
+}
+
+model Media {
+  id     String    @id @default(cuid())
+  postId String?
+  post   Post?     @relation(fields: [postId], references: [id], onDelete: SetNull)
+  type   MediaType
+  url    String
+
+  createdAt DateTime @default(now())
+
+  @@map("post_media")
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+model Comment {
+  id      String @id @default(cuid())
+  content String
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId  String
+  post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@map("comments")
+}
+
+model Like {
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
+  @@map("likes")
+}
+
+model Bookmark {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
+  @@map("bookmarks")
+}
+
+model Notification {
+  id          String           @id @default(cuid())
+  recipientId String
+  recipient   User             @relation("Recipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  issuerId    String
+  issuer      User             @relation("Issuer", fields: [issuerId], references: [id], onDelete: Cascade)
+  postId      String?
+  post        Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
+  type        NotificationType
+  read        Boolean          @default(false)
+
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}
+
+enum NotificationType {
+  LIKE
+  FOLLOW
+  COMMENT
+}

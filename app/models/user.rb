@@ -2,7 +2,9 @@ class User < ApplicationRecord
   include RefreshTokenUpdatable
   attr_accessor :activation_token, :reset_token
 
+  has_many :sessions, foreign_key: 'userId', dependent: :destroy
   has_many :microposts, dependent: :destroy
+  has_many :posts, foreign_key: 'userId', dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy

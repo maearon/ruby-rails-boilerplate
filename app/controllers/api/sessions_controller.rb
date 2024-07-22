@@ -10,7 +10,7 @@ class Api::SessionsController < Api::ApiController
   end
 
   def create
-    @user = User.find_by(email: session_params[:email])
+    @user = User.find_by(email: session_params[:username])
     if @user&.auth?(session_params[:password])
       if @user.activated?
         @user.generate_tokens!
@@ -45,7 +45,7 @@ class Api::SessionsController < Api::ApiController
   private
 
   def session_params
-    params.require(:session).permit(:email, :password, :remember_me)
+    params.require(:session).permit(:username, :password)
   end
 
   def refresh_params

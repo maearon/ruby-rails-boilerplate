@@ -1,0 +1,2 @@
+POSTGRES_PRISMA_URL=postgresql://postgres:@localhost:5432/ruby_rails_boilerplate_development
+POSTGRES_URL_NON_POOLING=postgresql://postgres:@localhost:5432/ruby_rails_boilerplate_development

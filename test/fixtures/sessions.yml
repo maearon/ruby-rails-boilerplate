@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  userId: 
+  expiresAt: 2024-07-23 04:08:34
+
+two:
+  id: 
+  userId: 
+  expiresAt: 2024-07-23 04:08:34
