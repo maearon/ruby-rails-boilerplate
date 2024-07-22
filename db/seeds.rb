@@ -34,11 +34,14 @@
 users = User.order(:created_at).take(6)
 50.times do
   content = Faker::Lorem.sentence(word_count: 5)
-  users.each { |user| Post.create!(id: SecureRandom.uuid,
-                                   content: content,
-                                   userId: User.find_by(id: user.id),
-                                   createdAt: Time.zone.now)
-  }
+  users.each do |user|
+    Post.create!(
+      id: SecureRandom.uuid,
+      content: content,
+      userId: user.id,
+      createdAt: Time.zone.now
+    )
+  end
 end
 
 # Create following relationships.
