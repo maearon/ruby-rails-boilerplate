@@ -21,5 +21,15 @@ export async function logout() {
     sessionCookie.attributes,
   );
 
+  // const rememberMe = "1";
+
+  // if (rememberMe) {
+  //   localStorage.removeItem("token")
+  //   localStorage.removeItem("remember_token")
+  // } else {
+  //   sessionStorage.removeItem("token")
+  //   sessionStorage.removeItem("remember_token")
+  // }
+
   return redirect("/login");
 }

@@ -26,7 +26,7 @@ scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :confirmations,     only: [:new, :create]
+  resources :confirmations,       only: [:new, :create]
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   resources :rooms do
@@ -78,6 +78,8 @@ scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
     resources :account_activations, only: [:update]
     resources :password_resets,     only: [:create, :update]
     resources :microposts,          only: [:create, :destroy]
+    resources :post_medias,         only: [:create, :destroy]
+    resources :posts,               only: [:create, :destroy]
     resources :relationships,       only: [:create, :destroy]
   end
 

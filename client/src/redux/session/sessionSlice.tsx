@@ -9,6 +9,7 @@ export interface User {
   role: boolean
   avatar?: string
   passwordHash: string;
+  test_cookie: string;
 }
 
 export interface UserState {

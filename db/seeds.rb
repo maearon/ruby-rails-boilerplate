@@ -1,6 +1,6 @@
 # user = User.create!(id: SecureRandom.uuid,
 #              name:  "Example User",
-#              username:  "example@railstutorial.org",
+#              username: Faker::Internet.unique.username,
 #              displayName:  "Example User",
 #              email: "example@railstutorial.org",
 #              password: "Abc@0974006807",
@@ -15,7 +15,7 @@
 
 # 99.times do |n|
 #   name  = Faker::Name.name
-#   username  = "example-#{n+1}@railstutorial.org"
+#   username  = Faker::Internet.unique.username
 #   displayName = name
 #   email = "example-#{n+1}@railstutorial.org"
 #   password = "Abc@0974006807"

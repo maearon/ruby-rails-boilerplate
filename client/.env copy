@@ -1,2 +1,6 @@
 POSTGRES_PRISMA_URL=postgresql://postgres:@localhost:5432/ruby_rails_boilerplate_development
 POSTGRES_URL_NON_POOLING=postgresql://postgres:@localhost:5432/ruby_rails_boilerplate_development
+NEXT_PUBLIC_STREAM_KEY=
+STREAM_SECRET=
+NEXT_PUBLIC_UPLOADTHING_APP_ID=
+CRON_SECRET=

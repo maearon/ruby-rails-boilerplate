@@ -31,46 +31,63 @@ export interface Micropost {
   channelTitle?: string
 }
 
-// export interface CreateParams {
-//   user: SignUpField
-// }
-
-// export interface SignUpField {
-//   name: string
-//   email: string
-//   password: string
-//   password_confirmation: string
-// }
-
 export interface CreateResponse {
   flash?: [message_type: string, message: string]
   error?: ErrorMessageType
+  post: Post
+  attachments: Attachment[]
 }
 
 export interface Response {
   flash?: [message_type: string, message: string]
 }
 
-const micropostApi = {
-  getAll(params: ListParams): Promise<ListResponse<Micropost>> {
-    const url = '';
-    return API.get(url, { params });
-  },
+export interface Post {
+  readonly id: string
+  content: string
+  attachments: string[]
+  // timestamp: string
+  // readonly userId: string
+  // userDisplayName: string
+}
 
-  // create(params: CreateParams): Promise<CreateResponse> {
-  //   const url = '/microposts';
-  //   return API.post(url, params);
-  // },
+export interface Attachment {
+  file: File;
+  mediaId?: string;
+  isUploading: boolean;
+}
 
-  remove(id: number): Promise<Response> {
-    const url = `/microposts/${id}`;
-    return API.delete(url);
-  },
+export interface PostCreate {
+  content: string,
+  userId: string,
+  attachments: File[]
+}
 
-  likeOrDislikeYoutubeVideo(videoId: string, rating: string): Promise<Response> {
-    const url = `https://www.googleapis.com/youtube/v3/videos/rate?id=${videoId}&rating=${rating}`;
-    return API.post(url);
-  },
-};
+export interface CreatePostPayload {
+  post: PostCreate,
+}
 
-export default micropostApi;
+export async function getAll(params: ListParams): Promise<ListResponse<Micropost>> {
+  const url = '';
+  return API.get(url, { params });
+}
+
+export async function createPostMedia(payload: FormData): Promise<CreateResponse> {
+  const url = '/post_medias';
+  return API.post(url, payload, { headers: { 'Content-Type': 'multipart/form-data' }});
+}
+
+export async function createPost(payload: CreatePostPayload): Promise<CreateResponse> {
+  const url = '/posts';
+  return API.post(url, payload, { headers: { 'Content-Type': 'multipart/form-data' }});
+}
+
+export async function remove(id: number): Promise<Response> {
+  const url = `/posts/${id}`;
+  return API.delete(url);
+}
+
+export async function likeOrDislikeYoutubeVideo(videoId: string, rating: string): Promise<Response> {
+  const url = `https://www.googleapis.com/youtube/v3/videos/rate?id=${videoId}&rating=${rating}`;
+  return API.post(url);
+}

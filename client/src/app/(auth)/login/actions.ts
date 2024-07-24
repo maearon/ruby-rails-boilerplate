@@ -26,13 +26,14 @@ export async function login(
 
     const response = await create({ session: {username, password} });
 
-    if (!response.user || !response.user.passwordHash) {
+    if (!response.user || !response.user.passwordHash || !response.tokens || !response.tokens.access || !response.user.test_cookie) {
       return {
         error: "Incorrect username or password",
       };
     }
 
-    const existingUser = response.user;
+    // const existingUser = response.user;
+    // const rememberMe = "1";
 
     // const validPassword = await verify(existingUser.passwordHash, password, {
     //   memoryCost: 19456,
@@ -55,6 +56,45 @@ export async function login(
       sessionCookie.value,
       sessionCookie.attributes,
     );
+
+    // Calculate expiration date (30 days from now)
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30);
+
+    const accessToken = response.tokens.access.token;
+
+    const jwt = {
+      name: 'jwt',
+      value: accessToken,
+      attributes: {
+        path: '/',
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax' as 'lax' | 'strict' | 'none',
+        expires: expirationDate // Pass Date object
+      }
+    };
+
+    // Use cookies().set with correct typing
+    cookies().set(
+      jwt.name,
+      jwt.value,
+      {
+        path: jwt.attributes.path,
+        httpOnly: jwt.attributes.httpOnly,
+        secure: jwt.attributes.secure,
+        sameSite: jwt.attributes.sameSite,
+        expires: jwt.attributes.expires // Pass Date object
+      }
+    );
+
+    // if (rememberMe) {
+    //   localStorage.setItem("token", response.tokens.access.token)
+    //   localStorage.setItem("remember_token", response.tokens.access.token)
+    // } else {
+    //   sessionStorage.setItem("token", response.tokens.access.token)
+    //   sessionStorage.setItem("remember_token", response.tokens.access.token)
+    // }
 
     return redirect("/");
   } catch (error) {

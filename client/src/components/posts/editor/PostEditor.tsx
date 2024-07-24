@@ -58,6 +58,7 @@ export default function PostEditor() {
       {
         content: input,
         mediaIds: attachments.map((a) => a.mediaId).filter(Boolean) as string[],
+        attachments,
       },
       {
         onSuccess: () => {

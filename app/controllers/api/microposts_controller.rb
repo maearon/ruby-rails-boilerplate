@@ -1,7 +1,8 @@
 class Api::MicropostsController < Api::ApiController
-  before_action :authenticate!, only: [:create, :destroy]
+  before_action :authenticate!, except: %i[create]
   before_action :correct_user,   only: :destroy
   def create
+    # binding.b
     @micropost = current_user.microposts.build(micropost_params)
     @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
