@@ -3,17 +3,24 @@ class Api::PostMediasController < Api::ApiController
   before_action :correct_user, only: :destroy
 
   def create
-    binding.b
     attachment_ids = []
-    if params[:media] && params[:media][:files].present?
-      params[:media][:files].each do |file|
-        media = Media.new
-        media.attach_file(file)
-        media.save!
-        attachment_ids.push(media.id)
+    if post_media_params[:files].present?
+      post_media_params[:files].each do |index, file|
+        post_media = PostMedia.new
+        post_media.file.attach(file)
+        if post_media.save
+          attachment_ids.push(post_media.id)
+        else
+          render json: { error: "Failed to save media" }, status: :unprocessable_entity and return
+        end
       end
     end
-    render json: { flash: ["success", "PostMedia created!"], attachments: attachment_ids }
+  
+    if attachment_ids.any?
+      render json: { flash: ["success", "PostMedia created!"], attachments: attachment_ids }
+    else
+      render json: { error: "No files were uploaded" }, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -23,8 +30,8 @@ class Api::PostMediasController < Api::ApiController
 
   private
 
-  def media_params
-    params.require(:media).permit(files: [])
+  def post_media_params
+    params.require(:post_media).permit(files: {})
   end
 
   def correct_user

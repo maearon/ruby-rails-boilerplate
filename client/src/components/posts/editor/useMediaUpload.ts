@@ -79,25 +79,19 @@ export default function useMediaUpload() {
     setIsUploading(true);
     const fileList = filesToFileList(files);
     const payload = new FormData();
-    let image = fileList[0];
-    let imageName = '';
-    if (fileList && fileList[0]) {
-      const sizeInMegabytes = fileList[0].size / 1024 / 1024;
+    // Convert FileList to array and check file size and append files to FormData
+    Array.from(fileList).forEach((file, index) => {
+      const sizeInMegabytes = file.size / 1024 / 1024;
       if (sizeInMegabytes > 512) {
         alert('Maximum file size is 512MB. Please choose a smaller file.');
       } else {
-        image = fileList[0];
-        imageName = fileList[0].name;
+        payload.append(`post_media[files][${index}]`, file, file.name);
       }
-    }
-    if (image) {
-      payload.append('micropost[image]', image, imageName);
-    }
+    });
     // payload.append("post[userId]", user.id);
-    payload.append("micropost[content]", 'content');
+    // payload.append("micropost[content]", 'content');
     console.log(fileList);
 
-    
     try {
       const res = await createPostMedia(payload);
 
