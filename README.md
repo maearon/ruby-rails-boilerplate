@@ -49,7 +49,8 @@ docker compose logs
 ```bash
 git clone --depth 1 https://github.com/brocoders/nestjs-boilerplate.git my-app
 cd my-app/
-cp env-example .env
+cp .env-example .env
+cp client/env-example client/.env
 ```
 
 Change `DATABASE_HOST=postgres` to `DATABASE_HOST=localhost`
@@ -65,7 +66,14 @@ docker compose up -d postgres redis
 ```bash
 bundle
 
-rails db:migrate
+rails db:drop
+
+cd client &&
+npx prisma generate && 
+prisma introspect
+npx prisma migrate dev (rails db:migrate)
+npx prisma db pull
+npx prisma db push
 
 rails db:seed
 
@@ -75,7 +83,7 @@ rails s
 ## Links
 
 - Routes: http://localhost:3000/rails/info/routes
-- Adminer (client for DB): http://127.0.0.1/pgadmin4/browser/
+- Adminer (client for DB): http://127.0.0.1/pgadmin4/browser/ (npx prisma studio)
 - Maildev: http://localhost:3000/letter_opener
 
 ## Automatic update of dependencies

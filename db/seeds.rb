@@ -1,34 +1,34 @@
-# user = User.create!(id: SecureRandom.uuid,
-#              name:  "Example User",
-#              username: Faker::Internet.unique.username,
-#              displayName:  "Example User",
-#              email: "example@railstutorial.org",
-#              password: "Abc@0974006807",
-#              password_confirmation: "Abc@0974006807",
-#              admin: true,
-#              activated: true,
-#              activated_at: Time.zone.now)
+user = User.create!(id: SecureRandom.uuid,
+             name:  "Example User",
+             username: Faker::Internet.unique.username,
+             displayName:  "Example User",
+             email: "example@railstutorial.org",
+             password: "Abc@0974006807",
+             password_confirmation: "Abc@0974006807",
+             admin: true,
+             activated: true,
+             activated_at: Time.zone.now)
 
-# Session.create!(id: SecureRandom.uuid,
-#                 userId: User.first.id,
-#                 expiresAt: Time.zone.now + 30.days)
+Session.create!(id: SecureRandom.uuid,
+                userId: User.first.id,
+                expiresAt: Time.zone.now + 30.days)
 
-# 99.times do |n|
-#   name  = Faker::Name.name
-#   username  = Faker::Internet.unique.username
-#   displayName = name
-#   email = "example-#{n+1}@railstutorial.org"
-#   password = "Abc@0974006807"
-#   User.create!(id: SecureRandom.uuid,
-#               name: name,
-#               username: username,
-#               displayName: displayName,
-#               email: email,
-#               password: password,
-#               password_confirmation: password,
-#               activated: true,
-#               activated_at: Time.zone.now)
-# end
+99.times do |n|
+  name  = Faker::Name.name
+  username  = Faker::Internet.unique.username
+  displayName = name
+  email = "example-#{n+1}@railstutorial.org"
+  password = "Abc@0974006807"
+  User.create!(id: SecureRandom.uuid,
+              name: name,
+              username: username,
+              displayName: displayName,
+              email: email,
+              password: password,
+              password_confirmation: password,
+              activated: true,
+              activated_at: Time.zone.now)
+end
 
 # Generate posts for a subset of users.
 users = User.order(:created_at).take(6)

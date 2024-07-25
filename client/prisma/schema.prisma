@@ -466,7 +466,7 @@ model Media {
   id     String    @id @default(cuid())
   postId String?
   post   Post?     @relation(fields: [postId], references: [id], onDelete: SetNull)
-  type   MediaType
+  media_type   MediaType
   url    String
 
   createdAt DateTime @default(now())
