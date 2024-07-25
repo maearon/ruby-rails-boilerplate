@@ -26,7 +26,7 @@ export async function login(
 
     const response = await create({ session: {username, password} });
 
-    if (!response.user || !response.user.passwordHash || !response.tokens || !response.tokens.access || !response.user.test_cookie) {
+    if (!response.user || !response.user.passwordHash || !response.tokens || !response.tokens.access) {
       return {
         error: "Incorrect username or password",
       };

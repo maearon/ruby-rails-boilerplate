@@ -175,7 +175,7 @@ ActiveRecord::Schema[7.1].define(version: 0) do
 
   create_table "post_media", id: :text, force: :cascade do |t|
     t.text "postId"
-    t.enum "type", null: false, enum_type: ""MediaType""
+    t.enum "media_type", null: false, enum_type: ""MediaType""
     t.text "url", null: false
     t.datetime "createdAt", precision: 3, default: -> { "CURRENT_TIMESTAMP" }, null: false
   end

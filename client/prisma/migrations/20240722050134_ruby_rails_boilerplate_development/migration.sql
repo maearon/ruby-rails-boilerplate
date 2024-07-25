@@ -329,7 +329,7 @@ CREATE TABLE "posts" (
 CREATE TABLE "post_media" (
     "id" TEXT NOT NULL,
     "postId" TEXT,
-    "type" "MediaType" NOT NULL,
+    "media_type" "MediaType" NOT NULL,
     "url" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

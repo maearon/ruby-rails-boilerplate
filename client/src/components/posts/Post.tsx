@@ -118,7 +118,7 @@ interface MediaPreviewProps {
 }
 
 function MediaPreview({ media }: MediaPreviewProps) {
-  if (media.type === "IMAGE") {
+  if (media.media_type === "IMAGE") {
     return (
       <Image
         src={media.url}
@@ -130,7 +130,7 @@ function MediaPreview({ media }: MediaPreviewProps) {
     );
   }
 
-  if (media.type === "VIDEO") {
+  if (media.media_type === "VIDEO") {
     return (
       <div>
         <video

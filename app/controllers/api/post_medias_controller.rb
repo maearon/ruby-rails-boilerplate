@@ -5,8 +5,9 @@ class Api::PostMediasController < Api::ApiController
   before_action :correct_user, only: :destroy
 
   def create
+    binding.b
     attachment_ids = []
-    if post_media_params[:files].present?
+    if post_media_params[:files].values.first.present?
       post_media_params[:files].each do |index, file|
         media_type = determine_media_type(file)
         
