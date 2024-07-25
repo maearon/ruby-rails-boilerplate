@@ -117,7 +117,18 @@ interface MediaPreviewProps {
   media: Media;
 }
 
+
+
 function MediaPreview({ media }: MediaPreviewProps) {
+  function isEmbedUrl(url: string): boolean {
+    const embedPatterns = [
+      /youtube\.com\/embed\//i,
+      /youtu\.be\//i,
+      /vimeo\.com\/video\//i,
+    ];
+    return embedPatterns.some((pattern) => pattern.test(url));
+  }
+  
   if (media.media_type === "IMAGE") {
     return (
       <Image
@@ -131,14 +142,18 @@ function MediaPreview({ media }: MediaPreviewProps) {
   }
 
   if (media.media_type === "VIDEO") {
+    const isEmbed = isEmbedUrl(media.url);
     return (
       <div>
-        {/* <video
-          src={media.url}
-          controls
-          className="mx-auto size-fit max-h-[30rem] rounded-2xl"
-        /> */}
-        <iframe src={media.url} allow="autoplay; encrypted-media" allowFullScreen className="mx-auto size-fit max-h-[30rem] rounded-2xl"></iframe>
+        {!isEmbed ? (
+          <video
+            src={media.url}
+            controls
+            className="mx-auto size-fit max-h-[30rem] rounded-2xl"
+          />
+        ) : (
+          <iframe src={media.url} allow="autoplay; encrypted-media" allowFullScreen className="mx-auto size-fit max-h-[30rem] rounded-2xl"></iframe>
+        )}
       </div>
     );
   }
