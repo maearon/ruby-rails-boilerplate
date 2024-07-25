@@ -104,6 +104,9 @@ export default function useMediaUpload() {
         [...prev, ...files.map((file) => ({ file, isUploading: false }))]
       );
 
+      console.log('res', res)
+      // console.log('attachments', attachments)
+
       // setAttachments((prev) =>
       //   prev.map((a) => {
       //     const uploadResult = res.attachments.find((r) => r.file.name === a.file.name);

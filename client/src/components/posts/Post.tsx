@@ -133,11 +133,12 @@ function MediaPreview({ media }: MediaPreviewProps) {
   if (media.media_type === "VIDEO") {
     return (
       <div>
-        <video
+        {/* <video
           src={media.url}
           controls
           className="mx-auto size-fit max-h-[30rem] rounded-2xl"
-        />
+        /> */}
+        <iframe src={media.url} allow="autoplay; encrypted-media" allowFullScreen className="mx-auto size-fit max-h-[30rem] rounded-2xl"></iframe>
       </div>
     );
   }

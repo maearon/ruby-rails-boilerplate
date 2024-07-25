@@ -1,7 +1,7 @@
 "use server";
 
 import { validateRequest } from "@/auth";
-import { create } from "@/components/shared/api/micropostApi";
+// import { create } from "@/components/shared/api/micropostApi";
 import prisma from "@/lib/prisma";
 import { getPostDataInclude } from "@/lib/types";
 import { createPostSchema } from "@/lib/validation";
@@ -15,13 +15,12 @@ export interface Attachment {
 export async function submitPost(input: {
   content: string;
   mediaIds: string[];
-  attachments: Attachment[];
 }) {
   const { user } = await validateRequest();
 
   if (!user) throw new Error("Unauthorized");
 
-  const { content, mediaIds, attachments } = createPostSchema.parse(input);
+  const { content, mediaIds } = createPostSchema.parse(input);
 
   const newPost = await prisma.post.create({
     data: {

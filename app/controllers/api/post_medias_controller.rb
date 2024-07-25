@@ -5,53 +5,37 @@ class Api::PostMediasController < Api::ApiController
   before_action :correct_user, only: :destroy
 
   def create
-    # binding.b
     attachment_ids = []
+    errors = []
+  
     if post_media_params[:files].present?
       post_media_params[:files].each do |index, file|
         media_type = determine_media_type(file)
         
         if media_type.nil?
-          render json: { error: "Unsupported file type" }, status: :unprocessable_entity and return
+          errors << "Unsupported file type for file #{file.original_filename}"
+          next
         end
-
+  
         @post_media = PostMedia.new(media_type: media_type)
         @post_media.file.attach(file)
         @post_media.id = SecureRandom.uuid
-        # @post_media.url = "#{request.ssl? ? 'https' : 'http'}://#{request.env['HTTP_HOST']}"+url_for(@post_media.file.variant(:display)) if @post_media.file.attached?
         @post_media.url = "https://via.placeholder.com/150/FF0000/FFFFFF?Text=yttags.com"
-        binding.b
-
+  
         if @post_media.save
-          # post_media.file.attach(file)
-          
-          # Generate URL after attaching the file
-          # @post_media.url = "#{request.ssl? ? 'https' : 'http'}://#{request.env['HTTP_HOST']}"+url_for(@post_media.file.variant(:display)) if @post_media.file.attached?
-          binding.b
-
-          if media_type.nil?
-            render json: { error: 'PG::NotNullViolation: ERROR:  null value in column "url" of relation "post_media" violates not-null constraint' }, status: :unprocessable_entity and return
-          end
-          
-          if @post_media.save
-            attachment_ids.push(post_media.id)
-          else
-            binding.b
-            render json: { error: "Failed to update media URL", details: post_media.errors.full_messages }, status: :unprocessable_entity and return
-          end
+          attachment_ids << @post_media.id
         else
-          binding.b
-          render json: { error: "Failed to save media", details: @post_media.errors.full_messages }, status: :unprocessable_entity and return
+          errors.concat(@post_media.errors.full_messages)
         end
       end
     end
-
-    if attachment_ids.any?
-      render json: { flash: ["success", "PostMedia created!"], attachments: attachment_ids }
+  
+    if errors.empty?
+      render json: { flash: ["success", "Files uploaded!"], attachments: attachment_ids }
     else
-      render json: { error: "No files were uploaded" }, status: :unprocessable_entity
+      render json: { error: errors }, status: :unprocessable_entity
     end
-  end
+  end  
 
   def destroy
     @post_media.destroy

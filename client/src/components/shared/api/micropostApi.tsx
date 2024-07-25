@@ -34,8 +34,7 @@ export interface Micropost {
 export interface CreateResponse {
   flash?: [message_type: string, message: string]
   error?: ErrorMessageType
-  post: Post
-  attachments: Attachment[]
+  attachments: string[]
 }
 
 export interface Response {
@@ -49,12 +48,6 @@ export interface Post {
   // timestamp: string
   // readonly userId: string
   // userDisplayName: string
-}
-
-export interface Attachment {
-  file: File;
-  mediaId?: string;
-  isUploading: boolean;
 }
 
 export interface PostCreate {
