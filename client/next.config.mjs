@@ -14,6 +14,7 @@ const nextConfig = {
   },
   serverExternalPackages: ["@node-rs/argon2"],
   images: {
+    domains: ['localhost', 'your-production-domain.com'],
     remotePatterns: [
       {
         protocol: 'https',

@@ -9,25 +9,14 @@ class PostMedia < ApplicationRecord
   validates :file, presence: true
   validates :url, presence: true, allow_nil: true
 
-  # after_save :set_url
+  # after_save :update_url
 
   # private
 
-  # def set_url
+  # def update_url
   #   if file.attached?
-  #     self.url = "#{Rails.application.config.action_controller.asset_host}#{Rails.application.routes.url_helpers.rails_blob_path(file, only_path: true)}"
-  #     save if url.present? # Save again to persist the URL
-  #   end
-  # end
-
-  # def file_attached_and_url_blank?
-  #   file..attached? && url.blank?
-  # end
-
-  # def set_url
-  #   if file.attached? && url.blank?
-  #     self.url = Rails.application.routes.url_helpers.rails_blob_path(file, only_path: true)
-  #     save if url.present? # Save again to persist the URL
+  #     self.url = Rails.application.routes.url_helpers.rails_blob_url(file, only_path: true)
+  #     save if url_changed?
   #   end
   # end
 end

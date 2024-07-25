@@ -93,16 +93,19 @@ export default function useMediaUpload() {
     console.log(fileList);
 
     try {
-      const res = await createPostMedia(payload);
+      let res = await createPostMedia(payload);
 
-      if (res.error) {
-        const errorMessage = Array.isArray(res.error) ? res.error.join(", ") : "Unknown error occurred";
-        throw new Error(errorMessage);
-      }
+      if (!res.attachments) {
+        // const errorMessage = Array.isArray(res.error) ? res.error.join(", ") : "Unknown error occurred";
+        // throw new Error(errorMessage);
+        createPostMedia(payload);
+      } else {
 
       setAttachments((prev) =>
-        [...prev, ...files.map((file) => ({ file, isUploading: false }))]
+        [...prev, ...files.map((file, index) => ({ file, mediaId: res.attachments[index], isUploading: false }))]
       );
+
+      }
 
       console.log('res', res)
       // console.log('attachments', attachments)
@@ -160,7 +163,22 @@ export default function useMediaUpload() {
   }
 
   function removeAttachment(fileName: string) {
-    setAttachments((prev) => prev.filter((a) => a.file.name !== fileName));
+    setAttachments((prev) => {
+      // Filter out the attachment by fileName
+      const updatedAttachments = prev.filter((a) => a.file.name === fileName);
+
+      // Convert the filtered attachments to an array of files
+      const filesArray = updatedAttachments.map((attachment) => attachment.file);
+      const payload = new FormData();
+
+      // Check file size and append files to FormData
+      filesArray.forEach((file, index) => {
+        payload.append(`post_media[files][${index}]`, file, file.name);
+      });
+      createPostMedia(payload);
+      return prev.filter((a) => a.file.name !== fileName);
+    });
+    console.log('attachments on remove', attachments)
   }
 
   function reset() {

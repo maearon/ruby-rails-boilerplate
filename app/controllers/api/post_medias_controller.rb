@@ -23,6 +23,7 @@ class Api::PostMediasController < Api::ApiController
         @post_media.url = "https://via.placeholder.com/150/FF0000/FFFFFF?Text=yttags.com"
   
         if @post_media.save
+          @post_media.update(url: rails_blob_url(@post_media.file, only_path: false)) if @post_media.file.attached?
           attachment_ids << @post_media.id
         else
           errors.concat(@post_media.errors.full_messages)
