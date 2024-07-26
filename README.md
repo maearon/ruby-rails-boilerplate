@@ -1,4 +1,4 @@
-# Rails REST API boilerplate 🇻🇳
+# Rails REST API + NextJS Prisma boilerplate 🇻🇳
 ## Description
 
 Rails REST API boilerplate for typical project
@@ -70,14 +70,9 @@ rails db:drop
 
 cd client &&
 npx prisma generate && 
-prisma introspect
 npx prisma migrate dev (rails db:migrate)
-npx prisma db pull
-npx prisma db push
-
-rails db:seed
-
-rails s
+rails db:seed (prisma introspect && npx prisma db pull && npx prisma db push)
+rails s -p 3001
 ```
 
 ## Links
