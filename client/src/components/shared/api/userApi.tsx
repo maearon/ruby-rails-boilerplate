@@ -74,15 +74,16 @@ export interface UpdateParams {
 }
 
 export interface UpdateField {
-  name: string
-  email: string
-  password: string
-  password_confirmation: string
+  // name: string
+  // email: string
+  // password: string
+  // password_confirmation: string
 }
 
 export interface UpdateResponse {
   flash_success?: [message_type: string, message: string]
   error?: string[]
+  avatarUrl?: string
 }
 
 export interface Response {
@@ -110,9 +111,9 @@ const userApi = {
     return API.get(url);
   },
 
-  update(id: string, params: UpdateParams): Promise<UpdateResponse> {
+  update(id: string, payload: FormData): Promise<UpdateResponse> {
     const url = `/users/${id}`;
-    return API.patch(url, params);
+    return API.patch(url, payload, { headers: { 'Content-Type': 'multipart/form-data' }});
   },
 
   destroy(id: number): Promise<Response> {
@@ -138,6 +139,7 @@ const userApi = {
 
 export default userApi;
 export const { create } = userApi;
+export const { update } = userApi;
 
 export interface UserFollow {
   readonly id: number

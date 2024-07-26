@@ -1,8 +1,9 @@
 "use server";
 
 import { validateRequest } from "@/auth";
+import { update } from "@/components/shared/api/userApi";
 import prisma from "@/lib/prisma";
-import streamServerClient from "@/lib/stream";
+// import streamServerClient from "@/lib/stream";
 import { getUserDataSelect } from "@/lib/types";
 import {
   updateUserProfileSchema,
@@ -22,14 +23,24 @@ export async function updateUserProfile(values: UpdateUserProfileValues) {
       data: validatedValues,
       select: getUserDataSelect(user.id),
     });
-    await streamServerClient.partialUpdateUser({
-      id: user.id,
-      set: {
-        name: validatedValues.displayName,
-      },
-    });
+    // await streamServerClient.partialUpdateUser({
+    //   id: user.id,
+    //   set: {
+    //     name: validatedValues.displayName,
+    //   },
+    // });
     return updatedUser;
   });
 
   return updatedUser;
+}
+
+export async function startAvatarUpload(payload: FormData) {
+  const { user } = await validateRequest();
+
+  if (!user) throw new Error("Unauthorized");
+
+  const res = await update(user.id, payload);
+  
+  return res;
 }

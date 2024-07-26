@@ -18,6 +18,9 @@ class Api::PostMediasController < Api::ApiController
         end
   
         @post_media = PostMedia.new(media_type: media_type)
+        if @post_media.file.attached?
+          @post_media.file.purge
+        end
         @post_media.file.attach(file)
         @post_media.id = SecureRandom.uuid
         @post_media.url = "https://via.placeholder.com/150/FF0000/FFFFFF?Text=yttags.com"

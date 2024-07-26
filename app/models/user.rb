@@ -13,6 +13,9 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  has_one_attached :avatar do |attachable|
+    attachable.variant :display, resize_to_limit: [500, 500]
+  end
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   # before_create :create_activation_digest

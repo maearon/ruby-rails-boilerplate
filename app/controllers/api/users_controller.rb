@@ -1,7 +1,7 @@
 class Api::UsersController < Api::ApiController
-  before_action :authenticate!, except: %i[create]
+  before_action :authenticate!, except: %i[create, update]
   before_action :set_user,       except: %i[index create]
-  before_action :correct_user,   only: %i[update destroy]
+  before_action :correct_user,   only: %i[destroy]
   before_action :admin_user,     only: %i[destroy]
 
   def index
@@ -30,9 +30,16 @@ class Api::UsersController < Api::ApiController
   end
 
   def update
-    if @user.update(user_params)
-      # @user.unactivate if @user.saved_change_to_email? && @user.send_activation_email
-      response200
+    # binding.b
+    if user_params[:avatar].present?
+      if @user.avatar.attached?
+        @user.avatar.purge
+      end
+      @user.avatar.attach(user_params[:avatar])
+    end
+    if @user.update(user_params.except(:avatar))
+      @user.update(avatarUrl: rails_blob_url(@user.avatar, only_path: false)) if @user.avatar.attached?
+      render json: { flash: ["success", "Avatar's User updated!"], avatarUrl: @user.avatarUrl }
     else
       response422_with_error(@user.errors.messages)
     end
@@ -65,7 +72,7 @@ class Api::UsersController < Api::ApiController
 
   def user_params
     params.require(:user).permit(
-      :name, :email, :password, :password_confirmation
+      :avatar
     )
   end
 
