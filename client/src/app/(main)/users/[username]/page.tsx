@@ -13,6 +13,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import EditProfileButton from "./EditProfileButton";
 import UserPosts from "./UserPosts";
+// import { useSession } from "@/app/(main)/SessionProvider";
 
 interface PageProps {
   params: { username: string };
@@ -38,10 +39,11 @@ export async function generateMetadata({
   params: { username },
 }: PageProps): Promise<Metadata> {
   const { user: loggedInUser } = await validateRequest();
+  console.log('loggedInUser 1', loggedInUser);
 
   if (!loggedInUser) return {};
 
-  const user = await getUser(username, loggedInUser.id);
+  const user = await getUser(decodeURIComponent(username), loggedInUser.id);
 
   return {
     title: `${user.displayName} (@${user.username})`,
@@ -50,6 +52,8 @@ export async function generateMetadata({
 
 export default async function Page({ params: { username } }: PageProps) {
   const { user: loggedInUser } = await validateRequest();
+  // const { user: loggedInUser } = useSession();
+  console.log('loggedInUser 2', loggedInUser);
 
   if (!loggedInUser) {
     return (
@@ -59,7 +63,7 @@ export default async function Page({ params: { username } }: PageProps) {
     );
   }
 
-  const user = await getUser(username, loggedInUser.id);
+  const user = await getUser(decodeURIComponent(username), loggedInUser.id);
 
   return (
     <main className="flex w-full min-w-0 gap-5">
