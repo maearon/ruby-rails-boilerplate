@@ -1,7 +1,7 @@
-# Rails REST API + NextJS Prisma boilerplate 🇻🇳
+# Rails REST API + NextJS boilerplate 🇻🇳
 ## Description
 
-Rails REST API boilerplate for typical project
+Rails REST API boilerplate for typical project can connect and interact with Posgres default by Prisma
 
 ## Table of Contents
 
@@ -72,14 +72,15 @@ cd client &&
 npx prisma generate && 
 npx prisma migrate dev (rails db:migrate)
 rails db:seed (prisma introspect && npx prisma db pull && npx prisma db push)
+cd ..
 rails s -p 3001
 ```
 
 ## Links
 
-- Routes: http://localhost:3000/rails/info/routes
+- Routes: http://localhost:3001/rails/info/routes
 - Adminer (client for DB): http://127.0.0.1/pgadmin4/browser/ (npx prisma studio)
-- Maildev: http://localhost:3000/letter_opener
+- Maildev: http://localhost:3001/letter_opener
 
 ## Automatic update of dependencies
 
@@ -136,5 +137,5 @@ docker compose -f docker-compose.ci.yaml --env-file env-example -p ci up --build
 ## Test benchmarking
 
 ```bash
-docker run --rm jordi/ab -n 100 -c 100 -T application/json -H "Authorization: Bearer USER_TOKEN" -v 2 http://<server_ip>:3000/api/v1/users
+docker run --rm jordi/ab -n 100 -c 100 -T application/json -H "Authorization: Bearer USER_TOKEN" -v 2 http://<server_ip>:3001/api/v1/users
 ```
