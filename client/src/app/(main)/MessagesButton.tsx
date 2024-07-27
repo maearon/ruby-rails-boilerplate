@@ -6,6 +6,7 @@ import { MessageCountInfo } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { Mail } from "lucide-react";
 import Link from "next/link";
+// import { useMessageCount } from "@/hooks/useMessageCount";
 
 interface MessagesButtonProps {
   initialState: MessageCountInfo;
@@ -19,6 +20,7 @@ export default function MessagesButton({ initialState }: MessagesButtonProps) {
     initialData: initialState,
     refetchInterval: 60 * 1000,
   });
+  // const unreadCount = useMessageCount('00cffeed-248f-4fc5-92ff-b99ebbad7e8d');
 
   return (
     <Button
@@ -35,6 +37,11 @@ export default function MessagesButton({ initialState }: MessagesButtonProps) {
               {data.unreadCount}
             </span>
           )}
+          {/* {!!unreadCount && (
+            <span className="absolute -right-1 -top-1 rounded-full bg-primary px-1 text-xs font-medium tabular-nums text-primary-foreground">
+              {unreadCount}
+            </span>
+          )} */}
         </div>
         <span className="hidden lg:inline">Messages</span>
       </Link>

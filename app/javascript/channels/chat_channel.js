@@ -1,15 +1,25 @@
-import consumer from "./consumer"
+import { createConsumer } from "@rails/actioncable"
 
-consumer.subscriptions.create("ChatChannel", {
-  connected() {
-    // Called when the subscription is ready for use on the server
-  },
+const consumer = createConsumer()
 
-  disconnected() {
-    // Called when the subscription has been terminated by the server
-  },
+document.addEventListener("DOMContentLoaded", () => {
+  const room = document.getElementById("chat-room-id").value
+  const chatChannel = consumer.subscriptions.create(
+    { channel: "ChatChannel", room: room },
+    {
+      received(data) {
+        console.log("Received message:", data.message)
+        // Handle the received message (e.g., append to chat log)
+      },
+      sendMessage(message) {
+        this.perform('send_message', { message: message })
+      }
+    }
+  )
 
-  received(data) {
-    // Called when there's incoming data on the websocket for this channel
-  }
-});
+  // Example usage
+  document.getElementById("send-button").addEventListener("click", () => {
+    const message = document.getElementById("message-input").value
+    chatChannel.sendMessage(message)
+  })
+})

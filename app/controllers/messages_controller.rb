@@ -14,6 +14,13 @@ class MessagesController < ApplicationController
     end
   end
 
+  def unread_count
+    # Assuming you have a method to fetch unread count for the current user
+    unread_count = Message.where(user_id: current_user.id, read: false).count
+
+    render json: { unreadCount: unread_count }
+  end
+
   private
     def set_room
       @room = Room.find(params[:room_id])

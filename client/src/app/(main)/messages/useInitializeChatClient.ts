@@ -21,6 +21,7 @@ export default function useInitializeChatClient() {
         async () =>
           kyInstance
             .get("/api/get-token")
+            // .get("/api/sessions")
             .json<{ token: string }>()
             .then((data) => data.token),
       )

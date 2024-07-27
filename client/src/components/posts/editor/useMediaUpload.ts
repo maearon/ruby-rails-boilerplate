@@ -72,14 +72,13 @@ export default function useMediaUpload() {
       dataTransfer.items.add(file);
     });
   
-    return dataTransfer.files; // This is a FileList object
+    return dataTransfer.files;
   }
 
   async function startUpload(files: File[]) {
     setIsUploading(true);
     const fileList = filesToFileList(files);
     const payload = new FormData();
-    // Convert FileList to array and check file size and append files to FormData
     Array.from(fileList).forEach((file, index) => {
       const sizeInMegabytes = file.size / 1024 / 1024;
       if (sizeInMegabytes > 512) {
@@ -88,46 +87,19 @@ export default function useMediaUpload() {
         payload.append(`post_media[files][${index}]`, file, file.name);
       }
     });
-    // payload.append("post[userId]", user.id);
-    // payload.append("micropost[content]", 'content');
     console.log(fileList);
 
     try {
       let res = await createPostMedia(payload);
 
       if (!res.attachments) {
-        // const errorMessage = Array.isArray(res.error) ? res.error.join(", ") : "Unknown error occurred";
-        // throw new Error(errorMessage);
-        createPostMedia(payload);
-      } else {
+        const errorMessage = Array.isArray(res.error) ? res.error.join(", ") : "Unknown error occurred";
+        throw new Error(errorMessage);
+      }
 
       setAttachments((prev) =>
         [...prev, ...files.map((file, index) => ({ file, mediaId: res.attachments[index], isUploading: false }))]
       );
-
-      }
-
-      console.log('res', res)
-      // console.log('attachments', attachments)
-
-      // setAttachments((prev) =>
-      //   prev.map((a) => {
-      //     const uploadResult = res.attachments.find((r) => r.file.name === a.file.name);
-
-      //     if (!uploadResult) return a;
-
-      //     return {
-      //       ...a,
-      //       mediaId: uploadResult.mediaId,
-      //       isUploading: false,
-      //     };
-      //   }),
-      // );
-
-      // toast({
-      //   variant: "default",
-      //   description: response.flash?.[1] || "Files uploaded successfully",
-      // });
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
       setAttachments((prev) =>
@@ -164,18 +136,6 @@ export default function useMediaUpload() {
 
   function removeAttachment(fileName: string) {
     setAttachments((prev) => {
-      // Filter out the attachment by fileName
-      const updatedAttachments = prev.filter((a) => a.file.name === fileName);
-
-      // Convert the filtered attachments to an array of files
-      const filesArray = updatedAttachments.map((attachment) => attachment.file);
-      const payload = new FormData();
-
-      // Check file size and append files to FormData
-      filesArray.forEach((file, index) => {
-        payload.append(`post_media[files][${index}]`, file, file.name);
-      });
-      createPostMedia(payload);
       return prev.filter((a) => a.file.name !== fileName);
     });
     console.log('attachments on remove', attachments)
