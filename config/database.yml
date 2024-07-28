@@ -21,7 +21,11 @@ default: &default
 
 development:
   <<: *default
-  database: ruby_rails_boilerplate_development
+  database: <%= ENV['POSTGRES_DATABASE'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+  port: 5432
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -55,7 +59,11 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: ruby_rails_boilerplate_test
+  database: <%= ENV['POSTGRES_DATABASE'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+  port: 5432
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -79,6 +87,4 @@ test:
 #
 production:
   <<: *default
-  database: ruby_rails_boilerplate_production
-  username: ruby_rails_boilerplate
-  password: <%= ENV["RUBY_RAILS_BOILERPLATE_DATABASE_PASSWORD"] %>
+  url: <%= ENV['POSTGRES_URL'] %>

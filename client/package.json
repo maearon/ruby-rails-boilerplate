@@ -33,8 +33,10 @@
     "actioncable": "^5.2.8-1",
     "arctic": "^1.9.1",
     "axios": "^1.7.2",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "crypto": "^1.0.1",
     "date-fns": "^3.6.0",
     "ky": "^1.4.0",
     "lucia": "^3.2.0",
@@ -57,6 +59,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

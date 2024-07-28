@@ -1,8 +1,18 @@
 import API from '.';
-import { User } from '../../../redux/session/sessionSlice';
+// import { User } from '../../../redux/session/sessionSlice';
 
 export interface SessionParams {
   session: LoginField
+}
+
+export interface User {
+  readonly id: number
+  email: string
+  name: string
+  role: boolean
+  avatar?: string
+  passwordHash: string;
+  test_cookie: string;
 }
 
 export interface LoginField {

@@ -72,8 +72,7 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'ruby_rails_boilerplate.onrender.com'
-  # host = 'desolate-dusk-93830.onrender.com'
+  host = 'ruby-rails-boilerplate-3s9t.onrender.com'
   # config.action_mailer.default_url_options = { host: host }
   config.action_mailer.default_url_options = { host: host, protocol: 'https'}
   # ActionMailer::Base.smtp_settings = {

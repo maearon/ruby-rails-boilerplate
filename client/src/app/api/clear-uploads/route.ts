@@ -18,7 +18,7 @@ export async function GET(req: Request) {
         ...(process.env.NODE_ENV === "production"
           ? {
               createdAt: {
-                lte: new Date(Date.now() - 1000 * 60 * 60 * 24),
+                lte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
               },
             }
           : {}),

@@ -55,7 +55,15 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
-    origins 'https://funny-movies-pied.vercel.app/'
+    origins 'https://ruby-rails-boilerplate-chv2p231v-maearons-projects.vercel.app'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
+  end
+
+  allow do
+    origins 'https://ruby-rails-boilerplate.vercel.app'
 
     resource '*',
       headers: :any,

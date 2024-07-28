@@ -1,9 +1,9 @@
-version: "3.9"
+version: '3'
 
 services:
   web:
     build: .
-    container_name: sample_app.api
+    container_name: ruby_rails_boilerplate.api
     ports:
       - 3000:3000
     volumes:
@@ -11,24 +11,32 @@ services:
       - /app/tmp
       - gem-data:/usr/local/bundle
     working_dir: /app
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bundle exec puma -C config/puma.rb -e production
     networks:
-      - sample_app-networks
+      - ruby_rails_boilerplate-networks
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://postgres:password@5432:5432/rails_boilerplate_development
+      DATABASE_URL: postgres://default:z9GYTlrXa8Qx@ep-bold-voice-a4yp8xc9-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require
+      POSTGRES_URL: postgres://default:z9GYTlrXa8Qx@ep-bold-voice-a4yp8xc9-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require
+      POSTGRES_PRISMA_URL: postgres://default:z9GYTlrXa8Qx@ep-bold-voice-a4yp8xc9-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15
+      POSTGRES_URL_NO_SSL: postgres://default:z9GYTlrXa8Qx@ep-bold-voice-a4yp8xc9-pooler.us-east-1.aws.neon.tech:5432/verceldb
+      POSTGRES_URL_NON_POOLING: postgres://default:z9GYTlrXa8Qx@ep-bold-voice-a4yp8xc9.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require
+      POSTGRES_USER: default
+      POSTGRES_HOST: ep-bold-voice-a4yp8xc9-pooler.us-east-1.aws.neon.tech
+      POSTGRES_PASSWORD: z9GYTlrXa8Qx
+      POSTGRES_DATABASE: verceldb
       POSTGRES_HOST_AUTH_METHOD: trust
     stdin_open: true
     tty: true
 
   postgres:
     image: postgres:13
-    container_name: sample_app.postgres
+    container_name: ruby_rails_boilerplate.postgres
     volumes:
       - db-data:/var/lib/postgresql/data
     networks:
-      - sample_app-networks
+      - ruby_rails_boilerplate-networks
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
@@ -38,15 +46,15 @@ services:
   redis:
     image: redis
     command: redis-server
-    container_name: sample_app.redis
+    container_name: ruby_rails_boilerplate.redis
     volumes:
       - redis-data:/var/shared/redis
     networks:
-      - sample_app-networks
+      - ruby_rails_boilerplate-networks
 
 networks:
   sample_app-networks:
-    name: sample_app
+    name: ruby_rails_boilerplate
     external: true
 
 volumes:

@@ -12,9 +12,13 @@ const nextConfig = {
       dynamic: 30,
     },
   },
-  serverExternalPackages: ["@node-rs/argon2"],
+  // serverExternalPackages: ["@node-rs/argon2"],
   images: {
-    domains: ['localhost', 'your-production-domain.com'],
+    domains: [
+      'localhost', 
+      'ruby-rails-boilerplate.vercel.app',
+      'ruby-rails-boilerplate-h3xkxjxom-maearons-projects.vercel.app'
+    ],
     remotePatterns: [
       {
         protocol: 'https',
@@ -41,18 +45,37 @@ const nextConfig = {
         pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "utfs.io",
+        protocol: 'https',
+        hostname: 'ruby-rails-boilerplate-3s9t.onrender.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'utfs.io',
+        port: '',
         pathname: `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/*`,
       },
     ],
   },
   env: {
-    CLIENT_ID: process.env.CLIENT_ID,
-    REDIRECT_URI: process.env.REDIRECT_URI,
-    SCOPE: process.env.SCOPE,
-    CLIENT_SECRET: process.env.CLIENT_SECRET,
-    API_KEY: process.env.API_KEY,
+    POSTGRES_URL: process.env.POSTGRES_URL,
+    POSTGRES_PRISMA_URL: process.env.POSTGRES_PRISMA_URL,
+    POSTGRES_URL_NO_SSL: process.env.POSTGRES_URL_NO_SSL,
+    POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING,
+    POSTGRES_USER: process.env.POSTGRES_USER,
+    POSTGRES_HOST: process.env.POSTGRES_HOST,
+    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
+    POSTGRES_DATABASE: process.env.POSTGRES_DATABASE,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
+    NEXT_PUBLIC_UPLOADTHING_APP_ID: process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID,
+    NEXT_PUBLIC_STREAM_KEY: process.env.NEXT_PUBLIC_STREAM_KEY,
+    STREAM_SECRET: process.env.STREAM_SECRET,
+    CRON_SECRET: process.env.CRON_SECRET,
+    NEXT_PUBLIC_BASE_URL_LOCAL: process.env.NEXT_PUBLIC_BASE_URL_LOCAL,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   },
   rewrites: () => {
     return [

@@ -68,7 +68,7 @@ export const fileRouter = {
             "/f/",
             `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,
           ),
-          type: file.type.startsWith("image") ? "IMAGE" : "VIDEO",
+          media_type: file.type.startsWith("image") ? "IMAGE" : "VIDEO",
         },
       });
 

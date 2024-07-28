@@ -2,13 +2,19 @@
 
 import { lucia } from "@/auth";
 import prisma from "@/lib/prisma";
-import streamServerClient from "@/lib/stream";
+// import streamServerClient from "@/lib/stream";
 import { signUpSchema, SignUpValues } from "@/lib/validation";
-import { hash } from "@node-rs/argon2";
+// import { hash } from "@node-rs/argon2";
+import bcrypt from 'bcrypt';
+// import { scrypt, randomBytes } from 'crypto';
+// import { promisify } from 'util';
+import { Prisma } from "@prisma/client";
 import { generateIdFromEntropySize } from "lucia";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+
+type UserCreateInput = Prisma.UserCreateInput;
 
 export async function signUp(
   credentials: SignUpValues,
@@ -16,12 +22,14 @@ export async function signUp(
   try {
     const { username, email, password } = signUpSchema.parse(credentials);
 
-    const passwordHash = await hash(password, {
-      memoryCost: 19456,
-      timeCost: 2,
-      outputLen: 32,
-      parallelism: 1,
-    });
+    // const passwordHash = await hash(password, {
+    //   memoryCost: 19456,
+    //   timeCost: 2,
+    //   outputLen: 32,
+    //   parallelism: 1,
+    // });
+
+    const passwordHash = await bcrypt.hash(password, 12);
 
     const userId = generateIdFromEntropySize(10);
 
@@ -55,22 +63,35 @@ export async function signUp(
       };
     }
 
+    const now = new Date().toISOString(); // Thời gian hiện tại dưới định dạng ISO 8601
+
+    const transformedUser: UserCreateInput = {
+      id: userId,
+      username,
+      displayName: username,
+      email,
+      passwordHash, // Đây là nơi bạn gán giá trị đã hash cho passwordHash
+      created_at: now, // Thời gian hiện tại
+      updated_at: now, // Thời gian hiện tại
+    }
+
     await prisma.$transaction(async (tx) => {
       await tx.user.create({
-        data: {
-          id: userId,
-          username,
-          displayName: username,
-          email,
-          passwordHash,
-        },
+        // data: {
+        //   id: userId,
+        //   username,
+        //   displayName: username,
+        //   email,
+        //   passwordHash,
+        // },
+        data: transformedUser,
       });
-      // stream upsertUser
-      await streamServerClient.upsertUser({
-        id: userId,
-        username,
-        name: username,
-      });
+      // stream upsertUser not working for free account https://getstream.io/
+      // await streamServerClient.upsertUser({
+      //   id: userId,
+      //   username,
+      //   name: username,
+      // });
     });
 
     const session = await lucia.createSession(userId, {});

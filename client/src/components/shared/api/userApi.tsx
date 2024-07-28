@@ -1,10 +1,20 @@
 import API from '.';
 import { Micropost } from './micropostApi';
-import { User as UserCreate } from '../../../redux/session/sessionSlice';
+// import { User as UserCreate } from '../../../redux/session/sessionSlice';
 
 export interface ListParams {
   page?: number
   [key: string]: any
+}
+
+export interface UserCreate {
+  readonly id: number
+  email: string
+  name: string
+  role: boolean
+  avatar?: string
+  passwordHash: string;
+  test_cookie: string;
 }
 
 export interface ListResponse<User> {

@@ -1,4 +1,4 @@
-user = User.create!(id: SecureRandom.uuid,
+user = User.create!(id: '00cffeed-248f-4fc5-92ff-b99ebbad7e8d',
              name:  "Example User",
              username: Faker::Internet.unique.username,
              displayName:  "Example User",
@@ -30,34 +30,39 @@ Session.create!(id: SecureRandom.uuid,
               activated_at: Time.zone.now)
 end
 
+User.find_each do |user|
+  user.passwordHash = user.password_digest 
+  user.save!
+end  
+
 # Generate posts for a subset of users.
-users = User.order(:created_at).take(6)
-50.times do
-  content = Faker::Lorem.sentence(word_count: 5)
-  users.each do |user|
-    id = SecureRandom.uuid
-    Post.create!(
-      id: id,
-      content: content,
-      userId: user.id,
-      createdAt: Time.zone.now
-    )
-    PostMedia.create!(
-      id: SecureRandom.uuid,
-      postId: id,
-      media_type: 'VIDEO',
-      url: 'https://www.youtube.com/embed/VUfVxg0Bduk?si=8vnFVL5JQmuEj5Af?autoplay=1',
-      createdAt: Time.zone.now
-    )
-    PostMedia.create!(
-      id: SecureRandom.uuid,
-      postId: id,
-      media_type: 'PHOTO',
-      url: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=yttags.com',
-      createdAt: Time.zone.now
-    )
-  end
-end
+# users = User.order(:created_at).take(6)
+# 50.times do
+#   content = Faker::Lorem.sentence(word_count: 5)
+#   users.each do |user|
+#     id = SecureRandom.uuid
+#     Post.create!(
+#       id: id,
+#       content: content,
+#       userId: user.id,
+#       createdAt: Time.zone.now
+#     )
+#     PostMedia.create!(
+#       id: SecureRandom.uuid,
+#       postId: id,
+#       media_type: 'VIDEO',
+#       url: 'https://www.youtube.com/embed/VUfVxg0Bduk?si=8vnFVL5JQmuEj5Af?autoplay=1',
+#       createdAt: Time.zone.now
+#     )
+#     PostMedia.create!(
+#       id: SecureRandom.uuid,
+#       postId: id,
+#       media_type: 'PHOTO',
+#       url: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=yttags.com',
+#       createdAt: Time.zone.now
+#     )
+#   end
+# end
 
 # Create following relationships.
 # users = User.all

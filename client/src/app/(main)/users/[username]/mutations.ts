@@ -1,6 +1,6 @@
 import { useToast } from "@/components/ui/use-toast";
 import { PostsPage } from "@/lib/types";
-// import { useUploadThing } from "@/lib/uploadthing";
+import { useUploadThing } from "@/lib/uploadthing";
 import { UpdateUserProfileValues } from "@/lib/validation";
 import {
   InfiniteData,
@@ -9,9 +9,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { startAvatarUpload, updateUserProfile } from "./actions";
-import { update, UpdateResponse } from "@/components/shared/api/userApi";
-// import { validateRequest } from "@/auth";
+import { updateUserProfile } from "./actions";
 
 export function useUpdateProfileMutation() {
   const { toast } = useToast();
@@ -20,7 +18,7 @@ export function useUpdateProfileMutation() {
 
   const queryClient = useQueryClient();
 
-  // const { startUpload: startAvatarUpload } = useUploadThing("avatar");
+  const { startUpload: startAvatarUpload } = useUploadThing("avatar");
 
   const mutation = useMutation({
     mutationFn: async ({
@@ -30,27 +28,13 @@ export function useUpdateProfileMutation() {
       values: UpdateUserProfileValues;
       avatar?: File;
     }) => {
-      let avatarUploadPromise: Promise<UpdateResponse | null>;
-    
-      if (avatar) {
-        const dataTransfer = new DataTransfer();
-        dataTransfer.items.add(avatar);
-  
-        const payload = new FormData();
-        payload.append('user[avatar]', dataTransfer.files[0], dataTransfer.files[0].name);
-  
-        avatarUploadPromise = startAvatarUpload(payload);
-      } else {
-        avatarUploadPromise = Promise.resolve(null);
-      }
-
       return Promise.all([
         updateUserProfile(values),
-        avatarUploadPromise,
+        avatar && startAvatarUpload([avatar]),
       ]);
     },
     onSuccess: async ([updatedUser, uploadResult]) => {
-      const newAvatarUrl = uploadResult?.avatarUrl;
+      const newAvatarUrl = uploadResult?.[0].serverData.avatarUrl;
 
       const queryFilter: QueryFilters = {
         queryKey: ["post-feed"],
@@ -91,7 +75,7 @@ export function useUpdateProfileMutation() {
       });
     },
     onError(error) {
-      console.error('error update user', error);
+      console.error(error);
       toast({
         variant: "destructive",
         description: "Failed to update profile. Please try again.",

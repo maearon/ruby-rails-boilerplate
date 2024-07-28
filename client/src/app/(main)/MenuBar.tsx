@@ -23,8 +23,7 @@ export default async function MenuBar({ className }: MenuBarProps) {
         read: false,
       },
     }),
-    (await streamServerClient.getUnreadCount(user.id)).total_unread_count,
-    // Math.random(),
+    await getUnreadMessagesCount(user.id),
   ]);
 
   return (
@@ -57,4 +56,15 @@ export default async function MenuBar({ className }: MenuBarProps) {
       </Button>
     </div>
   );
+}
+
+// Function to safely get unread message count
+async function getUnreadMessagesCount(userId: string): Promise<number> {
+  try {
+    const response = await streamServerClient.getUnreadCount(userId);
+    return response.total_unread_count;
+  } catch (error) {
+    console.error("Failed to get unread message count", error);
+    return 0;
+  }
 }

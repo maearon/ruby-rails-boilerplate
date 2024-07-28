@@ -1,9 +1,9 @@
 class StaticPagesController < ApplicationController
 
-  def detect_locale
-    I18n.locale = extract_locale_from_accept_language_header
-    redirect_to root_path(locale: I18n.locale)
-  end
+  # def detect_locale
+  #   I18n.locale = extract_locale_from_accept_language_header
+  #   redirect_to root_path(locale: I18n.locale)
+  # end
 
   def home
     if logged_in?

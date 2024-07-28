@@ -71,6 +71,35 @@ rails db:drop
 cd client &&
 npx prisma generate && 
 npx prisma migrate dev (rails db:migrate)
+
+manhpc@manhpc-B660M-D3H-DDR4:~/code/ruby-rails-boilerplate/client$ npx prisma migrate dev
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": PostgreSQL database "verceldb", schema "public" at "ep-bold-voice-a4yp8xc9.us-east-1.aws.neon.tech:5432"
+
+Applying migration `20240722050134_ruby_rails_boilerplate_development`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 20240722050134_ruby_rails_boilerplate_development/
+    └─ migration.sql
+
+
+
+Your database is now in sync with your schema.
+
+Running generate... (Use --skip-generate to skip the generators)
+
+✔ Generated Prisma Client (v5.17.0) to ./node_modules/@prisma/client in 130ms
+
+
+manhpc@manhpc-B660M-D3H-DDR4:~/code/ruby-rails-boilerplate/client$ 
+ 1953  git checkout 6757f51096580846978602258ea87eabee204ef2 -- Dockerfile
+ 1954  git status
+ 1955  git checkout 6757f51096580846978602258ea87eabee204ef2 -- docker-compose.yml
+
+
 rails db:seed (prisma introspect && npx prisma db pull && npx prisma db push)
 cd ..
 rails s -p 3001
