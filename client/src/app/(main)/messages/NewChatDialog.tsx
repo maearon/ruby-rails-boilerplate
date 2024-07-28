@@ -44,7 +44,7 @@ export default function NewChatDialog({
       client.queryUsers(
         {
           id: { $ne: loggedInUser.id },
-          role: { $ne: "admin" },
+          // role: { $ne: "user" },
           ...(searchInputDebounced
             ? {
                 $or: [
@@ -61,16 +61,20 @@ export default function NewChatDialog({
 
   const mutation = useMutation({
     mutationFn: async () => {
-      const channel = client.channel("messaging", {
-        members: [loggedInUser.id, ...selectedUsers.map((u) => u.id)],
-        name:
-          selectedUsers.length > 1
-            ? loggedInUser.displayName +
-              ", " +
-              selectedUsers.map((u) => u.name).join(", ")
-            : undefined,
+      const channelId = `self-chat-${loggedInUser.id}`;
+      const channel = client.channel("messaging", channelId, {
+        members: [loggedInUser.id],
+        name: loggedInUser.displayName
       });
-      await channel.create();
+      try {
+        const response = await channel.create();
+        console.log('Channel created:', response);
+      } catch (error) {
+        console.error('Error creating channel:', error);
+      }
+      const result = await channel.addMembers([{user_id: "00cffeed-248f-4fc5-92ff-b99ebbad7e8d"}]);
+      // const result1 = await channel.addMembers([{user_id: "0649d146-060c-4c8e-86c1-b975947c49b4"}]);
+      console.log(result.members[0].channel_role) // "channel_member"
       return channel;
     },
     onSuccess: (channel) => {

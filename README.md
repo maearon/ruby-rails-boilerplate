@@ -74,6 +74,8 @@ npx prisma migrate dev (rails db:migrate)
 rails db:seed (prisma introspect && npx prisma db pull && npx prisma db push)
 cd ..
 rails s -p 3001
+(git checkout 1242dc57c527178d6bffd6980c884ba4478bafd4 -- db/migrate)
+(rails status code symbol: https://gist.github.com/mlanett/a31c340b132ddefa9cca)
 ```
 
 ## Links

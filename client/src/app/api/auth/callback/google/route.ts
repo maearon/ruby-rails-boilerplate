@@ -74,6 +74,7 @@ export async function GET(req: NextRequest) {
           googleId: googleUser.id,
         },
       });
+      // stream upsertUser
       await streamServerClient.upsertUser({
         id: userId,
         username,

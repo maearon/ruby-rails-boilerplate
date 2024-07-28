@@ -13,10 +13,13 @@ export interface ListResponse<User> {
 }
 
 export interface User {
-  readonly id: number
+  readonly id: string
   name: string
-  gravatar_id: string
-  size: number
+  username: string
+  displayName: string
+  avatarUrl: string
+  // gravatar_id: string
+  // size: number
 }
 
 export interface CreateParams {
@@ -140,6 +143,7 @@ const userApi = {
 export default userApi;
 export const { create } = userApi;
 export const { update } = userApi;
+export const { index } = userApi;
 
 export interface UserFollow {
   readonly id: number

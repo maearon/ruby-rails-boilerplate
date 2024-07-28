@@ -65,6 +65,7 @@ export async function signUp(
           passwordHash,
         },
       });
+      // stream upsertUser
       await streamServerClient.upsertUser({
         id: userId,
         username,
