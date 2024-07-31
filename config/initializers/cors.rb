@@ -31,6 +31,14 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
+    origins 'http://localhost:3002'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
+  end
+
+  allow do
     origins 'http://localhost:4200'
 
     resource '*',
@@ -64,6 +72,38 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 
   allow do
     origins 'https://ruby-rails-boilerplate.vercel.app'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
+  end
+
+  allow do
+    origins 'https://funny-movies-79gl1t9ss-maearons-projects.vercel.app'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
+  end
+
+  allow do
+    origins 'https://funny-movies-pied.vercel.app'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
+  end
+
+  allow do
+    origins 'https://sample-1xdla8a74-maearons-projects.vercel.app'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
+  end
+
+  allow do
+    origins 'https://sample-app-beta-lac.vercel.app'
 
     resource '*',
       headers: :any,

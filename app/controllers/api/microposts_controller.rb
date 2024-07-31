@@ -2,9 +2,13 @@ class Api::MicropostsController < Api::ApiController
   before_action :authenticate!, except: %i[create]
   before_action :correct_user,   only: :destroy
   def create
+    @micropost = Micropost.new(micropost_params.except(:image))
+    @micropost.image.attach(params[:micropost][:image]) if params[:micropost] && params[:micropost][:image].present?
+    @micropost.content = micropost_params[:content] if micropost_params[:content].present?
+    @micropost.user_id = current_user.id if current_user.present?
     # binding.b
-    @micropost = current_user.microposts.build(micropost_params)
-    @micropost.image.attach(params[:micropost][:image])
+    # @micropost = current_user.microposts.build(micropost_params)
+    # @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
       render json: { flash: ["success", "Micropost created!"] }
     else

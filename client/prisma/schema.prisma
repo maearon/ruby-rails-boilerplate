@@ -34,7 +34,7 @@ model User {
   reset_digest                String?      @db.VarChar
   reset_sent_at               DateTime?    @db.Timestamp(6)
   // carts                       carts[]
-  // microposts                  microposts[]
+  microposts                  microposts[]
   // orders                      orders[]
   // reviews                     reviews[]
   sessions                    Session[]
@@ -216,10 +216,11 @@ model messages {
 model microposts {
   id         BigInt   @id @default(autoincrement())
   content    String?
-  user_id    BigInt
+  user_id    String
   created_at DateTime @db.Timestamp(6)
   updated_at DateTime @db.Timestamp(6)
   // users      User     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_558c81314b")
+  users         User     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_558c81314b")
 
   @@index([user_id], map: "index_microposts_on_user_id")
   @@index([user_id, created_at], map: "index_microposts_on_user_id_and_created_at")
@@ -289,8 +290,8 @@ model projects {
 
 model relationships {
   id          BigInt   @id @default(autoincrement())
-  follower_id Int?
-  followed_id Int?
+  follower_id String?
+  followed_id String?
   created_at  DateTime @db.Timestamp(6)
   updated_at  DateTime @db.Timestamp(6)
 
