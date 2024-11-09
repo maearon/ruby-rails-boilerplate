@@ -38,9 +38,6 @@ class User < ApplicationRecord
   # Custom validation (potentially user-defined method)
   validates_by_type(type: :string, except: %i[email password_digest refresh_token], opt: STRING_VALIDATION)
 
-  # Enum declaration
-  enum admin: { admin: true, user: false }
-
   # Associations for carts, wishes, orders, and reviews
   has_one :cart, dependent: :destroy
   has_one :wish, dependent: :destroy
@@ -77,6 +74,10 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email = email.downcase
+  end
+
+  def admin?
+    self.admin
   end
 
   # def create_activation_digest
