@@ -1,4 +1,4 @@
-FROM ruby:3.3.3
+FROM ruby:3.3.6
 
 # Install node & yarn
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
