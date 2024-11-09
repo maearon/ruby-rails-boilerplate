@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   include RefreshTokenUpdatable
 
+  # bcrypt
+  has_secure_password
+
   # Accessor for temporary tokens
   attr_accessor :remember_token, :activation_token, :reset_token
 
