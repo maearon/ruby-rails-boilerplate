@@ -3,10 +3,7 @@
 import { lucia } from "@/auth";
 import prisma from "@/lib/prisma";
 import { loginSchema, LoginValues } from "@/lib/validation";
-// import { verify } from "@node-rs/argon2";
 import bcrypt from 'bcrypt';
-// import { scrypt } from 'crypto';
-// import { promisify } from "util";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -32,13 +29,7 @@ export async function login(
       };
     }
 
-    // const validPassword = await verify(existingUser.passwordHash, password, {
-    //   memoryCost: 19456,
-    //   timeCost: 2,
-    //   outputLen: 32,
-    //   parallelism: 1,
-    // });
-
+    // Use bcrypt to compare the entered password with the stored hash
     const validPassword = await bcrypt.compare(password, existingUser.passwordHash);
 
     if (!validPassword) {
@@ -47,18 +38,27 @@ export async function login(
       };
     }
 
+    // Create a session for the user if authentication is successful
     const session = await lucia.createSession(existingUser.id, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
+    
+    // Set the session cookie in the browser
     cookies().set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes,
     );
 
+    // Redirect to the home page after successful login
     return redirect("/");
   } catch (error) {
+    // Check if the error is a redirect error and throw it
     if (isRedirectError(error)) throw error;
-    console.error(error);
+
+    // Log the error details to help diagnose the issue
+    console.error("Login error:", error);
+
+    // Return a generic error message to the user
     return {
       error: "Something went wrong. Please try again.",
     };
