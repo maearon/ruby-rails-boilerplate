@@ -32,7 +32,7 @@ WORKDIR /app
 
 # Install Bundler and dependencies
 COPY Gemfile Gemfile.lock /app/
-RUN gem install bundler:2.5.11 && \
+RUN gem install bundler:2.6.2 && \
     bundle config set without 'development test' && \
     bundle install ${BUNDLE_INSTALL_ARGS:-"--jobs=4 --retry=3"} && \
     rm -rf /usr/local/bundle/cache/* && \
