@@ -32,7 +32,7 @@ WORKDIR /app
 
 # Install Bundler and dependencies
 COPY Gemfile Gemfile.lock /app/
-RUN gem install bundler:2.6.2 && \
+RUN gem install bundler:2.5.11 && \
     bundle config set without 'development test' && \
     bundle install ${BUNDLE_INSTALL_ARGS:-"--jobs=4 --retry=3"} && \
     rm -rf /usr/local/bundle/cache/* && \
@@ -47,6 +47,10 @@ ARG RAILS_ENV=development
 RUN if [ "$RAILS_ENV" = "production" ]; then \
       SECRET_KEY_BASE=$(rake secret) bundle exec rake assets:precompile; \
     fi
+
+# Add a health check for the application
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:3000/ || exit 1
 
 # Define a volume for persistent database storage
 VOLUME /rails/db
