@@ -34,7 +34,7 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock /app/
 RUN gem install bundler:2.5.11 && \
     bundle config set without 'development test' && \
-    bundle install ${BUNDLE_INSTALL_ARGS} && \
+    bundle install ${BUNDLE_INSTALL_ARGS:-"--jobs=4 --retry=3"} && \
     rm -rf /usr/local/bundle/cache/* && \
     find /usr/local/bundle/gems/ -name "*.c" -delete && \
     find /usr/local/bundle/gems/ -name "*.o" -delete
