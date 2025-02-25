@@ -1,51 +1,47 @@
-FROM ruby:3.1.2
+# Base image với Ruby 3.2.2 thay vì 3.1.2
+FROM ruby:3.42
 
-RUN apt-get update -yq \
-  && apt-get upgrade -yq \
-  #ESSENTIALS
-  && apt-get install -y -qq --no-install-recommends build-essential curl git-core vim passwd unzip cron gcc wget netcat \
-  # RAILS PACKAGES NEEDED
-  && apt-get update \
-  && apt-get install -y --no-install-recommends imagemagick postgresql-client \
-  # INSTALL NODE
-  && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
-  && apt-get install -y --no-install-recommends nodejs \
-  # INSTALL YARN
-  && npm install -g yarn
+# Cài đặt các dependencies cần thiết
+RUN apt-get update -yq && apt-get install -y --no-install-recommends \
+    build-essential curl git vim unzip cron gcc wget netcat \
+    imagemagick postgresql-client \
+    nodejs && corepack enable && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Clean cache and temp files, fix permissions
-RUN apt-get clean -qy \
-  && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir /app
+# Tạo thư mục ứng dụng
+RUN mkdir -p /app
 WORKDIR /app
 
-COPY package.json yarn.lock
-RUN yarn install
+# Copy và cài đặt Yarn dependencies trước để tận dụng cache
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
-# install specific version of bundler
+# Cài đặt Bundler và Gems
 RUN gem install bundler -v 2.2.32
-
-ENV BUNDLE_GEMFILE=/app/Gemfile \
-  BUNDLE_JOBS=20 \
-  BUNDLE_PATH=/bundle \
-  BUNDLE_BIN=/bundle/bin \
-  GEM_HOME=/bundle
-ENV PATH="${BUNDLE_BIN}:${PATH}"
-
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --binstubs --without development test
+RUN bundle install --without development test
 
+# Copy mã nguồn ứng dụng
 COPY . .
 
-ENV RAILS_ENV production
-ENV RAILS_SERVE_STATIC_FILES 1
-ENV RAILS_LOG_TO_STDOUT 1
+# Định nghĩa biến môi trường
+ENV RAILS_ENV=production \
+    RAILS_SERVE_STATIC_FILES=true \
+    RAILS_LOG_TO_STDOUT=true
 
-RUN SECRET_KEY_BASE=skb DB_ADAPTER=nulldb bundle exec rails assets:precompile
+# Chạy precompile assets nếu cần
+RUN SECRET_KEY_BASE=dummy_key DB_ADAPTER=nulldb bundle exec rails assets:precompile
 
+# Chạy ứng dụng với user không phải root
+RUN adduser --disabled-login --gecos "" appuser
+USER appuser
+
+# Entrypoint script
 RUN chmod +x entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]
 
+# Expose cổng 3000
 EXPOSE 3000
-CMD bundle exec puma -C config/puma.rb
+
+# Chạy Puma server
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

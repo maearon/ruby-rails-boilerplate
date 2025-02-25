@@ -1,24 +1,15 @@
-# Use Ruby base image
-FROM ruby:3.3.6
+# Use stable Ruby image
+FROM ruby:3.4.2
 
-# Install Node.js and Yarn
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get update && \
-    apt-get install -y \
+# Install Node.js and Yarn using corepack
+RUN apt-get update && apt-get install -y curl \
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    && corepack enable
+
+# Install base dependencies
+RUN apt-get install -y \
     libvips-dev \
-    nodejs \
-    curl && \
-    curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && \
-    apt-get install -y yarn && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Install base dependencies or additional packages
-ARG INSTALL_DEPENDENCIES
-RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends ${INSTALL_DEPENDENCIES} \
     build-essential \
     libpq-dev \
     git && \
@@ -26,37 +17,39 @@ RUN apt-get update -qq && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
-# Set up application directory
-RUN mkdir -p /app
+# Create a non-root user
+RUN adduser --disabled-login --gecos "" appuser
+
+# Create app directory and set permissions
+RUN mkdir -p /app && chown -R appuser:appuser /app
 WORKDIR /app
 
-# Install Bundler and dependencies
-COPY Gemfile Gemfile.lock /app/
-RUN gem install bundler:2.6.2 && \
-    bundle config set without 'development test' && \
-    bundle install ${BUNDLE_INSTALL_ARGS:-"--jobs=4 --retry=3"} && \
-    rm -rf /usr/local/bundle/cache/* && \
-    find /usr/local/bundle/gems/ -name "*.c" -delete && \
-    find /usr/local/bundle/gems/ -name "*.o" -delete
+# Copy Gemfile first to leverage caching
+COPY Gemfile Gemfile.lock ./
+RUN gem install bundler && bundle install --jobs=4 --retry=3
 
-# Copy application code
-COPY . /app/
+# Copy remaining app files
+COPY . .
 
-# Compile assets for production
+# Change ownership to appuser after copying files
+RUN chown -R appuser:appuser /app
+
+# Precompile assets only if in production
 ARG RAILS_ENV=development
+ENV RAILS_ENV=${RAILS_ENV}
 RUN if [ "$RAILS_ENV" = "production" ]; then \
-      SECRET_KEY_BASE=$(rake secret) bundle exec rake assets:precompile; \
+      SECRET_KEY_BASE=dummy_key bundle exec rake assets:precompile; \
     fi
 
-# Add a health check for the application
+# Add health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
     CMD curl -f http://localhost:3000/ || exit 1
 
-# Define a volume for persistent database storage
-VOLUME /rails/db
-
-# Expose the port for Rails
+# Expose Rails port
 EXPOSE 3000
 
-# Set the default command
+# Switch to non-root user
+USER appuser
+
+# Start Rails server
 CMD ["rails", "server", "-b", "0.0.0.0"]

@@ -18,9 +18,7 @@ interface PageProps {
 
 const getPost = cache(async (postId: string, loggedInUserId: string) => {
   const post = await prisma.post.findUnique({
-    where: {
-      id: postId,
-    },
+    where: { id: postId },
     include: getPostDataInclude(loggedInUserId),
   });
 
@@ -29,32 +27,25 @@ const getPost = cache(async (postId: string, loggedInUserId: string) => {
   return post;
 });
 
-export async function generateMetadata({
-  params: { postId },
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { user } = await validateRequest();
-
   if (!user) return {};
 
-  const post = await getPost(postId, user.id);
+  const post = await getPost(params.postId, user.id);
 
   return {
     title: `${post.user.displayName}: ${post.content.slice(0, 50)}...`,
   };
 }
 
-export default async function Page({ params: { postId } }: PageProps) {
+export default async function Page({ params }: PageProps) {
   const { user } = await validateRequest();
 
   if (!user) {
-    return (
-      <p className="text-destructive">
-        You&apos;re not authorized to view this page.
-      </p>
-    );
+    return <p className="text-destructive">You're not authorized to view this page.</p>;
   }
 
-  const post = await getPost(postId, user.id);
+  const post = await getPost(params.postId, user.id);
 
   return (
     <main className="flex w-full min-w-0 gap-5">
@@ -76,25 +67,17 @@ interface UserInfoSidebarProps {
 
 async function UserInfoSidebar({ user }: UserInfoSidebarProps) {
   const { user: loggedInUser } = await validateRequest();
-
   if (!loggedInUser) return null;
 
   return (
     <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm">
       <div className="text-xl font-bold">About this user</div>
       <UserTooltip user={user}>
-        <Link
-          href={`/users/${user.username}`}
-          className="flex items-center gap-3"
-        >
+        <Link href={`/users/${user.username}`} className="flex items-center gap-3">
           <UserAvatar avatarUrl={user.avatarUrl} className="flex-none" />
           <div>
-            <p className="line-clamp-1 break-all font-semibold hover:underline">
-              {user.displayName}
-            </p>
-            <p className="line-clamp-1 break-all text-muted-foreground">
-              @{user.username}
-            </p>
+            <p className="line-clamp-1 break-all font-semibold hover:underline">{user.displayName}</p>
+            <p className="line-clamp-1 break-all text-muted-foreground">@{user.username}</p>
           </div>
         </Link>
       </UserTooltip>
@@ -108,9 +91,7 @@ async function UserInfoSidebar({ user }: UserInfoSidebarProps) {
           userId={user.id}
           initialState={{
             followers: user._count.followers,
-            isFollowedByUser: user.followers.some(
-              ({ followerId }) => followerId === loggedInUser.id,
-            ),
+            isFollowedByUser: user.followers.some(({ followerId }) => followerId === loggedInUser.id),
           }}
         />
       )}
