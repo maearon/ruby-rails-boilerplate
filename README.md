@@ -20,7 +20,7 @@ Rails REST API boilerplate for typical project can connect and interact with Pos
 - [x] Config Service ([rails/config](https://guides.rubyonrails.org/configuring.html)).
 - [x] Mailing ([activemail](https://guides.rubyonrails.org/action_mailer_basics.html)).
 - [x] Sign in and sign up via email.
-- [x] Social sign in (Apple, Facebook, Google, Twitter).
+- [x] Social sign in (Apple, Facebook, Google, X).
 - [x] Admin and User roles.
 - [x] I18N ([rails-i18n](https://guides.rubyonrails.org/i18n.html)).
 - [x] File uploads. Support local and Amazon S3 drivers.
