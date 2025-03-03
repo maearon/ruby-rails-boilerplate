@@ -1,9 +1,4 @@
 # Next.js 15 Social Media App
-```
-npm i --save-dev next@latest react react-dom eslint-config-next@latest @types/react @types/react-dom
-
-npm install next@latest react@rc react-dom@rc
-```
 
 A full-stack social media app with infinite loading, optimistic updates, authentication, DMs, notifications, file uploads, and much more.
 
