@@ -72,9 +72,10 @@ class Api::UsersController < Api::ApiController
   end
 
   def user_params
-    params.require(:user).permit(
-      :avatar
-    )
+    permitted_params = [:name, :email, :password, :password_confirmation]
+    permitted_params << :avatar if action_name == "update"
+  
+    params.require(:user).permit(*permitted_params)
   end
 
   def correct_user
