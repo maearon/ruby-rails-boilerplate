@@ -1,5 +1,6 @@
 class Api::UsersController < Api::ApiController
-  before_action :authenticate!, except: %i[create, update, index]
+  before_action :authenticate!, except: %i[update, index]
+  skip_before_action :authenticate!, only: [:create]
   before_action :set_user,       except: %i[index create]
   before_action :correct_user,   only: %i[destroy]
   before_action :admin_user,     only: %i[destroy]
