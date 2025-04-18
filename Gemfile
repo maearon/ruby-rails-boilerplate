@@ -131,7 +131,6 @@ gem 'jwt'
 gem 'graphql'
 gem 'rake', '13.2.1'
 # gem 'dotenv'
-# gem 'graphql'
 # gem "graphiql-rails", group: :development
 # gem 'search_object_graphql'
 gem 'rubyzip', '~> 2.3.0'
