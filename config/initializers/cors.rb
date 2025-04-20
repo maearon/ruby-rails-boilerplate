@@ -7,6 +7,15 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
+    origins 'https://aa9e-2001-ee0-4422-98f0-73c6-d4af-616c-fc1.ngrok-free.app', 'https://studio.apollographql.com'
+  
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head],
+      credentials: true
+  end
+
+  allow do
     origins 'http://localhost:19006'
 
     resource '*',

@@ -6,6 +6,12 @@ module Types
       argument :id, ID, required: true, description: "ID of the object."
     end
 
+    field :users, [Types::UserType], null: false
+
+    def users
+      User.all
+    end
+
     def node(id:)
       context.schema.object_from_id(id, context)
     end

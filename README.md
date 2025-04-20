@@ -170,3 +170,19 @@ docker compose -f docker-compose.ci.yaml --env-file env-example -p ci up --build
 ```bash
 docker run --rm jordi/ab -n 100 -c 100 -T application/json -H "Authorization: Bearer USER_TOKEN" -v 2 http://<server_ip>:3001/api/v1/users
 ```
+
+## Test graphql
+
+```bash
+curl -X POST http://localhost:3000/graphql   -H "Content-Type: application/json"   -d '{"query": "{ users { id name } }"}'
+ngrok http 3000
+https://studio.apollographql.com/sandbox/explorer
+https://aa9e-2001-ee0-4422-98f0-73c6-d4af-616c-fc1.ngrok-free.app/graphql
+https://ruby-rails-boilerplate-3s9t.onrender.com/graphql
+query GetUsers {
+  users {
+    id
+    name
+  }
+}
+```

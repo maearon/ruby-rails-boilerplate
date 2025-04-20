@@ -35,7 +35,7 @@ class GraphqlController < ApplicationController
     when Hash
       variables_param
     when ActionController::Parameters
-      variables_param.to_unsafe_hash # GraphQL-Ruby will validate name and type of incoming variables.
+      variables_param.to_unsafe_hash # graphql_controller will validate name and type of incoming variables.
     when nil
       {}
     else
