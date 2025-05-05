@@ -3,6 +3,7 @@ json.users do
     json.id u.id
     json.name u.name
     json.email u.email
+    json.gravatar_id Digest::MD5::hexdigest(u.email.downcase)
     json.size 30
     json.username u.username
     json.displayName u.displayName
