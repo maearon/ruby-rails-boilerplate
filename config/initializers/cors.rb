@@ -72,6 +72,14 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
+    origins 'http://localhost:5173'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
+  end
+
+  allow do
     origins 'https://ruby-rails-boilerplate-chv2p231v-maearons-projects.vercel.app'
 
     resource '*',
