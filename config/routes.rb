@@ -65,6 +65,8 @@ Rails.application.routes.draw do
     resources :sessions,          only: [:index]
     delete '/logout',             to: 'sessions#destroy'
     post   '/login',              to: 'sessions#create'
+    post   '/refresh',            to: 'sessions#refresh'
+    post   '/revoke',             to: 'sessions#revoke'
     resources :users do
       member do
         get :following, :followers
