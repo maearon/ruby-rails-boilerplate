@@ -158,4 +158,12 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
   end
+
+  allow do
+    origins 'http://192.168.1.7:5555', 'http://localhost:5555' # Flutter Web (VD: chạy trên port khác) # Flutter local web build (nếu bạn test local)
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
+  end
 end
