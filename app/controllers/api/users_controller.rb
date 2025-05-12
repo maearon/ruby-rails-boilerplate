@@ -1,5 +1,5 @@
 class Api::UsersController < Api::ApiController
-  before_action :authenticate!, except: %i[create, update, index]
+  before_action :authenticate!,  except: %i[create]
   before_action :set_user,       except: %i[index create]
   before_action :correct_user,   only: %i[destroy]
   before_action :admin_user,     only: %i[destroy]
@@ -19,6 +19,9 @@ class Api::UsersController < Api::ApiController
 
   def create
     @user = User.new(user_params)
+    @user.id = SecureRandom.uuid  # Gán GUID cho @user.id
+    @user.displayName = @user.name
+    @user.username = @user.email.split('@').first
     if @user.save
       @user.create_activation_digest
       @user.send_activation_email
