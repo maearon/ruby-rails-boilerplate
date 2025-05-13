@@ -89,4 +89,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   post "/graphql", to: "graphql#execute"
+  post '/api/ai/chat', to: 'api/ai#chat'
 end

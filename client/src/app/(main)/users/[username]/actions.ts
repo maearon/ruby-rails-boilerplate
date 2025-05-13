@@ -1,7 +1,7 @@
 "use server";
 
 import { validateRequest } from "@/auth";
-import { update } from "@/components/shared/api/userApi";
+// import { update } from "@/components/shared/api/userApi";
 import prisma from "@/lib/prisma";
 // import streamServerClient from "@/lib/stream";
 import { getUserDataSelect } from "@/lib/types";
@@ -35,12 +35,12 @@ export async function updateUserProfile(values: UpdateUserProfileValues) {
   return updatedUser;
 }
 
-export async function startAvatarUpload(payload: FormData) {
-  const { user } = await validateRequest();
+// export async function startAvatarUpload(payload: FormData) {
+//   const { user } = await validateRequest();
 
-  if (!user) throw new Error("Unauthorized");
+//   if (!user) throw new Error("Unauthorized");
 
-  const res = await update(user.id, payload);
+//   const res = await update(user.id, payload);
   
-  return res;
-}
+//   return res;
+// }

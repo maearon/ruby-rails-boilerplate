@@ -1,0 +1,10 @@
+tools:
+  time_now:
+    description: "Hiển thị thời gian hiện tại ở một múi giờ"
+    parameters:
+      type: object
+      properties:
+        timezone:
+          type: string
+          description: "Múi giờ (ví dụ: Asia/Ho_Chi_Minh)"
+      required: [timezone]

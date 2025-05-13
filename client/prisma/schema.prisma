@@ -434,6 +434,8 @@ model Session {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
+  // ✅ Sửa dòng này:
+  payload   Json? // <-- cho phép null bằng cách thêm `?`
 }
 
 
