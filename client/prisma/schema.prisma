@@ -14,7 +14,7 @@ model User {
   id                    String         @id
   name                        String?      @db.VarChar
   username              String         @unique
-  displayName           String
+  displayName           String?
   email                       String?      @unique(map: "index_admin_users_email_uniqueness") @db.VarChar
   refresh_token               String?      @unique(map: "index_admin_users_refresh_token_uniqueness") @db.VarChar
   refresh_token_expiration_at DateTime?    @db.Timestamp(6)
@@ -33,6 +33,9 @@ model User {
   activated_at                DateTime?    @db.Timestamp(6)
   reset_digest                String?      @db.VarChar
   reset_sent_at               DateTime?    @db.Timestamp(6)
+  games                       Game[]
+  accounts                    Account[]
+  // sessions                    Session[]
   // carts                       carts[]
   microposts                  microposts[]
   // orders                      orders[]
@@ -83,6 +86,74 @@ model User {
 
 //   @@map("sessions")
 // }
+
+// model Session {
+//   id        String   @id
+//   userId    String
+//   expiresAt DateTime
+//   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+// 
+//   @@map("sessions")
+// }
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+enum GameType {
+  mcq
+  open_ended
+}
+
+model Game {
+  id          String     @id @default(cuid())
+  userId      String
+  questions   Question[]
+  timeStarted DateTime
+  topic       String
+  timeEnded   DateTime?
+  gameType    GameType
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model topic_count {
+  id    String @id @default(cuid())
+  topic String @unique
+  count Int
+}
+
+model Question {
+  id                String   @id @default(cuid())
+  question          String
+  answer            String
+  gameId            String
+  options           Json? // for mcq questions
+  percentageCorrect Float? // for open_ended questions
+  isCorrect         Boolean? // for mcq questions
+  questionType      GameType
+  userAnswer        String?
+
+  game Game @relation(fields: [gameId], references: [id])
+
+  @@index([gameId])
+}
 
 model active_storage_attachments {
   id                   BigInt               @id @default(autoincrement())
