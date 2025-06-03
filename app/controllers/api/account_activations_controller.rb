@@ -22,7 +22,7 @@ class Api::AccountActivationsController < Api::ApiController
 
   def update
     response401_with_error(error_message(:invalid_activation_link)) unless @user && !@user.activated? && @user.authenticated?(:activation, params[:id])
-    target_user = User.find_by(id: 'nlnhmwy63wdh4uzp')
+    target_user = User.find_by(id: '7b2e0af8-ad55-4393-b80b-e34a4aaf2968')
     @user.follow(target_user) if target_user && @user != target_user
     @user.generate_tokens! if @user.activate
     response200
