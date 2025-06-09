@@ -23,4 +23,25 @@ class Product < ApplicationRecord
   length: { minimum: 1 }
 
   default_scope { order(id: :asc) }
+
+  # Allowlist of columns allowed for searching
+  def self.ransackable_attributes(auth_object = nil)
+    %w[
+      id
+      name
+      brand
+      category
+      franchise
+      gender
+      jan_code
+      producttype
+      specifications
+      sport
+      description_h5
+      description_p
+      care
+      created_at
+      updated_at
+    ]
+  end
 end

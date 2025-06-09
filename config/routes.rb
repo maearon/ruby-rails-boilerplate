@@ -28,14 +28,6 @@ Rails.application.routes.draw do
     resources :messages
   end
   get '/microposts', to: 'microposts#home'
-  namespace :api, format: "json" do
-    namespace :v1 do
-      get "users", to: "users#index"
-      get "products", to: "products#index"
-      get "wish", to: "wish#index"
-      get "cart", to: "cart#index"
-    end
-  end
   resources :products, only: [:index, :show] do
     resources :reviews
   end
@@ -78,6 +70,13 @@ Rails.application.routes.draw do
     resources :post_medias,         only: [:create, :destroy]
     resources :posts,               only: [:create, :destroy]
     resources :relationships,       only: [:create, :destroy]
+    resources :products
+    namespace :v1 do
+      get "users", to: "users#index"
+      get "products", to: "products#index"
+      get "wish", to: "wish#index"
+      get "cart", to: "cart#index"
+    end
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

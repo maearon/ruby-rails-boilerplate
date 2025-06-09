@@ -1,4 +1,6 @@
 class Api::ApiController < ActionController::API
+  include LocaleHelper
+  helper_method :currency_code
   include ResponsesHandler
   include ErrorsHandler
   include ActionController::RequestForgeryProtection
