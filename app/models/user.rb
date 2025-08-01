@@ -23,10 +23,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
   has_secure_password
-  STRING_VALIDATION = {
-    with: /\A[a-zA-Z0-9_\-@. ]+\z/,
-    message: "chỉ cho phép chữ, số, gạch dưới, dấu chấm và khoảng trắng"
-  }
+  include TypeValidatable
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   default_scope { order(id: :asc) }
