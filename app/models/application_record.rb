@@ -1,6 +1,5 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
-  include TypeValidatable
 
   MAX_RECORD_NUMBER = 1000
 

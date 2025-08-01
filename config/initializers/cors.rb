@@ -24,6 +24,14 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
+    origins 'http://localhost:9000'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head], credentials: true
+  end
+
+  allow do
     origins 'http://localhost:3000'
 
     resource '*',
@@ -144,7 +152,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
-    origins 'https://react-ts-boilerplate-jade.vercel.app'
+    origins 'https://adidas-mocha.vercel.app'
 
     resource '*',
       headers: :any,

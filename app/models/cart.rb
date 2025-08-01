@@ -3,13 +3,12 @@ class Cart < ApplicationRecord
   has_many :cart_items, dependent: :destroy
 
   def cart(product, variant, quantity, action)
-    if current_item = cart_items.find_by(variant: variant)
-      current_item.quantity ||= 1
-      action == 'edit' ? current_item.quantity = quantity.to_i : current_item.quantity += quantity.to_i
-      current_item.save
-    else
-      cart_items.create(product: product,variant: variant, cart: self, quantity: quantity)
-    end
+    current_item = cart_items.find_or_initialize_by(variant: variant)
+    current_item.quantity ||= 0
+    current_item.quantity = action == 'edit' ? quantity.to_i : current_item.quantity + quantity.to_i
+    current_item.product = product
+    current_item.cart = self
+    current_item.save
   end
 
   def list
@@ -17,11 +16,7 @@ class Cart < ApplicationRecord
   end
 
   def total_item
-    total_item = 0
-    self.cart_items.each do |cart_item|
-      total_item += cart_item.quantity.to_i
-    end
-    total_item
+    cart_items.sum(:quantity)
   end
 
   def total_originalvalue

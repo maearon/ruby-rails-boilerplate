@@ -1,110 +1,168 @@
-user = User.create!(id: '00cffeed-248f-4fc5-92ff-b99ebbad7e8d',
-             name:  "Example User",
-             username: Faker::Internet.unique.username,
-             displayName:  "Example User",
-             email: "example@railstutorial.org",
-             password: "Abc@0974006807",
-             password_confirmation: "Abc@0974006807",
-             admin: true,
-             activated: true,
-             activated_at: Time.zone.now)
+# puts "🧼 Purging images before destroying models..."
 
-Session.create!(id: SecureRandom.uuid,
-                userId: User.first.id,
-                expiresAt: Time.zone.now + 30.days)
-
-99.times do |n|
-  name  = Faker::Name.name
-  username  = Faker::Internet.unique.username
-  displayName = name
-  email = "example-#{n+1}@railstutorial.org"
-  password = "Abc@0974006807"
-  User.create!(id: SecureRandom.uuid,
-              name: name,
-              username: username,
-              displayName: displayName,
-              email: email,
-              password: password,
-              password_confirmation: password,
-              activated: true,
-              activated_at: Time.zone.now)
-end
-
-User.find_each do |user|
-  user.passwordHash = user.password_digest 
-  user.save!
-end  
-
-# Generate posts for a subset of users.
-users = User.order(:created_at).take(6)
-50.times do
-  content = Faker::Lorem.sentence(word_count: 5)
-  users.each do |user|
-    id = SecureRandom.uuid
-    Post.create!(
-      id: id,
-      content: content,
-      userId: user.id,
-      createdAt: Time.zone.now
-    )
-    # PostMedia.create!(
-    #   id: SecureRandom.uuid,
-    #   postId: id,
-    #   media_type: 'VIDEO',
-    #   url: 'https://www.youtube.com/embed/VUfVxg0Bduk?si=8vnFVL5JQmuEj5Af?autoplay=1',
-    #   createdAt: Time.zone.now
-    # )
-    # PostMedia.create!(
-    #   id: SecureRandom.uuid,
-    #   postId: id,
-    #   media_type: 'PHOTO',
-    #   url: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=yttags.com',
-    #   createdAt: Time.zone.now
-    # )
-  end
-end
-
-# Create following relationships.
-# users = User.all
-# user  = users.first
-# following = users[2..50]
-# followers = users[3..40]
-# following.each { |followed| user.follow(followed) }
-# followers.each { |follower| follower.follow(user) }
-
-# # Generate a bunch of additional products.
-# i = 1
-# u = "#{Rails.root.to_s}/app/assets/images/img"
-# 93.times do |i|
-#   i +=1
-#   p = Product.create!(name: 'Loose Oversized Shirt',
-#                       gender: 'Men',
-#                       franchise: 'Tubular',
-#                       producttype: 'Wear',
-#                       brand: 'Originals',
-#                       category: 'Shoes',
-#                       sport: 'Running',
-#                       jan_code: '0886'<<i.to_s,
-#                       variants_attributes: {
-#                         0 => {
-#                           color: 'Black', price: '65', originalprice: '90', sku: 'AQ0886', stock: '1000'
-#                         },
-#                         1 => {
-#                           color: 'Black', price: '65', originalprice: '90', sku: 'AQ0886', stock: '1000'
-#                         },
-#                         2 => {
-#                           color: 'Black', price: '65', originalprice: '90', sku: 'AQ0886', stock: '1000'
-#                         },
-#                         3 => {
-#                           color: 'Black', price: '65', originalprice: '90', sku: 'AQ0886', stock: '1000'
-#                         },
-#                       })
-#   t=i%12
-#   t=12 if t.zero?
-#   p.variants.first.avatar.attach(io: File.open(u+'/item'+t.to_s+'.png'), filename: 'item'+t.to_s+'.png', content_type: 'application/png')
-#   p.variants.first.hover.attach(io: File.open(u+'/item'+t.to_s+'.png'), filename: 'item'+t.to_s+'.png', content_type: 'application/png')
-#   p.variants.first.images.attach(io: File.open(u+'/detail1.png'), filename: 'detail1.png', content_type: 'application/png')
-#   p.variants.second.images.attach(io: File.open(u+'/detail2.png'), filename: 'detail2.png', content_type: 'application/png')
-#   p.variants.third.images.attach(io: File.open(u+'/detail3.png'), filename: 'detail3.png', content_type: 'application/png')
-#   p.variants.fourth.images.attach(io: File.open(u+'/detail4.png'), filename: 'detail4.png', content_type: 'application/png')
+# Product.find_each do |product|
+#   product.image.purge if product.image.attached?
+#   product.hover_image.purge if product.hover_image.attached?
 # end
+
+# Variant.find_each do |variant|
+#   variant.avatar.purge if variant.avatar.attached?
+#   variant.hover.purge if variant.hover.attached?
+#   variant.images.each { |img| img.purge }
+# end
+
+# # Now is the right time to destroy
+# puts "🧼 Clearing existing data..."
+# [Product, Variant, VariantSize, Size, Tag, ModelBase, Model, Collaboration, Category].each(&:destroy_all)
+# [Product, Variant, VariantSize, Size, Tag, ModelBase, Model, Collaboration, Category].each do |model|
+#   ActiveRecord::Base.connection.reset_pk_sequence!(model.table_name)
+# end
+
+# puts "📦 Seeding sizes..."
+# ALPHA_SIZES   = %w[XS S M L XL XXL]
+# NUMERIC_SIZES = (36..45).flat_map { |n| ["#{n}", "#{n}.5"] }
+# LOCATIONS     = %w[US VN]
+
+# puts "📁 Seeding categories..."
+# categories = %w[Shoes Apparel Accessories].map do |name|
+#   Category.find_or_create_by!(name: name)
+# end
+
+# LOCATIONS.each do |loc|
+#   ALPHA_SIZES.each do |label|
+#     Size.create!(label: label, system: "alpha", location: loc)
+#   end
+#   NUMERIC_SIZES.each do |label|
+#     Size.create!(label: label, system: "numeric", location: loc)
+#   end
+# end
+
+# Size.create!(label: "One Size", system: "one_size", location: "GLOBAL")
+# puts "✅ Done seeding sizes: #{Size.count} entries."
+
+# puts "🏷️ Seeding tags..."
+# tags = %w[
+#   new_arrivals best_sellers prime_delivery liberty_london_florals
+#   fast_delivery soft_lux must_have summer_savings trending_now
+#   disney_collection premium_collaborations release_dates track_pants
+# ]
+# tags.each { |slug| Tag.find_or_create_by!(slug: slug, name: slug.titleize) }
+
+# puts "📚 Seeding model bases (collections)..."
+# collections = %w[
+#   adicolor gazelle samba superstar sportswear supernova terrex ultraboost y-3 zne
+#   stella_mccartney originals f50 adizero 4d five_ten tiro copa
+# ]
+# collections.each do |slug|
+#   ModelBase.find_or_create_by!(slug: slug, name: slug.titleize)
+# end
+
+# puts "🤝 Seeding collaborations..."
+# collabs = [
+#   "Bad Bunny", "Bape", "Disney", "Edison Chen", "Fear of God Athletics",
+#   "Pharrell", "Prada", "Sporty & Rich", "Wales Bonner"
+# ]
+# collabs.each do |name|
+#   Collaboration.find_or_create_by!(name: name, slug: name.parameterize)
+# end
+
+puts "👟 Generating sample products..."
+
+brands       = %w[Adidas Originals Athletics Essentials]
+sports       = %w[Running Soccer Basketball Tennis Gym Training Golf Hiking Yoga Football Baseball]
+producttypes = %w[Sneakers Cleats Sandals Hoodie Pants Shorts Jacket Jersey TShirt TankTop Dress Leggings Tracksuit Bra Coat]
+genders      = %w[Men Women Unisex Kids]
+categories = Category.where(name: ["Shoes", "Apparel", "Accessories"]).to_a
+PRODUCTS_IMAGE_DIR = Rails.root.join("app/assets/images/products")
+
+95.times do |i|
+  model_number = "MOD#{rand(10000..99999)}"
+  brand        = brands.sample
+  sport        = sports.sample
+  producttype  = producttypes.sample
+  gender       = genders.sample
+  category     = categories.sample
+  name         = "#{brand} #{producttype} #{i + 1}"
+
+  model_base = ModelBase.order("RANDOM()").first
+
+  model = Model.find_or_create_by!(name: "#{brand} #{producttype} Model #{i + 1}") do |m|
+    m.model_base = model_base
+  end
+
+  product = Product.create!(
+    name: name,
+    model_number: model_number,
+    gender: gender,
+    franchise: "Tubular",
+    product_type: producttype,
+    brand: brand,
+    category: categories.sample,
+    sport: sport,
+    model_base_id: model_base.id,
+    # category_id: Category.first.id,
+    model: model,
+    collaboration: Collaboration.order("RANDOM()").first,
+    tag_ids: Tag.order("RANDOM()").limit(2).pluck(:id),
+    description_h5: "#{producttype} for #{sport} by #{brand}",
+    description_p: "Performance-driven #{producttype} for the modern athlete.",
+    care: "Machine wash cold. Tumble dry low.",
+    specifications: "Ergonomic, high-performance, breathable, eco-friendly"
+  )
+
+  dir_path = PRODUCTS_IMAGE_DIR.join((i + 1).to_s)
+  thumbnail_dir = dir_path.join("thumbnail")
+  image_files = Dir.glob("#{thumbnail_dir}/*.jpg").sort_by { |p| File.basename(p).downcase }
+  if image_files[0] && image_files[1]
+    product.image.attach(
+      io: File.open(image_files[0]),
+      filename: File.basename(image_files[0]),
+      content_type: "image/jpeg"
+    )
+
+    product.hover_image.attach(
+      io: File.open(image_files[1]),
+      filename: File.basename(image_files[1]),
+      content_type: "image/jpeg"
+    )
+  else
+    puts "❌ Không tìm thấy đủ ảnh trong #{thumbnail_dir}"
+  end
+
+  %w[Black White Red Blue].each_with_index do |color, idx|
+    variant = product.variants.create!(
+      color: color,
+      price: rand(40.0..150.0).round(2),
+      compare_at_price: rand(160.0..250.0).round(2),
+      variant_code: "VC#{i + 1}-#{color[0..1].upcase}-#{SecureRandom.hex(2)}",
+      stock: rand(5..30)
+    )
+
+    if idx == 0 && File.exist?(avatar_path)
+      variant.avatar.attach(io: File.open(avatar_path), filename: "#{i + 1}.jpg", content_type: "image/jpeg")
+      variant.hover.attach(io: File.open(avatar_path), filename: "#{i + 1}.jpg", content_type: "image/jpeg")
+    end
+
+    detail_images = Dir.glob("#{dir_path}/#{i + 1}dt*.jpg").sort
+    detail_images.each do |img_path|
+      variant.images.attach(io: File.open(img_path), filename: File.basename(img_path), content_type: "image/jpeg")
+    end
+
+    sizes = case category
+            when "Shoes"
+              NUMERIC_SIZES.map { |label| Size.find_by!(label: label, system: "numeric", location: "US") }
+            when "Apparel"
+              ALPHA_SIZES.map { |label| Size.find_by!(label: label, system: "alpha", location: "US") }
+            else
+              [Size.find_by!(label: "One Size", system: "one_size", location: "GLOBAL")]
+            end
+
+    sizes.each do |size|
+      VariantSize.create!(variant: variant, size: size, stock: rand(1..30))
+    end
+  end
+
+  puts "✅ Created product #{i + 1}: #{product.name}"
+end
+
+# puts "🎉 Seed completed with #{Product.count} products and #{Size.count} sizes."

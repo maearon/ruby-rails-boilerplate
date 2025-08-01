@@ -1,0 +1,7 @@
+sample_user:
+  id: "user_test_id_1"
+  username: "sampleuser"
+  displayName: "Sample User"
+  email: "sample@example.com"
+  activated: true
+  activated_at: <%= Time.zone.now %>

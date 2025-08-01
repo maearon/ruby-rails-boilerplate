@@ -46,9 +46,15 @@ Rails.application.routes.draw do
   get 'addresses', to: 'addresses#index'
 
   namespace :admin do
+    # Root API landing (optional)
     root 'static_pages#home'
     resources :users
-    resources :products
+    # Product endpoints
+    resources :products do
+      collection do
+        get :filters
+      end
+    end
     resources :orders
   end
 
