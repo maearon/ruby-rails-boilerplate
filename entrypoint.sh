@@ -4,8 +4,8 @@ set -e
 echo "🔧 Chuẩn bị database..."
 bundle exec bin/rails db:prepare # db:create + db:migrate
 
-echo "🌱 Seed dữ liệu..."
-bundle exec bin/rails db:seed
+# echo "🌱 Seed dữ liệu..."
+# bundle exec bin/rails db:seed
 
 echo "🧹 Xoá server.pid cũ nếu có..."
 rm -f /app/tmp/pids/server.pid
