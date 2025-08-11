@@ -44,6 +44,11 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
+  # git checkout 1242dc57c527178d6bffd6980c884ba4478bafd4 -- config/environments/development.rb
+  # https://myaccount.google.com/lesssecureapps
+  # https://accounts.google.com/DisplayUnlockCaptcha
+  # https://support.google.com/mail/answer/185833?hl=en
+
   # i18n fallback
   config.i18n.fallbacks = true
 
