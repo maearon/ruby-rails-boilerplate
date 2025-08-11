@@ -29,6 +29,10 @@ Rails.application.configure do
     authentication: 'plain',
     enable_starttls_auto: true
   }
+  # git checkout 1242dc57c527178d6bffd6980c884ba4478bafd4 -- config/environments/development.rb
+  # https://myaccount.google.com/lesssecureapps
+  # https://accounts.google.com/DisplayUnlockCaptcha
+  # https://support.google.com/mail/answer/185833?hl=en
   config.action_mailer.perform_caching = false
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: 'localhost', port: 3001 }
