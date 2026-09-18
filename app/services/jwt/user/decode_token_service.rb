@@ -2,6 +2,8 @@ class Jwt::User::DecodeTokenService
   include Service
   include UserJwtClaims
 
+  ACCESS = "access".freeze
+
   def initialize(auth_header)
     @auth_header = auth_header
   end
@@ -15,27 +17,41 @@ class Jwt::User::DecodeTokenService
   attr_reader :auth_header
 
   def id_from_claim
-    decoded_token[0].fetch('sub') if decoded_token
+    payload = decoded_payload
+    payload&.fetch("sub", nil)
   end
 
-  def decoded_token
-    return unless auth_header
+  def decoded_payload
+    token = bearer_token
+    return unless token
 
-    token = auth_header.split[1] # == auth_header.split(' ')[1]
-    JWT.decode(
+    payload, = JWT.decode(
       token,
-      Rails.application.credentials[:secret_key_base],
+      jwt_secret,
       true,
-      jwt_claims
+      {
+        algorithm: ALGORITHM,
+        verify_expiration: true
+      }
     )
+    return unless payload["type"] == ACCESS
+
+    payload
+  rescue JWT::DecodeError, JWT::ExpiredSignature, JWT::VerificationError
+    nil
   end
 
-  def jwt_claims
-    {
-      # iss: ISS, verify_iss: true,
-      # sub: SUB, verify_sub: true,
-      # aud: AUD, verify_aud: true,
-      algorithm: ALGORITHM
-    }
+  def bearer_token
+    return unless auth_header.present?
+
+    scheme, token = auth_header.split(" ", 2)
+    return token if token.present? && scheme&.casecmp("Bearer")&.zero?
+
+    # Keep the previous "Authorization: <scheme> <token>" shape working.
+    auth_header.split[1]
+  end
+
+  def jwt_secret
+    Rails.application.secret_key_base
   end
 end

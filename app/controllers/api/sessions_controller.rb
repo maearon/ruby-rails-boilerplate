@@ -1,5 +1,5 @@
 class Api::SessionsController < Api::ApiController
-  before_action :authenticate!, except: %i[create]
+  before_action :authenticate!, except: %i[create refresh revoke]
 
   def index
     # binding.b

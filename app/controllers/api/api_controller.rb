@@ -31,8 +31,10 @@ class Api::ApiController < ActionController::API
   end
 
   def current_user
-    user_id = Jwt::User::DecodeTokenService.call(request.headers['Authorization'])
-    User.find_by(id: user_id) if user_id
+    return @current_user if defined?(@current_user)
+
+    user_id = Jwt::User::DecodeTokenService.call(request.headers["Authorization"])
+    @current_user = user_id.present? ? User.find_by(id: user_id) : nil
     # return @current_user if defined?(@current_user)
 
     # token = request.headers['Authorization']
