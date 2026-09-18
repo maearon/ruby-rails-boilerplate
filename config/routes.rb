@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   # mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   resources :users do
     member do
-      get :following, :followers
+      get :following
+      get :followers
     end
   end
   resources :account_activations, only: [:edit]
@@ -67,7 +68,8 @@ Rails.application.routes.draw do
     post   '/revoke',             to: 'sessions#revoke'
     resources :users do
       member do
-        get :following, :followers
+        get :following
+        get :followers
       end
     end
     resources :account_activations, only: [:create, :update]

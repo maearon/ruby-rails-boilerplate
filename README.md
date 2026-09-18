@@ -166,7 +166,7 @@ maearon@maearon:~/code/shop-php/apps/ruby-rails-boilerplate$
 maearon@maearon:~/code/shop-php/apps/ruby-rails-boilerplate$ 
 maearon@maearon:~/code/shop-php/apps/ruby-rails-boilerplate$ 
 maearon@maearon:~/code/shop-php/apps/ruby-rails-boilerplate$ rails c
-Loading development environment (Rails 8.0.2)
+Loading development environment (Rails 8.1.3.1)
 ruby-rails-boilerplate(dev)> Size.pluck(:label, :system)
   Size Pluck (356.7ms)  SELECT "sizes"."label", "sizes"."system" FROM "sizes" /*application='RubyRailsBoilerplate'*/
 => 
@@ -223,7 +223,7 @@ maearon@maearon:~/code/shop-php/apps/ruby-rails-boilerplate$ sudo lsof -t -i :30
 
 
 docker compose exec api-ruby # rails c 
-Loading development environment (Rails 8.0.2)
+Loading development environment (Rails 8.1.3.1)
 ruby-rails-boilerplate(dev)> Product.first
   Product Load (232.4ms)  SELECT "products".* FROM "products" ORDER BY "products"."id" ASC LIMIT 1 /*application='RubyRailsBoilerplate'*/
 => 

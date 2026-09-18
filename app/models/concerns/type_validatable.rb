@@ -11,10 +11,13 @@ module TypeValidatable
   class_methods do
     def validates_by_type(type:, opt:, only: nil, except: nil)
       column_names = columns_by_type(type)
+      return if column_names.empty?
+
       inclusions = Array(only)
       column_names.select! { |name| inclusions.include?(name) } if inclusions.present?
       exclusions = Array(except)
       column_names.select! { |name| exclusions.exclude?(name) } if exclusions.present?
+      return if column_names.empty?
 
       validates(*column_names, **opt)
     end
@@ -22,7 +25,8 @@ module TypeValidatable
     private
 
     def columns_by_type(type)
-      raise 'type error' unless %i[string text integer decimal].include?(type)
+      raise "type error" unless %i[string text integer decimal].include?(type)
+      return [] unless table_exists?
 
       columns.filter { |col| col.type == type }.map(&:name).map(&:to_sym)
     end

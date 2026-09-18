@@ -1,15 +1,16 @@
 source "https://rubygems.org"
 
-ruby "3.4.2"
+ruby "4.0.7"
 
 # Core Rails and database
-gem "rails", "~> 8.0.2"
+gem "rails", "8.1.3.1"
 gem "pg", "~> 1.1"
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
 gem 'cloudinary', '~> 2.3', '>= 2.3.1'
 gem 'activestorage-cloudinary-service', '~> 0.2.3'
 gem "puma", ">= 5.0" # Web server
 gem "jbuilder"       # JSON responses
+gem "turbo-rails"    # broadcasts_to / turbo_stream (used by messages + HTML)
 
 # Environment variables
 gem "dotenv-rails"
@@ -45,7 +46,9 @@ gem "rack-cors"
 gem "rubyzip", "~> 2.3.0"
 
 # Utility
-gem "rake", "13.2.1"
+gem "rake", ">= 13.2.1"
+# Ruby 4.0: stdlib gems no longer shipped as default gems
+gem "benchmark"
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows]

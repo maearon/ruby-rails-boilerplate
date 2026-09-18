@@ -1,5 +1,5 @@
 # Use stable Ruby image
-FROM ruby:3.4.2
+FROM ruby:4.0.7
 
 # Install Node.js and Yarn using corepack
 RUN apt-get update && apt-get install -y curl \

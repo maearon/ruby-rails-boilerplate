@@ -1,5 +1,4 @@
-# Base image với Ruby 3.2.2 thay vì 3.1.2
-FROM ruby:3.42
+FROM ruby:4.0.7
 
 # Cài đặt các dependencies cần thiết
 RUN apt-get update -yq && apt-get install -y --no-install-recommends \

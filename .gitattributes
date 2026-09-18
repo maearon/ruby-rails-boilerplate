@@ -1,0 +1,2 @@
+bin/* text eol=lf
+entrypoint.sh text eol=lf
